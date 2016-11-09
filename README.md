@@ -15,7 +15,7 @@ Je nach Konfiguration entfernt der FRB Dateien und Unterordner. Daher sollte der
    
 Skriptname:`firmware-release-builder.sh`  
 
-Wird den Skript mit der Option `-h` aufgerufen, wird folgendes ausgegeben:
+Wird das Skript mit der Option `-h` aufgerufen, wird folgendes ausgegeben:
 
 ```
 Usage: firmware-releas-builder.sh ... 
