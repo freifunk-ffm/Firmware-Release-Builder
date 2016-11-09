@@ -3,7 +3,7 @@
 Mit dem Firmware Release Builder (FRB) können sehr einfach Gluon Releases gebaut werden.  
 Der FRB kann z.B. unter Jenkins oder händisch auf einem PC aufgerufen werden.  
 
-Es ist ein einzelnes Skript, welches alle notwendigen Schritt des Buildprozesses vereint.   
+Der FRB ist ein einzelnes Skript, welches alle notwendigen Schritt des Buildprozesses vereint.   
   - Dem Skript könne Parameter übergeben werden.  
   - Das Skript legt einen eigenen Workspace an. Es wird dafür u.a. der Firmware Versionsstring verwendet (siehe weiter unten).  
   - Der FRB ist hauptsächlich auf Frankfurter Ansprüche abgestimmt. Für den automatischen Upload auf den FFM dl-Server wird eine .gz Archiv mit allen Images, allen opkg-Modulen und allen Versionsinformationen erzeugt (siehe https://github.com/freifunk-ffm/scripts/blob/master/firmwarefetch).  
@@ -15,7 +15,7 @@ Je nach Konfiguration entfernt der FRB Dateien und Unterordner. Daher sollte der
    
 Skriptname:`firmware-release-builder.sh`  
 
-Wird das Skript mit der Option `-h` aufgerufen, wird folgendes ausgegeben:
+Wird das Skript mit der Option `-h` aufgerufen, so wird folgendes ausgegeben:
 
 ```
 Usage: firmware-releas-builder.sh ... 
