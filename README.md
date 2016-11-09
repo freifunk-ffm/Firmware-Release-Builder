@@ -1,6 +1,6 @@
 # Frankfurter Firmware Release Builder (FRB)
 
-Mit dem Firmware Release Builder (FRB) können sehr einfach Gluon Releases gebaut werden.  
+Mit dem Firmware Release Builder (FRB) können sehr einfach Firmware Releases gebaut werden.  
 Der FRB kann z.B. unter Jenkins oder händisch auf einem PC aufgerufen werden.  
 
 Der FRB ist ein einzelnes Skript, welches alle notwendigen Schritt des Buildprozesses vereint.   
