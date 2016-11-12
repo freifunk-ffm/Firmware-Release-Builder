@@ -38,8 +38,8 @@ Usage: ${0##*/} ...
     -b          BROKEN Router-Images bauen? (Voreinstellung: 0)
     -t          BROKEN Targets bauen. Es werden dann Images fuer "alle" Targets gebaut! (Voreinstellung: 0)
     -P          GLUON_PRIORITY (Voreinstellung: 0)
-    -s          Pfad zu privatem ECDSA Signkey.
-    -o          Pfad zu oeffentlichem ECDSA Signkey.
+    -s          Absoluter Pfad zum privaten ECDSA-Signkey.
+    -o          Absoluter Pfad zum oeffentlichen ECDSA-Signkey.
     -p          Build Parameter? (Voreinstellung: "-j4 V=s")
     -c          Workspace vor dem Bauen löschen? (Voreinstellung: 1)
     -a          Ein .gz Gesamtarchiv erzeugen? (Voreinstellung: 1)
@@ -204,8 +204,12 @@ do
 done
 
 
+# Manifest erstellen
 to_output "Erzeuge das Manifest"
 make manifest
+if [ "$FRB_SIGNKEY_PRIVATE" != "none" ];  then
+ contrib/sign.sh ${FRB_SIGNKEY_PRIVATE} ${WORKSPACE}/output/images/sysupgrade/${GLUON_BRANCH}.manifest
+fi
 
 # MD5 und SHA256 Hashes von allen Images erzeugen
 # MD5 wird letztlich doch noch benötigt. Der MD5-HASH wird im Konfig-Modus beim Umflashen angezeigt.
@@ -224,14 +228,14 @@ if [ "$FRB_SIGNKEY_PRIVATE" != "none" ];  then
  # ECDSA signieren der Hash-Datei und verschieben in output/images/sysupgrade
  echo --- >> ${hashfile_MD5}
  echo --- >> ${hashfile_SHA256}
- ecdsasign ${hashfile_MD5} < ${SECRETKEY} >> ${hashfile_MD5}
- ecdsasign ${hashfile_SHA256} < ${SECRETKEY} >> ${hashfile_SHA256}
+ ecdsasign ${hashfile_MD5} < ${FRB_SIGNKEY_PRIVATE} >> ${hashfile_MD5}
+ ecdsasign ${hashfile_SHA256} < ${FRB_SIGNKEY_PRIVATE} >> ${hashfile_SHA256}
  mv ${hashfile_MD5} .
  mv ${hashfile_SHA256} .
  # Damit das auch kontrolliert werden kann -> Bereitstellen des öffentlichen  ECDSA-Schluessels
  if [ "$FRB_SIGNKEY_PUBLIC" != "none" ];  then
   to_output "Public ECDSA-Schluessel bereitstellen"
-  cp ${$FRB_SIGNKEY_PUBLIC} ecdsa-key-${GLUON_RELEASE}.pub
+  cp ${FRB_SIGNKEY_PUBLIC} ecdsa-key-${GLUON_RELEASE}.pub
  fi
  cd ${WORKSPACE}
 fi

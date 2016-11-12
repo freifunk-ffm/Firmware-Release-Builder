@@ -29,8 +29,8 @@ Usage: firmware-releas-builder.sh ...
     -b          BROKEN Router-Images bauen? (Voreinstellung: 0)
     -t          BROKEN Targets bauen. Es werden dann Images fuer "alle" Targets gebaut! (Voreinstellung: 0)
     -P          GLUON_PRIORITY (Voreinstellung: 0)
-    -s          Pfad zu privatem ECDSA Signkey.
-    -o          Pfad zu oeffentlichem ECDSA Signkey.
+    -s          Absoluter Pfad zum privaten ECDSA-Signkey.
+    -o          Absoluter Pfad zum oeffentlichen ECDSA-Signkey.
     -p          Build Parameter? (Voreinstellung: "-j4 V=s")
     -c          Workspace vor dem Bauen löschen? (Voreinstellung: 1)
     -a          Ein .gz Gesamtarchiv erzeugen? (Voreinstellung: 1)
