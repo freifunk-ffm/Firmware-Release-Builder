@@ -54,7 +54,6 @@ EOF
 while getopts "T:B:V:P:s:o:p:c:b:t:a:h" opt; do
   case $opt in
     T) FRB_TARGETS=$OPTARG
-       echo "-t $OPTARG" >&2
        ;;
     B) FRB_BRANCH=$OPTARG
        ;;
