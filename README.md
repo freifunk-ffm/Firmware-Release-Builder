@@ -18,7 +18,7 @@ Skriptname:`firmware-release-builder.sh`
 Wird das Skript mit der Option `-h` aufgerufen, so wird folgendes ausgegeben:
 
 ```
-Usage: firmware-releas-builder.sh ... 
+Usage: firmware-release-builder.sh ... 
     Die Option -B (Branch) "muss" angegeben werden!
     Optionen in Grossbuchstaben 'sollten' angegeben werden.
     Optionen in Kleinbuichstaben 'koennen' angegeben werden.
