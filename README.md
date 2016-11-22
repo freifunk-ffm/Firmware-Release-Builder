@@ -24,17 +24,22 @@ Usage: firmware-release-builder.sh ...
     Die Option -B (Branch) "muss" angegeben werden!
     Optionen in Grossbuchstaben 'sollten' angegeben werden.
     Optionen in Kleinbuichstaben 'koennen' angegeben werden.
- 
-    -B          Name des FFM Firmware-Branches.
-    -T          Welche Targets sollen gebaut werden? (Voreinstellung: alle nicht BROKEN)
-    -V          Vorgabe des Firmware Versionsstrings. (Voreinstellung: "Homebrew")
-    -b          BROKEN Router-Images bauen? (Voreinstellung: 0)
-    -t          BROKEN Targets bauen. Es werden dann Images fuer "alle" Targets gebaut! (Voreinstellung: 0)
-    -P          GLUON_PRIORITY (Voreinstellung: 0)
-    -s          Absoluter Pfad zum privaten ECDSA-Signkey.
-    -o          Absoluter Pfad zum oeffentlichen ECDSA-Signkey.
-    -p          Build Parameter? (Voreinstellung: "-j4 V=s")
-    -c          Workspace vor dem Bauen löschen? (Voreinstellung: 1)
-    -a          Ein .gz Gesamtarchiv erzeugen? (Voreinstellung: 1)
-    -h          Dieser Text.
+
+    -B <String>  Name des FFM Firmware-Branches (dev, test oder stable).
+    -T <String>  Welche Targets sollen gebaut werden?
+                 Liste in Anführungszeichen, getrennt durch Leerzeichen.
+                 (Voreinstellung: alle als Nicht-BROKEN bekannte Targets)
+    -V <String>  Vorgabe des Firmware Versionsstrings.
+                 (Voreinstellung: "Homebrew")
+    -b [0|1]     BROKEN Router-Images bauen? (Voreinstellung: 0)
+    -t [0|1]     BROKEN Targets bauen. (Voreinstellung: 0)
+                 Bei 1 werden dann BROKEN-Images fuer "alle" Targets gebaut!
+    -P [0|1]     GLUON_PRIORITY (Voreinstellung: 0)
+    -s <String>  Absoluter Pfad zum privaten ECDSA-Signkey.
+    -o <String>  Absoluter Pfad zum oeffentlichen ECDSA-Signkey.
+    -p <String>  Build Parameter? (Voreinstellung: "-j4 V=s")
+                 Liste in Anführungszeichen, getrennt durch Leerzeichen.
+    -c [0|1]     Workspace vor dem Bauen löschen? (Voreinstellung: 1)
+    -a [0|1]     Ein .gz Gesamtarchiv erzeugen? (Voreinstellung: 1)
+    -h           Dieser Text.
 ```
