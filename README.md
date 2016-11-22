@@ -10,9 +10,11 @@ Der FRB ist ein einzelnes Skript, welches alle notwendigen Schritt des Buildproz
 
 ###Achtung!   
 Je nach Konfiguration entfernt der FRB Dateien und Unterordner. Daher sollte der FRB nicht zur reinen FW-Entwickling verwendet werden!
-  
-###Verwendung
-   
+
+###Anwendung
+####Voraussetzung 
+Für das Firmwarebauen müssen generell alle Pakete aus http://gluon.readthedocs.io/en/latest/user/getting_started.html#dependencies installier sein!
+####Anwendung
 Skriptname:`firmware-release-builder.sh`  
 
 Wird das Skript mit der Option `-h` aufgerufen, so wird folgendes ausgegeben:
