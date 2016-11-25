@@ -202,6 +202,9 @@ rm -rf ${WORKSPACE}/output
 to_output "Symlink auf ${WORKSPACE}/openwrt/dl"
 cd ${WORKSPACE}/openwrt
 mkdir -p ../../openwrt-dl-cache
+if [ -d "dl" ]; then
+	rm -r dl
+fi
 ln -s ../../openwrt-dl-cache ${WORKSPACE}/openwrt/dl
 cd ${WORKSPACE}
 
