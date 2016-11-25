@@ -217,7 +217,7 @@ to_output "BROKEN = $BROKEN"
 for GLUON_TARGET in $FRB_TARGETS
 do
  export GLUON_TARGET
- to_output "Build target ${GLUON_TARGET}"
+ to_output "Baue Target ${GLUON_TARGET}"
  make ${FRB_BPARAMETER}
  check_last_exitcode
 done
