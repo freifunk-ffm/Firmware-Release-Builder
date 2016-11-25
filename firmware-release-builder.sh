@@ -185,17 +185,6 @@ to_output "Update OpenWrt"
 make update
 check_last_exitcode
 
-# Schauen, ob FRB_BROKEN_TARGETS aktiv ist. Wenn ja, dann immer die volle Anzahl an Möglichkeiten (Images + Targets) bauen.
-# FRB_TARGETS verwenden oder komplett ueberschreiben.
-if [ $FRB_BROKEN_TARGETS == 1 ]; then
- # All möglichen Targets bauene. Auch die als BROKEN markierten.
- FRB_TARGETS=$(grep -o -E "GluonTarget[,_a-z0-9]*" targets/targets.mk | tr ',' '-' | sed 's/GluonTarget-//')
-  # Zur Sicherheit nochmal BROKEN setzen
- export BROKEN=1
-fi
-to_output "BROKEN = $BROKEN"
-to_output "Build Targets = $FRB_TARGETS"
-
 # Alte Images vorher immer komplett entfernen
 to_output "Loesche alten Image Ordner"
 if [ -d "$WORKSPACE/output" ]; then
@@ -210,6 +199,17 @@ if [ -d "dl" ]; then
 fi
 ln -s ../../openwrt-dl-cache ${WORKSPACE}/openwrt/dl
 cd ${WORKSPACE}
+
+# Schauen, ob FRB_BROKEN_TARGETS aktiv ist. Wenn ja, dann immer die volle Anzahl an Möglichkeiten (Images + Targets) bauen.
+# FRB_TARGETS verwenden oder komplett ueberschreiben.
+if [ $FRB_BROKEN_TARGETS == 1 ]; then
+ # All möglichen Targets bauene. Auch die als BROKEN markierten.
+ FRB_TARGETS=$(grep -o -E "GluonTarget[,_a-z0-9]*" targets/targets.mk | tr ',' '-' | sed 's/GluonTarget-//')
+  # Zur Sicherheit nochmal BROKEN setzen
+ export BROKEN=1
+fi
+to_output "BROKEN = $BROKEN"
+to_output "Build Targets = $FRB_TARGETS"
 
 ############
 # Bauen
