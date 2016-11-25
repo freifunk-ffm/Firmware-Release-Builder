@@ -159,7 +159,7 @@ show_build_information
 if [ $CLEANUP != 0 ];  then
  to_output "Loesche Workspace (das kann mehrere Minuten dauern)"
  if [ -d "$WORKSPACE" ]; then
-  rm -r $WORKSPACE
+  rm -rf $WORKSPACE
  fi
 fi
 
@@ -199,14 +199,14 @@ to_output "Build Targets = $FRB_TARGETS"
 # Alte Images vorher immer komplett entfernen
 to_output "Loesche alten Image Ordner"
 if [ -d "$WORKSPACE/output" ]; then
- rm -r ${WORKSPACE}/output
+ rm -rf ${WORKSPACE}/output
 fi
 # Einen OpenWrt-Download-Cache-Ordner anlegen
 to_output "Symlink auf ${WORKSPACE}/openwrt/dl"
 cd ${WORKSPACE}/openwrt
 mkdir -p ../../openwrt-dl-cache
 if [ -d "dl" ]; then
-	rm dl
+	rm -rf dl
 fi
 ln -s ../../openwrt-dl-cache ${WORKSPACE}/openwrt/dl
 cd ${WORKSPACE}
