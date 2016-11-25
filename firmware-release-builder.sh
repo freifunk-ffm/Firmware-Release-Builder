@@ -158,7 +158,9 @@ show_build_information
 # ggf. erstmal Aufraeumen, und den Workspace komplett löschen
 if [ $CLEANUP != 0 ];  then
  to_output "Loesche Workspace (das kann mehrere Minuten dauern)"
- rm -rf $WORKSPACE
+ if [ -d "$WORKSPACE" ]; then
+  rm -r $WORKSPACE
+ fi
 fi
 
 # ggf. Workspace erzeugen und Gluon aus Git holen
@@ -196,14 +198,15 @@ to_output "Build Targets = $FRB_TARGETS"
 
 # Alte Images vorher immer komplett entfernen
 to_output "Loesche alten Image Ordner"
-rm -rf ${WORKSPACE}/output
-
+if [ -d "$WORKSPACE/output" ]; then
+ rm -r ${WORKSPACE}/output
+fi
 # Einen OpenWrt-Download-Cache-Ordner anlegen
 to_output "Symlink auf ${WORKSPACE}/openwrt/dl"
 cd ${WORKSPACE}/openwrt
 mkdir -p ../../openwrt-dl-cache
 if [ -d "dl" ]; then
-	rm -r dl
+	rm dl
 fi
 ln -s ../../openwrt-dl-cache ${WORKSPACE}/openwrt/dl
 cd ${WORKSPACE}
