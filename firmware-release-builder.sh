@@ -198,7 +198,16 @@ to_output "Build Targets = $FRB_TARGETS"
 to_output "Loesche alten Image Ordner"
 rm -rf ${WORKSPACE}/output
 
+# Einen OpenWrt-Download-Cache-Ordner anlegen
+to_output "Symlink auf ${WORKSPACE}/openwrt/dl"
+cd ${WORKSPACE}/openwrt
+mkdir -p ../../openwrt-dl-cache
+ln -s ../../openwrt-dl-cache ${WORKSPACE}/openwrt/dl
+cd ${WORKSPACE}
+
+############
 # Bauen
+############
 for GLUON_TARGET in $FRB_TARGETS
 do
  export GLUON_TARGET
