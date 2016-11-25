@@ -208,8 +208,8 @@ if [ $FRB_BROKEN_TARGETS == 1 ]; then
   # Zur Sicherheit nochmal BROKEN setzen
  export BROKEN=1
 fi
-to_output "BROKEN = $BROKEN"
 to_output "Build Targets = $FRB_TARGETS"
+to_output "BROKEN = $BROKEN"
 
 ############
 # Bauen
