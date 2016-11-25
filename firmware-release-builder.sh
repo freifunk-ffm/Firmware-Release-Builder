@@ -191,7 +191,7 @@ if [ -d "$WORKSPACE/output" ]; then
  rm -rf ${WORKSPACE}/output
 fi
 # Einen OpenWrt-Download-Cache-Ordner anlegen
-to_output "Erstelle Symlink auf Ordener openwrt-dl-cache"
+to_output "Erstelle Symlink auf Ordner openwrt-dl-cache"
 cd ${WORKSPACE}/openwrt
 mkdir -p ../../openwrt-dl-cache
 if [ -d "dl" ]; then
