@@ -139,7 +139,7 @@ check_last_exitcode()
 
 # Uebernahme der Parameter für den Gluon-Build
 export GLUON_BRANCH=${FRB_BRANCH}
-export BUILD_NUMBER=$(date '+%m%d%H%M')
+export BUILD_NUMBER=$(date '+%m%d')
 export GLUON_RELEASE=${FRB_VERSION}-${GLUON_BRANCH}-${BUILD_NUMBER}
 export GLUON_PRIORITY=${FRB_PRIORITY}
 export BROKEN=${FRB_BROKEN}
