@@ -144,7 +144,7 @@ export GLUON_RELEASE=${FRB_VERSION}-${GLUON_BRANCH}-${BUILD_NUMBER}
 export GLUON_PRIORITY=${FRB_PRIORITY}
 export BROKEN=${FRB_BROKEN}
 CLEANUP=${FRB_CLEANUP}
-WORKSPACE="$(pwd)/workspace-fwb"
+WORKSPACE="$(pwd)/workspace-frb"
 
 
 # Wenn kein Branch definiert wurde -> Abbruch
