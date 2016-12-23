@@ -40,7 +40,7 @@ Usage: ${0##*/} ...
     -b [0|1]     BROKEN Router-Images bauen? (Voreinstellung: 0)
     -t [0|1]     BROKEN Targets bauen. (Voreinstellung: 0)
                  Bei 1 werden dann BROKEN-Images fuer "alle" Targets gebaut!
-    -P [0|1]     GLUON_PRIORITY (Voreinstellung: 0)
+    -P [0.0-1.0] GLUON_PRIORITY (Voreinstellung: 0.0)
     -s <String>  Absoluter Pfad zum privaten ECDSA-Signkey.
     -p <String>  Build Parameter? (Voreinstellung: "-j4 V=s")
                  Liste in Anführungszeichen, getrennt durch Leerzeichen.
