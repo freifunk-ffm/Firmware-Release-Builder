@@ -19,7 +19,6 @@ FRB_BROKEN_TARGETS=${FRB_BROKEN_TARGETS:-0}
 FRB_PRIORITY=${FRB_PRIORITY:-0}
 FRB_CREATE_DARCHIVE=${FRB_CREATE_DARCHIVE:-1}
 FRB_SIGNKEY_PRIVATE=${FRB_SIGNKEY_PRIVATE:-"none"}
-FRB_SIGNKEY_PUBLIC=${FRB_SIGNKEY_PUBLIC:-"none"}
 FRB_BPARAMETER=${FRB_BPARAMETER:-"-j4 V=s"}
 
 ###################################################################
@@ -43,7 +42,6 @@ Usage: ${0##*/} ...
                  Bei 1 werden dann BROKEN-Images fuer "alle" Targets gebaut!
     -P [0|1]     GLUON_PRIORITY (Voreinstellung: 0)
     -s <String>  Absoluter Pfad zum privaten ECDSA-Signkey.
-    -o <String>  Absoluter Pfad zum oeffentlichen ECDSA-Signkey.
     -p <String>  Build Parameter? (Voreinstellung: "-j4 V=s")
                  Liste in Anführungszeichen, getrennt durch Leerzeichen.
     -c [0|1]     Workspace vor dem Bauen löschen? (Voreinstellung: 1)
@@ -56,7 +54,7 @@ EOF
 ###################################################################
 # Optionen parsen
 ###################################################################
-while getopts "T:B:V:P:s:o:p:c:b:t:a:h" opt; do
+while getopts "T:B:V:P:s:p:c:b:t:a:h" opt; do
   case $opt in
     T) FRB_TARGETS=$OPTARG
        ;;
@@ -67,8 +65,6 @@ while getopts "T:B:V:P:s:o:p:c:b:t:a:h" opt; do
     P) FRB_PRIORITY=$OPTARG
        ;;
     s) FRB_SIGNKEY_PRIVATE=$OPTARG
-       ;;
-    o) FRB_SIGNKEY_PUBLIC=$OPTARG
        ;;
     p) FRB_BPARAMETER=$OPTARG
        ;;
@@ -117,7 +113,6 @@ BROKEN Targets:       $FRB_BROKEN_TARGETS
 GLUON_PRIORITY:       $FRB_PRIORITY
 Erzeuge Gesamtarchiv: $FRB_CREATE_DARCHIVE
 Pfad Signkey privat:  $FRB_SIGNKEY_PRIVATE
-Pfad Signkey public:  $FRB_SIGNKEY_PUBLIC
 Buildparameter:       $FRB_BPARAMETER
 Workspace:            $WORKSPACE
 
@@ -251,11 +246,9 @@ if [ "$FRB_SIGNKEY_PRIVATE" != "none" ];  then
  ecdsasign ${hashfile_SHA256} < ${FRB_SIGNKEY_PRIVATE} >> ${hashfile_SHA256}
  mv ${hashfile_MD5} .
  mv ${hashfile_SHA256} .
- # Damit das auch kontrolliert werden kann -> Bereitstellen des öffentlichen  ECDSA-Schluessels
- if [ "$FRB_SIGNKEY_PUBLIC" != "none" ];  then
-  to_output "Public ECDSA-Schluessel bereitstellen"
-  cp ${FRB_SIGNKEY_PUBLIC} ecdsa-key-${GLUON_RELEASE}.pub
- fi
+ # Damit es auch kontrolliert werden kann -> Bereitstellen des öffentlichen  ECDSA-Schluessels
+ to_output "Public ECDSA-Schluessel bereitstellen"
+ ecdsakeygen -p < ${FRB_SIGNKEY_PRIVATE} > ecdsa-key-${GLUON_RELEASE}.pub
  cd ${WORKSPACE}
 fi
 
