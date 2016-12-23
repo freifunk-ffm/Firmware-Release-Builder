@@ -43,6 +43,6 @@ Usage: firmware-release-builder.sh ...
     -h           Dieser Text.
 ```
 
-## ECDSA Utils
-Für das Signieren der Manifest-Datei werden die ECDSA-Utils benötigt.
+## Benötigte ECDSA Utils
+Der FirmwareReleaseBuilder verwendet u.a. die ECDSA-Utils.
 Wie diese Tools unter Debian oder OS X installiert werden, ist hier nachzulesen: https://wiki.freifunk.net/ECDSA_Util
