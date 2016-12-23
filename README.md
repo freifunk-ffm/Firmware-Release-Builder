@@ -46,4 +46,4 @@ Usage: firmware-release-builder.sh ...
 
 ## ECDSA Utils
 Für das Signieren der Manifest-Datei werden die ECDSA-Utils benötigt.
-Wie diese Tools unter Debian oder OS X installiert werden können, ist hier nachzulesen: https://wiki.freifunk.net/ECDSA_Util
+Wie diese Tools unter Debian oder OS X installiert werden, ist hier nachzulesen: https://wiki.freifunk.net/ECDSA_Util
