@@ -20,6 +20,7 @@ FRB_PRIORITY=${FRB_PRIORITY:-0}
 FRB_CREATE_DARCHIVE=${FRB_CREATE_DARCHIVE:-1}
 FRB_SIGNKEY_PRIVATE=${FRB_SIGNKEY_PRIVATE:-"none"}
 FRB_BPARAMETER=${FRB_BPARAMETER:-"-j4 V=s"}
+FRB_VERSION_SUFFIX=${FRB_VERSION_SUFFIX:-"none"}
 
 ###################################################################
 # Usage Info
@@ -37,6 +38,8 @@ Usage: ${0##*/} ...
                  (Voreinstellung: alle als Nicht-BROKEN bekannte Targets)
     -V <String>  Vorgabe des Firmware Versionstrings.
                  (Voreinstellung: "Homebrew")
+    -S <String>  Eigener Suffix fuer den Versionsbezeichnung. 
+                 Anstelle von MonatTag.
     -b [0|1]     BROKEN Router-Images bauen? (Voreinstellung: 0)
     -t [0|1]     BROKEN Targets bauen? (Voreinstellung: 0)
                  Bei 1 werden dann BROKEN-Images fuer "alle" Targets gebaut!
@@ -54,7 +57,7 @@ EOF
 ###################################################################
 # Optionen parsen
 ###################################################################
-while getopts "T:B:V:P:s:p:c:b:t:a:h" opt; do
+while getopts "T:B:V:P:S:s:p:c:b:t:a:h" opt; do
   case $opt in
     T) FRB_TARGETS=$OPTARG
        ;;
@@ -63,6 +66,8 @@ while getopts "T:B:V:P:s:p:c:b:t:a:h" opt; do
     V) FRB_VERSION=$OPTARG
        ;;
     P) FRB_PRIORITY=$OPTARG
+       ;;
+    S) FRB_VERSION_SUFFIX=$OPTARG
        ;;
     s) FRB_SIGNKEY_PRIVATE=$OPTARG
        ;;
@@ -107,6 +112,7 @@ Die FW wird/wurde mit folgenden Optionen gebaut:
 Targets:              $FRB_TARGETS
 Branch:               $FRB_BRANCH
 Versionsstring:       $FRB_VERSION
+Versionsuffix:        $FRB_VERSION_SUFFIX
 Workspace löschen:    $FRB_CLEANUP
 BROKEN Images:        $FRB_BROKEN
 BROKEN Targets:       $FRB_BROKEN_TARGETS
@@ -134,7 +140,11 @@ check_last_exitcode()
 
 # Uebernahme der Parameter für den Gluon-Build
 export GLUON_BRANCH=${FRB_BRANCH}
-export BUILD_NUMBER=$(date '+%m%d')
+if [ "$FRB_VERSION_SUFFIX" == "none" ];  then
+ export BUILD_NUMBER=$(date '+%m%d')
+else 
+ export BUILD_NUMBER=$FRB_VERSION_SUFFIX
+fi
 export GLUON_RELEASE=${FRB_VERSION}-${GLUON_BRANCH}-${BUILD_NUMBER}
 export GLUON_PRIORITY=${FRB_PRIORITY}
 export BROKEN=${FRB_BROKEN}
