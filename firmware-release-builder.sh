@@ -112,7 +112,7 @@ Die FW wird/wurde mit folgenden Optionen gebaut:
 Targets:              $FRB_TARGETS
 Branch:               $FRB_BRANCH
 Versionsstring:       $FRB_VERSION
-Versionsuffix:        $FRB_VERSION_SUFFIX
+Versionssuffix:        $FRB_VERSION_SUFFIX
 Workspace löschen:    $FRB_CLEANUP
 BROKEN Images:        $FRB_BROKEN
 BROKEN Targets:       $FRB_BROKEN_TARGETS
