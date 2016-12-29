@@ -38,7 +38,7 @@ Usage: ${0##*/} ...
                  (Voreinstellung: alle als Nicht-BROKEN bekannte Targets)
     -V <String>  Vorgabe des Firmware Versionstrings.
                  (Voreinstellung: "Homebrew")
-    -S <String>  Eigener Suffix fuer den Versionsbezeichnung. 
+    -S <String>  Eigener Suffix fuer die Versionsbezeichnung. 
                  Anstelle von MonatTag.
     -b [0|1]     BROKEN Router-Images bauen? (Voreinstellung: 0)
     -t [0|1]     BROKEN Targets bauen? (Voreinstellung: 0)
