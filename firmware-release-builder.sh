@@ -149,8 +149,8 @@ export GLUON_RELEASE=${FRB_VERSION}-${GLUON_BRANCH}-${BUILD_NUMBER}
 export GLUON_PRIORITY=${FRB_PRIORITY}
 export BROKEN=${FRB_BROKEN}
 CLEANUP=${FRB_CLEANUP}
-WORKSPACE="$(pwd)/workspace-frb"
 
+WORKSPACE="$(pwd)/workspace"
 
 # Wenn kein Branch definiert wurde -> Abbruch
 if [ "$GLUON_BRANCH" == "none" ];  then
@@ -159,6 +159,14 @@ if [ "$GLUON_BRANCH" == "none" ];  then
 fi
 
 show_build_information
+
+# Altlasten entfernen. 
+# Dieses sollte irgendwann mal entfernt werden
+WORKSPACE_ALT="$(pwd)/workspace-frb"
+if [ -d "$WORKSPACE_ALT" ]; then
+ to_output "Entferne veralteten, nicht mehr benoetigten Workspace"
+ rm -rf $WORKSPACE_ALT
+fi
 
 # ggf. erstmal Aufraeumen, und den Workspace komplett löschen
 if [ $CLEANUP != 0 ];  then
