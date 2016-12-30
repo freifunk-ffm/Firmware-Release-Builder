@@ -150,7 +150,7 @@ export GLUON_PRIORITY=${FRB_PRIORITY}
 export BROKEN=${FRB_BROKEN}
 CLEANUP=${FRB_CLEANUP}
 
-WORKSPACE="$(pwd)/workspace"
+WORKSPACE="$(pwd)/wspace"
 
 # Wenn kein Branch definiert wurde -> Abbruch
 if [ "$GLUON_BRANCH" == "none" ];  then
