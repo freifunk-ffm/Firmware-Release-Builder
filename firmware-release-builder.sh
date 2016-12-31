@@ -19,7 +19,7 @@ FRB_BROKEN_TARGETS=${FRB_BROKEN_TARGETS:-0}
 FRB_PRIORITY=${FRB_PRIORITY:-0}
 FRB_CREATE_DARCHIVE=${FRB_CREATE_DARCHIVE:-1}
 FRB_SIGNKEY_PRIVATE=${FRB_SIGNKEY_PRIVATE:-"none"}
-FRB_BPARAMETER=${FRB_BPARAMETER:-"-j4 --output-sync=recurse V=s"}
+FRB_BPARAMETER=${FRB_BPARAMETER:-"-j4 V=s"}
 FRB_VERSION_SUFFIX=${FRB_VERSION_SUFFIX:-"none"}
 
 ###################################################################
@@ -38,16 +38,15 @@ Usage: ${0##*/} ...
                  (Voreinstellung: alle als Nicht-BROKEN bekannte Targets)
     -V <String>  Vorgabe des Firmware Versionstrings.
                  (Voreinstellung: "Homebrew")
-    -S <String>  Eigener Suffix fuer die Versionsbezeichnung,
-                 anstelle von MonatTag.
+    -S <String>  Eigener Suffix fuer die Versionsbezeichnung. 
+                 Anstelle von MonatTag.
     -b [0|1]     BROKEN Router-Images bauen? (Voreinstellung: 0)
     -t [0|1]     BROKEN Targets bauen? (Voreinstellung: 0)
                  Bei 1 werden dann BROKEN-Images fuer "alle" Targets gebaut!
     -P [0.0-1.0] GLUON_PRIORITY (Voreinstellung: 0.0)
     -s <String>  Absoluter Pfad zum privaten ECDSA-Signkey.
-    -p <String>  Build Make-Parameter.
+    -p <String>  Build Make-Parameter. (Voreinstellung: "-j4 V=s")
                  Liste in Anführungszeichen, getrennt durch Leerzeichen.
-                 (Voreinstellung: "-j4 --output-sync=recurse V=s")
     -c [0|1]     Workspace vor dem Bauen löschen? (Voreinstellung: 1)
     -a [0|1]     Ein .gz Gesamtarchiv erzeugen? (Voreinstellung: 1)
     -h           Dieser Text.
