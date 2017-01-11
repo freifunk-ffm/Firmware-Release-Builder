@@ -30,7 +30,7 @@ cat << EOF
 Usage: ${0##*/} ...
     Die Option -B (Branch) "muss" angegeben werden!
     Optionen in Grossbuchstaben 'sollten' angegeben werden.
-    Optionen in Kleinbuichstaben 'koennen' angegeben werden.
+    Optionen in Kleinbuchstaben 'koennen' angegeben werden.
 
     -B <String>  Name des FFM Firmware-Branches (dev, test oder stable).
     -T <String>  Welche Targets sollen gebaut werden?
