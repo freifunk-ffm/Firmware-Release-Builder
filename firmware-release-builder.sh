@@ -205,12 +205,18 @@ if [ -d "$WORKSPACE/output" ]; then
 fi
 # Einen OpenWrt-Download-Cache-Ordner anlegen
 to_output "Erstelle Symlink auf Ordner openwrt-dl-cache"
-cd ${WORKSPACE}/openwrt
-mkdir -p ../../openwrt-dl-cache
+if [ -d "${WORKSPACE}/openwrt" ]; then
+ RAIDER_HEISST_JETZT_TWIX="openwrt"
+else
+ RAIDER_HEISST_JETZT_TWIX="lede"
+fi
+
+cd ${WORKSPACE}/${RAIDER_HEISST_JETZT_TWIX}
+mkdir -p ../../dl-cache
 if [ -d "dl" ]; then
 	rm -rf dl
 fi
-ln -s ../../openwrt-dl-cache ${WORKSPACE}/openwrt/dl
+ln -s ../../dl-cache ${WORKSPACE}/${RAIDER_HEISST_JETZT_TWIX}/dl
 cd ${WORKSPACE}
 
 # Schauen, ob FRB_BROKEN_TARGETS aktiv ist. Wenn ja, dann immer die volle Anzahl an Möglichkeiten (Images + Targets) bauen.
