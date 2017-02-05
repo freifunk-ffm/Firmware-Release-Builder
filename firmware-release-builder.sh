@@ -204,7 +204,7 @@ if [ -d "$WORKSPACE/output" ]; then
  rm -rf ${WORKSPACE}/output
 fi
 # Einen OpenWrt-Download-Cache-Ordner anlegen
-to_output "Erstelle Symlink auf Ordner openwrt-dl-cache"
+to_output "Erstelle Symlink auf Ordner dl-cache"
 if [ -d "${WORKSPACE}/openwrt" ]; then
  RAIDER_HEISST_JETZT_TWIX="openwrt"
 else
