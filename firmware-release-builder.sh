@@ -160,14 +160,6 @@ fi
 
 show_build_information
 
-# Altlasten entfernen. 
-# Dieses sollte irgendwann mal entfernt werden
-WORKSPACE_ALT="$(pwd)/workspace-frb"
-if [ -d "$WORKSPACE_ALT" ]; then
- to_output "Entferne veralteten, nicht mehr benoetigten Workspace"
- rm -rf $WORKSPACE_ALT
-fi
-
 # ggf. erstmal Aufraeumen, und den Workspace komplett löschen
 if [ $CLEANUP != 0 ];  then
  to_output "Loesche Workspace (das kann mehrere Minuten dauern)"
