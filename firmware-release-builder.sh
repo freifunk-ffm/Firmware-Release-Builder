@@ -160,11 +160,13 @@ fi
 
 show_build_information
 
-# ggf. erstmal Aufraeumen, und den Workspace komplett löschen
+# Ggf. erstmal Aufraeumen, und den Workspace komplett löschen
+# Zur Zeiteersparnis geschieht das Loeschen als Hintergrundprozess
 if [ $CLEANUP != 0 ];  then
- to_output "Loesche Workspace (das kann mehrere Minuten dauern)"
+ to_output "Loesche Workspace (Hintergrundprozess)"
  if [ -d "$WORKSPACE" ]; then
-  rm -rf $WORKSPACE
+  mv $WORKSPACE "$WORKSPACE"__removal_still_in_progress_id-$$
+  rm -rf "$WORKSPACE"__removal_still_in_progress_id-$$ &
  fi
 fi
 
