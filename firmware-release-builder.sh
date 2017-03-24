@@ -163,7 +163,7 @@ show_build_information
 # Ggf. erstmal Aufraeumen, und den Workspace komplett löschen
 # Zur Zeiteersparnis geschieht das Loeschen als Hintergrundprozess
 if [ $CLEANUP != 0 ];  then
- to_output "Loesche Workspace (Hintergrundprozess)"
+ to_output "Entferne alten Workspace (Hintergrundprozess)"
  if [ -d "$WORKSPACE" ]; then
   mv $WORKSPACE "$WORKSPACE"__removal_still_in_progress_id-$$
   rm -rf "$WORKSPACE"__removal_still_in_progress_id-$$ &
@@ -174,7 +174,7 @@ fi
 if [ ! -d "$WORKSPACE" ]; then
  to_output "Clone Gluon in neuen Workspace"
  git clone https://github.com/freifunk-ffm/gluon.git $WORKSPACE
- to_output  "Clone Site in neuen workspace"
+ to_output  "Clone Site in neuen Workspace"
  git clone https://github.com/freifunk-ffm/site-ffffm.git $WORKSPACE/site
 fi
 
