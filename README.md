@@ -8,13 +8,13 @@ Der FRB ist ein einzelnes Skript, welches alle notwendigen Schritt des Buildproz
   - Das Skript legt einen eigenen Workspace an (./wspace).  
   - Der FRB ist hauptsächlich auf Frankfurter Ansprüche abgestimmt. Für den automatischen Upload auf den FFM Download-Server wird ein .gz Archiv mit allen Images, allen opkg-Modulen und allen Versionsinformationen erzeugt (siehe https://github.com/freifunk-ffm/scripts/blob/master/firmwarefetch).  
 
-###Achtung!   
+### Achtung!   
 Je nach Konfiguration entfernt der FRB Dateien und Unterordner. Daher sollte der FRB nicht zur reinen FW-Entwickling verwendet werden!
 
-###Skript-Benutzung
-####Voraussetzung 
+### Skript-Benutzung
+#### Voraussetzung 
 Für das Firmwarebauen müssen generell alle Pakete aus http://gluon.readthedocs.io/en/latest/user/getting_started.html#dependencies installier sein!
-####Das Skript anwenden
+#### Das Skript anwenden
 Skriptname:`firmware-release-builder.sh`  
 
 Wird das Skript mit der Option `-h` aufgerufen, so wird folgendes ausgegeben:
