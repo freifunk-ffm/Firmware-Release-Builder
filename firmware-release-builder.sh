@@ -165,8 +165,8 @@ show_build_information
 if [ $CLEANUP != 0 ];  then
  to_output "Entferne alten Workspace (Hintergrundprozess)"
  if [ -d "$WORKSPACE" ]; then
-  mv $WORKSPACE "$WORKSPACE"__removal_still_in_progress_id-$$
-  rm -rf "$WORKSPACE"__removal_still_in_progress_id-$$ &
+  mv $WORKSPACE "$WORKSPACE"__removal_still_in_progress_PID-$$
+  rm -rf "$WORKSPACE"__removal_still_in_progress_PID-$$ &
  fi
 fi
 
