@@ -155,6 +155,7 @@ WORKSPACE="$(pwd)/wspace"
 # Wenn kein Branch definiert wurde -> Abbruch
 if [ "$GLUON_BRANCH" == "none" ];  then
  to_output "Abbruch: Es wurde kein Branch mittels '-B' angegeben"
+ show_help
  exit 1
 fi
 
