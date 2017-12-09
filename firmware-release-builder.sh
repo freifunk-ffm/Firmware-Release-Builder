@@ -274,10 +274,10 @@ fi
 if [ $FRB_CREATE_DARCHIVE != 0 ];  then
   to_output "Vorbereitung der Deplay-Informationen"
   # Verschieben der opkg-Module an Frankfurter Zielort -> 'output/images/sysupgrade/modules'
+
   if [ "$RAIDER_HEISST_JETZT_TWIX" == "lede" ]; then
     # lede
-    mkdir ${WORKSPACE}/output/images/sysupgrade/modules
-    mv ${WORKSPACE}/output/packages/* ${WORKSPACE}/output/images/sysupgrade/modules/
+    mv ${WORKSPACE}/output/packages ${WORKSPACE}/output/images/sysupgrade/modules
   else
     # OpenWrt
     mv ${WORKSPACE}/output/modules ${WORKSPACE}/output/images/sysupgrade
