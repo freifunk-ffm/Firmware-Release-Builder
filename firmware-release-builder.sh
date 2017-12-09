@@ -10,7 +10,7 @@ echo
 
 
 # Default Werte
-FRB_TARGETS=${FRB_TARGETS:-"ar71xx-generic x86-generic x86-64 x86-xen_domu mpc85xx-generic brcm2708-bcm2708 brcm2708-bcm2709 ar71xx-nand"}
+FRB_TARGETS=${FRB_TARGETS:-"ar71xx-tiny ar71xx-generic x86-generic x86-64 x86-geode mpc85xx-generic brcm2708-bcm2708 brcm2708-bcm2709 ar71xx-nand"}
 FRB_BRANCH=${FRB_BRANCH:-none}
 FRB_VERSION=${FRB_VERSION:-Homebrew}
 FRB_CLEANUP=${FRB_CLEANUP:-1}
@@ -274,7 +274,14 @@ fi
 if [ $FRB_CREATE_DARCHIVE != 0 ];  then
   to_output "Vorbereitung der Deplay-Informationen"
   # Verschieben der opkg-Module an Frankfurter Zielort -> 'output/images/sysupgrade/modules'
-  mv ${WORKSPACE}/output/modules ${WORKSPACE}/output/images/sysupgrade
+  if [ "$RAIDER_HEISST_JETZT_TWIX" == "lede" ]; then
+    # lede
+    mkdir ${WORKSPACE}/output/images/sysupgrade/modules
+    mv ${WORKSPACE}/output/packages/* ${WORKSPACE}/output/images/sysupgrade/modules/
+  else
+    # OpenWrt
+    mv ${WORKSPACE}/output/modules ${WORKSPACE}/output/images/sysupgrade
+  fi
   # Firmware-Information erzeugen
   echo ${GLUON_RELEASE} > version
   mv version ${WORKSPACE}/output/images
