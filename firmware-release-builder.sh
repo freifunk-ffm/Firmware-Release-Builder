@@ -218,7 +218,7 @@ cd ${WORKSPACE}
 # FRB_TARGETS verwenden oder komplett ueberschreiben.
 if [ $FRB_BROKEN_TARGETS == 1 ]; then
  # All möglichen Targets bauene. Auch die als BROKEN markierten.
- FRB_TARGETS=$(grep -o -E "GluonTarget[,_a-z0-9]*" targets/targets.mk | tr ',' '-' | sed 's/GluonTarget-//')
+ FRB_TARGETS=$(grep GluonTarget targets/targets.mk | awk -F, '{print $2 "-" $3}'|sed 's/).*//')
   # Zur Sicherheit nochmal BROKEN setzen
  export BROKEN=1
 fi
