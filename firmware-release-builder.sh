@@ -27,7 +27,9 @@ FRB_VERSION_SUFFIX=${FRB_VERSION_SUFFIX:-"none"}
 ###################################################################
 show_help() {
 cat << EOF
+
 Usage: ${0##*/} ...
+
     Die Option -B (Branch) "muss" angegeben werden!
     Optionen in Grossbuchstaben 'sollten' angegeben werden.
     Optionen in Kleinbuchstaben 'koennen' angegeben werden.
@@ -39,7 +41,7 @@ Usage: ${0##*/} ...
     -V <String>  Vorgabe des Firmware Versionstrings.
                  (Voreinstellung: "Homebrew")
     -S <String>  Eigener Suffix fuer die Versionsbezeichnung. 
-                 Anstelle von MonatTag.
+                 Anstelle von Monat/Tag.
     -b [0|1]     BROKEN Router-Images bauen? (Voreinstellung: 0)
     -t [0|1]     BROKEN Targets bauen? (Voreinstellung: 0)
                  Bei 1 werden dann BROKEN-Images fuer "alle" Targets gebaut!
