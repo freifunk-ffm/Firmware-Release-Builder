@@ -52,7 +52,7 @@ Usage: ${0##*/} ...
                  Liste in Anführungszeichen, getrennt durch Leerzeichen.
     -c [0|1]     Workspace vor dem Bauen löschen? (Voreinstellung: $FRB_CLEANUP)
     -a [0|1]     Ein tar.xz Gesamtarchiv erzeugen? (Voreinstellung: $FRB_CREATE_DARCHIVE)
-    -x <String>  Gesamtarchiv xz-Parameter. (Voreinstellung: "-T0 -9")
+    -x <String>  Gesamtarchiv xz-Parameter. (Voreinstellung: $FRB_XZPARAMETER)
                  Liste in Anführungszeichen, getrennt durch Leerzeichen.
     -h           Dieser Text.
 
@@ -240,7 +240,7 @@ for GLUON_TARGET in $FRB_TARGETS
 do
  export GLUON_TARGET
  to_output "Baue Target ${GLUON_TARGET}"
- make ${FRB_BPARAMETER}
+ make ${FRB_BPARAMETER} || (make -j1 V=s ; to_output "Abbruch durch Build-Fehler im Target ${GLUON_TARGET}";)
  check_last_exitcode
 done
 
