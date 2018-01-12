@@ -16,7 +16,7 @@ FRB_VERSION=${FRB_VERSION:-Homebrew}
 FRB_CLEANUP=${FRB_CLEANUP:-1}
 FRB_BROKEN=${FRB_BROKEN:-0}
 FRB_BROKEN_TARGETS=${FRB_BROKEN_TARGETS:-0}
-FRB_PRIORITY=${FRB_PRIORITY:-0}
+FRB_PRIORITY=${FRB_PRIORITY:-0.0}
 FRB_CREATE_DARCHIVE=${FRB_CREATE_DARCHIVE:-1}
 FRB_XZPARAMETER=${FRB_XZPARAMETER:-"-T0 -9"}
 FRB_SIGNKEY_PRIVATE=${FRB_SIGNKEY_PRIVATE:-"none"}
@@ -40,19 +40,20 @@ Usage: ${0##*/} ...
                  Liste in Anführungszeichen, getrennt durch Leerzeichen.
                  (Voreinstellung: alle als Nicht-BROKEN bekannte Targets)
     -V <String>  Vorgabe des Firmware Versionstrings.
-                 (Voreinstellung: "Homebrew")
-    -S <String>  Eigener Suffix fuer die Versionsbezeichnung. 
+                 (Voreinstellung: "$FRB_VERSION")
+    -S <String>  Eigener Suffix fuer die Versionsbezeichnung.
                  Anstelle von Monat/Tag.
-    -b [0|1]     BROKEN Router-Images bauen? (Voreinstellung: 0)
-    -t [0|1]     BROKEN Targets bauen? (Voreinstellung: 0)
+    -b [0|1]     BROKEN Router-Images bauen? (Voreinstellung: $FRB_BROKEN)
+    -t [0|1]     BROKEN Targets bauen? (Voreinstellung: $FRB_BROKEN_TARGETS)
                  Bei 1 werden dann BROKEN-Images fuer "alle" Targets gebaut!
-    -P [0.0-1.0] GLUON_PRIORITY (Voreinstellung: 0.0)
+    -P [0.0-1.0] GLUON_PRIORITY (Voreinstellung: $FRB_PRIORITY)
     -s <String>  Absoluter Pfad zum privaten ECDSA-Signkey.
-    -p <String>  Build Make-Parameter. (Voreinstellung: "-j4 V=s --output-sync=recurse")
+    -p <String>  Build Make-Parameter. (Voreinstellung: "$FRB_BPARAMETER")
                  Liste in Anführungszeichen, getrennt durch Leerzeichen.
-    -c [0|1]     Workspace vor dem Bauen löschen? (Voreinstellung: 1)
-    -a [0|1]     Ein tar.xz Gesamtarchiv erzeugen? (Voreinstellung: 1)
+    -c [0|1]     Workspace vor dem Bauen löschen? (Voreinstellung: $FRB_CLEANUP)
+    -a [0|1]     Ein tar.xz Gesamtarchiv erzeugen? (Voreinstellung: $FRB_CREATE_DARCHIVE)
     -x <String>  Gesamtarchiv xz-Parameter. (Voreinstellung: "-T0 -9")
+                 Liste in Anführungszeichen, getrennt durch Leerzeichen.
     -h           Dieser Text.
 
 EOF
