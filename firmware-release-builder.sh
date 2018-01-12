@@ -240,7 +240,7 @@ for GLUON_TARGET in $FRB_TARGETS
 do
  export GLUON_TARGET
  to_output "Baue Target ${GLUON_TARGET}"
- make ${FRB_BPARAMETER} || (make -j1 V=s ; to_output "Abbruch durch Build-Fehler im Target ${GLUON_TARGET}";)
+ make ${FRB_BPARAMETER} || (make -j1 V=s ; to_output "Abbruch durch Build-Fehler im Target ${GLUON_TARGET}";exit 1;)
  check_last_exitcode
 done
 
