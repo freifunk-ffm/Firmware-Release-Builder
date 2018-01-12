@@ -52,7 +52,7 @@ Usage: ${0##*/} ...
                  Liste in Anführungszeichen, getrennt durch Leerzeichen.
     -c [0|1]     Workspace vor dem Bauen löschen? (Voreinstellung: $FRB_CLEANUP)
     -a [0|1]     Ein tar.xz Gesamtarchiv erzeugen? (Voreinstellung: $FRB_CREATE_DARCHIVE)
-    -x <String>  Gesamtarchiv xz-Parameter. (Voreinstellung: $FRB_XZPARAMETER)
+    -x <String>  Gesamtarchiv xz-Parameter. (Voreinstellung: "$FRB_XZPARAMETER")
                  Liste in Anführungszeichen, getrennt durch Leerzeichen.
     -h           Dieser Text.
 
