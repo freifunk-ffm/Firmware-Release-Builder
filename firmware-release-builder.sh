@@ -18,6 +18,7 @@ FRB_BROKEN=${FRB_BROKEN:-0}
 FRB_BROKEN_TARGETS=${FRB_BROKEN_TARGETS:-0}
 FRB_PRIORITY=${FRB_PRIORITY:-0}
 FRB_CREATE_DARCHIVE=${FRB_CREATE_DARCHIVE:-1}
+FRB_XZPARAMETER=${FRB_XZPARAMETER:-"-T0 -9"}
 FRB_SIGNKEY_PRIVATE=${FRB_SIGNKEY_PRIVATE:-"none"}
 FRB_BPARAMETER=${FRB_BPARAMETER:-"-j4 V=s --output-sync=recurse"}
 FRB_VERSION_SUFFIX=${FRB_VERSION_SUFFIX:-"none"}
@@ -50,7 +51,8 @@ Usage: ${0##*/} ...
     -p <String>  Build Make-Parameter. (Voreinstellung: "-j4 V=s --output-sync=recurse")
                  Liste in Anführungszeichen, getrennt durch Leerzeichen.
     -c [0|1]     Workspace vor dem Bauen löschen? (Voreinstellung: 1)
-    -a [0|1]     Ein .gz Gesamtarchiv erzeugen? (Voreinstellung: 1)
+    -a [0|1]     Ein tar.xz Gesamtarchiv erzeugen? (Voreinstellung: 1)
+    -x <String>  Gesamtarchiv xz-Parameter. (Voreinstellung: "-T0 -9")
     -h           Dieser Text.
 
 EOF
@@ -82,6 +84,8 @@ while getopts "T:B:V:P:S:s:p:c:b:t:a:h" opt; do
     t) FRB_BROKEN_TARGETS=$OPTARG
        ;;
     a) FRB_CREATE_DARCHIVE=$OPTARG
+       ;;
+    x) FRB_XZPARAMETER=$OPTARG
        ;;
     h) show_help
        exit 0
@@ -120,6 +124,7 @@ BROKEN Images:        $FRB_BROKEN
 BROKEN Targets:       $FRB_BROKEN_TARGETS
 GLUON_PRIORITY:       $FRB_PRIORITY
 Erzeuge Gesamtarchiv: $FRB_CREATE_DARCHIVE
+xz-Parameter:         $FRB_XZPARAMETER
 Pfad Signkey privat:  $FRB_SIGNKEY_PRIVATE
 Buildparameter:       $FRB_BPARAMETER
 Workspace:            $WORKSPACE
@@ -291,8 +296,8 @@ if [ $FRB_CREATE_DARCHIVE != 0 ];  then
   # Deploy-Archiv erzeugen
   to_output "Erzeuge Deploy-Archiv"
   cd ${WORKSPACE}/output/images
-  tar czvf gluon-ffffm-${GLUON_RELEASE}.tar.gz *
-  to_output  "Das Deploy-Archive liegt hier: ${WORKSPACE}/output/images/gluon-ffffm-${GLUON_RELEASE}.tar.gz"
+  tar cvf gluon-ffffm-${GLUON_RELEASE}.tar.xz  -I "xz $FRB_XZPARAMETER" *
+  to_output  "Das Deploy-Archive liegt hier: ${WORKSPACE}/output/images/gluon-ffffm-${GLUON_RELEASE}.tar.xz"
 fi
 
 #Fertig!
