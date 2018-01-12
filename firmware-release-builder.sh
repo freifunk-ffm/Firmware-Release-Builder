@@ -62,7 +62,7 @@ EOF
 ###################################################################
 # Optionen parsen
 ###################################################################
-while getopts "T:B:V:P:S:s:p:c:b:t:a:h" opt; do
+while getopts "T:B:V:P:S:s:p:c:b:t:a:x:h" opt; do
   case $opt in
     T) FRB_TARGETS=$OPTARG
        ;;
