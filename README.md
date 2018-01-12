@@ -6,7 +6,7 @@ Der FRB kann z.B. unter Jenkins oder händisch auf einem PC aufgerufen werden.
 Der FRB ist ein einzelnes Skript, welches alle notwendigen Schritt des Buildprozesses vereint.   
   - Dem Skript könne Parameter übergeben werden.  
   - Das Skript legt einen eigenen Workspace an (./wspace).  
-  - Der FRB ist hauptsächlich auf Frankfurter Ansprüche abgestimmt. Für den automatischen Upload auf den FFM Download-Server wird ein .gz Archiv mit allen Images, allen opkg-Modulen und allen Versionsinformationen erzeugt (siehe https://github.com/freifunk-ffm/scripts/blob/master/firmwarefetch).  
+  - Der FRB ist hauptsächlich auf Frankfurter Ansprüche abgestimmt. Für den automatischen Upload auf den FFM Download-Server wird ein Tar-Archiv mit allen Images, allen opkg-Modulen und allen Versionsinformationen erzeugt (siehe https://github.com/freifunk-ffm/scripts/blob/master/firmwarefetch).  
 
 ### Achtung!   
 Je nach Konfiguration entfernt der FRB Dateien und Unterordner. Daher sollte der FRB nicht zur reinen FW-Entwickling verwendet werden!
@@ -42,7 +42,8 @@ Usage: firmware-release-builder.sh ...
     -p <String>  Build Make-Parameter. (Voreinstellung: "-j4 V=s --output-sync=recurse")
                  Liste in Anführungszeichen, getrennt durch Leerzeichen.
     -c [0|1]     Workspace vor dem Bauen löschen? (Voreinstellung: 1)
-    -a [0|1]     Ein .gz Gesamtarchiv erzeugen? (Voreinstellung: 1)
+    -a [0|1]     Ein .xz Gesamtarchiv erzeugen? (Voreinstellung: 1)
+    -x <String>  Gesamtarchiv xz-Parameter. (Voreinstellung: "-T0 -9")
     -h           Dieser Text.
 ```
 
