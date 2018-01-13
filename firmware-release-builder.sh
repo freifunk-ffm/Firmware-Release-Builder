@@ -277,7 +277,7 @@ if [ "$FRB_SIGNKEY_PRIVATE" != "none" ];  then
 fi
 
 if [ $FRB_CREATE_DARCHIVE != 0 ];  then
-  to_output "Vorbereitung der Deplay-Informationen"
+  to_output "Vorbereitung der Deploy-Informationen"
   # Verschieben der opkg-Module an Frankfurter Zielort -> 'output/images/sysupgrade/modules'
 
   if [ "$RAIDER_HEISST_JETZT_TWIX" == "lede" ]; then
