@@ -240,7 +240,7 @@ for GLUON_TARGET in $FRB_TARGETS
 do
  export GLUON_TARGET
  to_output "Baue Target ${GLUON_TARGET}"
- make ${FRB_BPARAMETER} || (make -j1 V=s ; to_output "Abbruch durch Build-Fehler im Target ${GLUON_TARGET}";exit 1;)
+ make ${FRB_BPARAMETER} || (make -j1 V=s ; to_output "Abbruch durch Build-Fehler im Target ${GLUON_TARGET}"; false ;)
  check_last_exitcode
 done
 
@@ -297,7 +297,7 @@ if [ $FRB_CREATE_DARCHIVE != 0 ];  then
   # Deploy-Archiv erzeugen
   to_output "Erzeuge Deploy-Archiv"
   cd ${WORKSPACE}/output/images
-  tar cvf gluon-ffffm-${GLUON_RELEASE}.tar.xz  -I "xz $FRB_XZPARAMETER" *
+  tar cvf gluon-ffffm-${GLUON_RELEASE}.tar.xz  -I "xz ${FRB_XZPARAMETER}" *
   to_output  "Das Deploy-Archive liegt hier: ${WORKSPACE}/output/images/gluon-ffffm-${GLUON_RELEASE}.tar.xz"
 fi
 
