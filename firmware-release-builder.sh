@@ -252,15 +252,11 @@ if [ "$FRB_SIGNKEY_PRIVATE" != "none" ];  then
  contrib/sign.sh ${FRB_SIGNKEY_PRIVATE} ${WORKSPACE}/output/images/sysupgrade/${GLUON_BRANCH}.manifest
 fi
 
-# MD5 und SHA256 Hashes von allen Images erzeugen
-# MD5 wird letztlich doch noch benötigt. Der MD5-HASH wird im Konfig-Modus beim Umflashen angezeigt.
+# SHA256 Hashes von allen Images erzeugen
 cd ${WORKSPACE}/output/images
 
 to_output  "Erzeuge Hashes der Images"
-# Hier sollte irgendwann mal eine Schleife abgearbeitet werden :o)
-hashfile_MD5=../MD5SUMS-${GLUON_RELEASE}
 hashfile_SHA256=../SHA256SUMS-${GLUON_RELEASE}
-find -L * -exec md5sum {} \; > ${hashfile_MD5}
 find -L * -exec sha256sum {} \; > ${hashfile_SHA256}
 
 # Die Hashes ggf. noch mit einem ECDSA-Key signieren (zur absoluten Sicherheit).
