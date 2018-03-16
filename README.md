@@ -39,7 +39,7 @@ Usage: firmware-release-builder.sh ...
                  Bei 1 werden dann BROKEN-Images fuer "alle" Targets gebaut!
     -P [0.0-1.0] GLUON_PRIORITY (Voreinstellung: 0.0)
     -s <String>  Absoluter Pfad zum privaten ECDSA-Signkey.
-    -p <String>  Build Make-Parameter. (Voreinstellung: "-j4 V=s --output-sync=recurse")
+    -p <String>  Build Make-Parameter. (Voreinstellung: "-j4")
                  Liste in Anführungszeichen, getrennt durch Leerzeichen.
     -c [0|1]     Workspace vor dem Bauen löschen? (Voreinstellung: 1)
     -a [0|1]     Ein .xz Gesamtarchiv erzeugen? (Voreinstellung: 1)
