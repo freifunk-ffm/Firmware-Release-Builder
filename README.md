@@ -1,11 +1,14 @@
 # Frankfurter Firmware Release Builder (FRB)
 
-Mit dem Firmware Release Builder (FRB) können sehr einfach Firmware Releases gebaut werden.  
-Der FRB kann z.B. unter Jenkins oder händisch auf einem PC aufgerufen werden.  
+Mit dem Firmware Release Builder (FRB) können auf einfachste Art und Weise Firmware-Releases gebaut werden.
 
-Der FRB ist ein einzelnes Skript, welches alle notwendigen Schritt des Buildprozesses vereint.   
+Der FRB kann z.B. unter Jenkins oder händisch auf einem PC aufgerufen werden.   
+
+Der FRB ist ein einzelnes Skript, welches alle notwendigen Schritte des Buildprozesses vereint.   
   - Dem Skript könne Parameter übergeben werden.  
-  - Das Skript legt einen eigenen Workspace an (./wspace).  
+  - Das Skript legt einen eigenen Workspace an (./wspace).
+  - Das Skript holte selbständig die Inhalte aller notwendigen Gluon-Git-Repositories.
+  - Das Skript legt einen Paketesourcen-Download-Cache an.
   - Der FRB ist hauptsächlich auf Frankfurter Ansprüche abgestimmt. Für den automatischen Upload auf den FFM Download-Server wird ein Tar-Archiv mit allen Images, allen opkg-Modulen und allen Versionsinformationen erzeugt (siehe https://github.com/freifunk-ffm/scripts/blob/master/firmwarefetch).  
 
 ### Achtung!   
@@ -13,7 +16,11 @@ Je nach Konfiguration entfernt der FRB Dateien und Unterordner. Daher sollte der
 
 ### Skript-Benutzung
 #### Voraussetzung 
-Für das Firmwarebauen müssen generell alle Pakete aus http://gluon.readthedocs.io/en/latest/user/getting_started.html#dependencies installier sein!
+  - Die zu verwendenen Gluon-Sources und die Community-spezifischen site-Sources müssen über einen Git-Server abrufbar sein. Durch den FRB werden für beide Repos Branches mit identischem Namen abgerufen.
+
+  - Für das Firmwarebauen müssen generell alle Pakete aus http://gluon.readthedocs.io/en/latest/user/getting_started.html#dependencies installier sein!  
+
+
 #### Das Skript anwenden
 Skriptname:`firmware-release-builder.sh`  
 
