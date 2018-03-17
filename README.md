@@ -8,7 +8,7 @@ Der FRB ist ein einzelnes Skript, welches alle notwendigen Schritte des Buildpro
   - Dem Skript könne Parameter übergeben werden.  
   - Das Skript legt einen eigenen Workspace an (./wspace).
   - Das Skript holte selbständig die Inhalte aller notwendigen Gluon-Git-Repositories.
-  - Das Skript legt einen Paketesourcen-Download-Cache an.
+  - Das Skript legt einen Paketesourcen-Download-Cache an (./dl-cache).
   - Der FRB ist hauptsächlich auf Frankfurter Ansprüche abgestimmt. Für den automatischen Upload auf den FFM Download-Server wird ein Tar-Archiv mit allen Images, allen opkg-Modulen und allen Versionsinformationen erzeugt (siehe https://github.com/freifunk-ffm/scripts/blob/master/firmwarefetch).  
 
 ### Achtung!   
