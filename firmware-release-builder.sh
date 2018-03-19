@@ -23,6 +23,7 @@ FRB_SIGNKEY_PRIVATE=${FRB_SIGNKEY_PRIVATE:-"none"}
 FRB_BPARAMETER=${FRB_BPARAMETER:-"-j4"}
 FRB_VERSION_SUFFIX=${FRB_VERSION_SUFFIX:-"none"}
 
+
 ###################################################################
 # Usage Info
 ###################################################################
@@ -62,6 +63,7 @@ EOF
 ###################################################################
 # Optionen parsen
 ###################################################################
+
 while getopts "T:B:V:P:S:s:p:c:b:t:a:x:h" opt; do
   case $opt in
     T) FRB_TARGETS=$OPTARG
@@ -99,6 +101,23 @@ while getopts "T:B:V:P:S:s:p:c:b:t:a:x:h" opt; do
        ;;
   esac
 done
+
+normalize_bool() {
+  if [[ "$1" = "true" ]]
+  then
+    echo 1
+  elif [[ "$1" = "false" ]]
+  then
+    echo 0
+  else
+    echo "$1"
+  fi
+}
+
+FRB_CLEANUP=$(normalize_bool $FRB_CLEANUP)
+FRB_BROKEN=$(normalize_bool $FRB_BROKEN)
+FRB_BROKEN_TARGETS=$(normalize_bool $FRB_BROKEN_TARGETS)
+FRB_CREATE_DARCHIVE=$(normalize_bool $FRB_CREATE_DARCHIVE)
 
 #####################################################################
 # Echo formated information
