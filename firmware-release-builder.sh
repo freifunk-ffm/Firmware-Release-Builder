@@ -102,6 +102,13 @@ while getopts "T:B:V:P:S:s:p:c:b:t:a:x:h" opt; do
   esac
 done
 
+
+#####################################################################
+# Jenkins kann komfortabel nur boolesche Variablen als (true/false) 
+# uebergeben.
+# Die folgendenden Zeilen tronsformieren durch Jenkins uebergebene 
+# Aufrufparameter in 0 und 1.
+#####################################################################
 normalize_bool() {
   if [[ "$1" = "true" ]]
   then
@@ -113,7 +120,6 @@ normalize_bool() {
     echo "$1"
   fi
 }
-
 FRB_CLEANUP=$(normalize_bool $FRB_CLEANUP)
 FRB_BROKEN=$(normalize_bool $FRB_BROKEN)
 FRB_BROKEN_TARGETS=$(normalize_bool $FRB_BROKEN_TARGETS)
