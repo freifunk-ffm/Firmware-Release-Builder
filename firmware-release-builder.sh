@@ -104,10 +104,10 @@ done
 
 
 #####################################################################
-# Jenkins kann komfortabel nur boolesche Variablen als (true/false) 
+# Jenkins kann komfortabel nur boolesche Variablen als false/true 
 # uebergeben.
 # Die folgendenden Zeilen transformieren durch Jenkins uebergebene 
-# Aufrufparameter in 0 und 1.
+# Aufrufparameter in 0/1 zurueck.
 #####################################################################
 normalize_bool() {
   if [[ "$1" = "true" ]]
