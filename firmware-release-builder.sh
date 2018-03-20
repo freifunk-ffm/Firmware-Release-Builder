@@ -106,7 +106,7 @@ done
 #####################################################################
 # Jenkins kann komfortabel nur boolesche Variablen als (true/false) 
 # uebergeben.
-# Die folgendenden Zeilen tronsformieren durch Jenkins uebergebene 
+# Die folgendenden Zeilen transformieren durch Jenkins uebergebene 
 # Aufrufparameter in 0 und 1.
 #####################################################################
 normalize_bool() {
