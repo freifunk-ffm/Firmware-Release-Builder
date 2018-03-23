@@ -288,8 +288,11 @@ find -L * -exec sha256sum {} \; > ${hashfile_SHA256}
 if [ "$FRB_SIGNKEY_PRIVATE" != "none" ];  then
  to_output "Signiere die Hashedatei"
  # ECDSA signieren der Hash-Datei und verschieben in output/images/sysupgrade
+ echo --- >> ${hashfile_MD5}
  echo --- >> ${hashfile_SHA256}
+ ecdsasign ${hashfile_MD5} < ${FRB_SIGNKEY_PRIVATE} >> ${hashfile_MD5}
  ecdsasign ${hashfile_SHA256} < ${FRB_SIGNKEY_PRIVATE} >> ${hashfile_SHA256}
+ mv ${hashfile_MD5} .
  mv ${hashfile_SHA256} .
  # Damit es auch kontrolliert werden kann -> Bereitstellen des öffentlichen  ECDSA-Schluessels
  to_output "Public ECDSA-Schluessel bereitstellen"
