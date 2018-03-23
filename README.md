@@ -44,7 +44,7 @@ Usage: firmware-release-builder.sh ...
     -b [0|1]     BROKEN Router-Images bauen? (Voreinstellung: 0)
     -t [0|1]     BROKEN Targets bauen? (Voreinstellung: 0)
                  Bei 1 werden dann BROKEN-Images fuer "alle" Targets gebaut!
-    -P [0.0-1.0] GLUON_PRIORITY (Voreinstellung: 0.0)
+    -P [int]     GLUON_PRIORITY (Voreinstellung: 0)
     -s <String>  Absoluter Pfad zum privaten ECDSA-Signkey.
     -p <String>  Build Make-Parameter. (Voreinstellung: "-j4")
                  Liste in Anführungszeichen, getrennt durch Leerzeichen.
