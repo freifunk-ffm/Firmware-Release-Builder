@@ -16,7 +16,7 @@ FRB_VERSION=${FRB_VERSION:-Homebrew}
 FRB_CLEANUP=${FRB_CLEANUP:-1}
 FRB_BROKEN=${FRB_BROKEN:-0}
 FRB_BROKEN_TARGETS=${FRB_BROKEN_TARGETS:-0}
-FRB_PRIORITY=${FRB_PRIORITY:-0.0}
+FRB_PRIORITY=${FRB_PRIORITY:-0}
 FRB_CREATE_DARCHIVE=${FRB_CREATE_DARCHIVE:-1}
 FRB_XZPARAMETER=${FRB_XZPARAMETER:-"-T0 -9"}
 FRB_SIGNKEY_PRIVATE=${FRB_SIGNKEY_PRIVATE:-"none"}
@@ -47,7 +47,7 @@ Usage: ${0##*/} ...
     -b [0|1]     BROKEN Router-Images bauen? (Voreinstellung: $FRB_BROKEN)
     -t [0|1]     BROKEN Targets bauen? (Voreinstellung: $FRB_BROKEN_TARGETS)
                  Bei 1 werden dann BROKEN-Images fuer "alle" Targets gebaut!
-    -P [0.0-1.0] GLUON_PRIORITY (Voreinstellung: $FRB_PRIORITY)
+    -P [int]     GLUON_PRIORITY (Voreinstellung: $FRB_PRIORITY)
     -s <String>  Absoluter Pfad zum privaten ECDSA-Signkey.
     -p <String>  Build Make-Parameter. (Voreinstellung: "$FRB_BPARAMETER")
                  Liste in Anführungszeichen, getrennt durch Leerzeichen.
