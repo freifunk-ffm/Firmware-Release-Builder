@@ -11,7 +11,8 @@ echo
 
 # Default Werte
 FRB_TARGETS=${FRB_TARGETS:-"ar71xx-tiny ar71xx-generic x86-generic x86-64 x86-geode mpc85xx-generic brcm2708-bcm2708 brcm2708-bcm2709 ar71xx-nand ramips-mt7621"}
-FRB_BRANCH=${FRB_BRANCH:-none}
+FRB_GIT_BRANCH=${FRB_GIT_BRANCH:-none}
+FRB_GLUON_BRANCH=${FRB_GLUON_BRANCH:-none}
 FRB_VERSION=${FRB_VERSION:-Homebrew}
 FRB_CLEANUP=${FRB_CLEANUP:-1}
 FRB_BROKEN=${FRB_BROKEN:-0}
@@ -36,7 +37,9 @@ Usage: ${0##*/} ...
     Optionen in Grossbuchstaben 'sollten' angegeben werden.
     Optionen in Kleinbuchstaben 'koennen' angegeben werden.
 
-    -B <String>  Name des FFM Firmware-Branches (dev, test oder stable).
+    -B <String>  Name der FFM Github-Branches (dev, test oder stable).
+    -U <String>  Name des Autoupdater-Branches (Firmware-spezifisch).
+                 (Voreinstellung: Es wird der Parameter von -B übernommen)
     -T <String>  Welche Targets sollen gebaut werden?
                  Liste in Anführungszeichen, getrennt durch Leerzeichen.
                  (Voreinstellung: alle als Nicht-BROKEN bekannte Targets)
@@ -64,11 +67,13 @@ EOF
 # Optionen parsen
 ###################################################################
 
-while getopts "T:B:V:P:S:s:p:c:b:t:a:x:h" opt; do
+while getopts "T:B:U:V:P:S:s:p:c:b:t:a:x:h" opt; do
   case $opt in
     T) FRB_TARGETS=$OPTARG
        ;;
-    B) FRB_BRANCH=$OPTARG
+    B) FRB_GIT_BRANCH=$OPTARG
+       ;;
+    U) FRB_GLUON_BRANCH=$OPTARG
        ;;
     V) FRB_VERSION=$OPTARG
        ;;
@@ -142,7 +147,8 @@ cat << EOF
 Die FW wird/wurde mit folgenden Optionen gebaut:
 
 Targets:              $FRB_TARGETS
-Branch:               $FRB_BRANCH
+Git-Branch:           $FRB_GIT_BRANCH
+Update-Branch:        $FRB_GLUON_BRANCH
 Versionstring:        $FRB_VERSION
 Versionsuffix:        $FRB_VERSION_SUFFIX
 Workspace löschen:    $FRB_CLEANUP
@@ -172,25 +178,32 @@ check_last_exitcode()
 ###################################################################
 
 # Uebernahme der Parameter für den Gluon-Build
-export GLUON_BRANCH=${FRB_BRANCH}
+# Wenn kein Git-Branch definiert wurde -> Abbruch
+if [ "$FRB_GIT_BRANCH" == "none" ];  then
+ show_help
+ to_output "Abbruch: Es wurde kein Git-Branch mittels '-B' angegeben"
+ exit 1
+fi
+
+# Wenn kein Gluon-Branch defniert wurde, dann den Git-Branch verwenden
+if [ "$FRB_GLUON_BRANCH" == "none" ];  then
+ FRB_GLUON_BRANCH=${FRB_GIT_BRANCH}
+fi
+
+export GLUON_BRANCH=${FRB_GLUON_BRANCH}
 if [ "$FRB_VERSION_SUFFIX" == "none" ];  then
  export BUILD_NUMBER=$(date '+%m%d')
 else 
  export BUILD_NUMBER=${FRB_VERSION_SUFFIX}
 fi
+
 export GLUON_RELEASE=${FRB_VERSION}-${GLUON_BRANCH}-${BUILD_NUMBER}
 export GLUON_PRIORITY=${FRB_PRIORITY}
 export BROKEN=${FRB_BROKEN}
+
 CLEANUP=${FRB_CLEANUP}
 
 WORKSPACE="$(pwd)/wspace"
-
-# Wenn kein Branch definiert wurde -> Abbruch
-if [ "$GLUON_BRANCH" == "none" ];  then
- show_help
- to_output "Abbruch: Es wurde kein Branch mittels '-B' angegeben"
- exit 1
-fi
 
 show_build_information
 
@@ -214,11 +227,11 @@ fi
 
 # Gluon und site.conf aus dem Github Branch holen
 cd $WORKSPACE
-to_output  "Checkout $GLUON_BRANCH Branch von Gluon und Site"
-git checkout ${GLUON_BRANCH}
+to_output  "Checkout Git-Branch vom Gluon- und Site-Repository"
+git checkout ${FRB_GIT_BRANCH}
 git pull
 cd $WORKSPACE/site
-git checkout ${GLUON_BRANCH}
+git checkout ${FRB_GIT_BRANCH}
 git pull
 
 cd $WORKSPACE
