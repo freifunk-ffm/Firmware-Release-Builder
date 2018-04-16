@@ -53,7 +53,7 @@ Usage: firmware-release-builder.sh ...
                  Liste in Anführungszeichen, getrennt durch Leerzeichen.
     -c [0|1]     Workspace vor dem Bauen löschen? (Voreinstellung: 1)
     -a [0|1]     Ein .xz Gesamtarchiv erzeugen? (Voreinstellung: 1)
-    -x <String>  Gesamtarchiv xz-Parameter. (Voreinstellung: "-T0 -9")
+    -x <String>  Gesamtarchiv xz-Parameter. (Voreinstellung: "-T0 -6")
     -h           Dieser Text.
 ```
 
