@@ -1,6 +1,6 @@
 # Frankfurter Firmware Release Builder (FRB)
 
-Mit dem Firmware Release Builder (FRB) können auf einfachste Art und Weise Firmware-Releases gebaut werden.
+Mit dem Firmware Release Builder (FRB) können auf einfachste Art und Weise automatisiert Firmware-Releases gebaut werden.
 
 Der FRB kann z.B. unter Jenkins oder händisch auf einem PC aufgerufen werden.   
 
