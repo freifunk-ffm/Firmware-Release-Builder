@@ -11,8 +11,11 @@ echo
 
 # Default Werte
 FRB_TARGETS=${FRB_TARGETS:-"ar71xx-generic ar71xx-tiny ar71xx-nand brcm2708-bcm2708 brcm2708-bcm2709 mpc85xx-generic ramips-mt7621 sunxi x86-generic x86-geode x86-64 ramips-mt7620 ramips-mt7628 ramips-rt305x"}
-FRB_GIT_BRANCH=${FRB_GIT_BRANCH:-none}
-FRB_GLUON_BRANCH=${FRB_GLUON_BRANCH:-none}
+FRB_GLUON_REPO=${FRB_GLUON_MAIN_REPO:-"https://github.com/freifunk-ffm/gluon.git"}
+FRB_GLUON_BRANCH=${FRB_GLUON_BRANCH:-"none"}
+FRB_SITE_REPO=${FRB_SITE_REPO:-"https://github.com/freifunk-ffm/site-ffffm.git"}
+FRB_SITE_BRANCH=${FRB_SITE_BRANCH:-"none"}
+FRB_FW_UPDATE_BRANCH=${FRB_FW_UPDATE_BRANCH:-none}
 FRB_VERSION=${FRB_VERSION:-Homebrew}
 FRB_CLEANUP=${FRB_CLEANUP:-1}
 FRB_BROKEN=${FRB_BROKEN:-0}
@@ -24,7 +27,6 @@ FRB_SIGNKEY_PRIVATE=${FRB_SIGNKEY_PRIVATE:-"none"}
 FRB_BPARAMETER=${FRB_BPARAMETER:-"-j4"}
 FRB_VERSION_SUFFIX=${FRB_VERSION_SUFFIX:-"none"}
 
-
 ###################################################################
 # Usage Info
 ###################################################################
@@ -33,16 +35,18 @@ cat << EOF
 
 Usage: ${0##*/} ...
 
-    Die Option -B (Branch) "muss" angegeben werden!
+    Die Option -B (Git Haupt-Branch) "muss" angegeben werden!
     Optionen in Grossbuchstaben 'sollten' angegeben werden.
     Optionen in Kleinbuchstaben 'koennen' angegeben werden.
 
-    -B <String>  Name der FFM Github-Branches (dev, test oder stable).
-    -U <String>  Name des Autoupdater-Branches (Firmware-spezifisch).
-                 (Voreinstellung: Es wird der Parameter von -B übernommen)
+    -B <String>  Name des Gluon-Branches (z.B. dev, test oder stable).
     -T <String>  Welche Targets sollen gebaut werden?
                  Liste in Anführungszeichen, getrennt durch Leerzeichen.
                  (Voreinstellung: alle als Nicht-BROKEN bekannte Targets)
+    -C <String>  Name des Site-Branches (z.B. dev, test oder stable).
+                 (Voreinstellung: Es wird der Parameter von -B übernommen)
+    -U <String>  Name des Firmware Autoupdater-Branches (Firmware-spezifisch).
+                 (Voreinstellung: Es wird der Parameter von -B übernommen)
     -V <String>  Vorgabe des Firmware Versionstrings.
                  (Voreinstellung: "$FRB_VERSION")
     -S <String>  Eigener Suffix fuer die Versionsbezeichnung.
@@ -58,6 +62,10 @@ Usage: ${0##*/} ...
     -a [0|1]     Ein tar.xz Gesamtarchiv erzeugen? (Voreinstellung: $FRB_CREATE_DARCHIVE)
     -x <String>  Gesamtarchiv xz-Parameter. (Voreinstellung: "$FRB_XZPARAMETER")
                  Liste in Anführungszeichen, getrennt durch Leerzeichen.
+    -g <String>  Zu verwendendes Gluon-Repository.
+                 (Voreinstellung https://github.com/freifunk-ffm/gluon.git)
+    -k <String>  Zu verwendendes Site-Repository.
+                 (Voreinstellung https://github.com/freifunk-ffm/site-ffffm.git)
     -h           Dieser Text.
 
 EOF
@@ -67,13 +75,15 @@ EOF
 # Optionen parsen
 ###################################################################
 
-while getopts "T:B:U:V:P:S:s:p:c:b:t:a:x:h" opt; do
+while getopts "T:B:C:U:V:P:S:s:p:c:b:t:a:x:g:k:h" opt; do
   case $opt in
     T) FRB_TARGETS=$OPTARG
        ;;
-    B) FRB_GIT_BRANCH=$OPTARG
+    B) FRB_GLUON_BRANCH=$OPTARG
        ;;
-    U) FRB_GLUON_BRANCH=$OPTARG
+    C) FRB_SITE_BRANCH=$OPTARG
+       ;;
+    U) FRB_FW_UPDATE_BRANCH=$OPTARG
        ;;
     V) FRB_VERSION=$OPTARG
        ;;
@@ -94,6 +104,10 @@ while getopts "T:B:U:V:P:S:s:p:c:b:t:a:x:h" opt; do
     a) FRB_CREATE_DARCHIVE=$OPTARG
        ;;
     x) FRB_XZPARAMETER=$OPTARG
+       ;;
+    g) FRB_GLUON_REPO=$OPTARG
+       ;;
+    k) FRB_SITE_REPO=$OPTARG
        ;;
     h) show_help
        exit 0
@@ -147,8 +161,11 @@ cat << EOF
 Die FW wird/wurde mit folgenden Optionen gebaut:
 
 Targets:              $FRB_TARGETS
-Git-Branch:           $FRB_GIT_BRANCH
-Update-Branch:        $FRB_GLUON_BRANCH
+Gluon-Repo:           $FRB_GLUON_REPO
+Site-Repo:            $FRB_SITE_REPO
+Gluon-Branch:         $FRB_GLUON_BRANCH
+Site-Branch:          $FRB_SITE_BRANCH
+FW Update-Branch:     $FRB_FW_UPDATE_BRANCH
 Versionstring:        $FRB_VERSION
 Versionsuffix:        $FRB_VERSION_SUFFIX
 Workspace löschen:    $FRB_CLEANUP
@@ -177,20 +194,25 @@ check_last_exitcode()
 ###################################################################
 ###################################################################
 
-# Uebernahme der Parameter für den Gluon-Build
-# Wenn kein Git-Branch definiert wurde -> Abbruch
-if [ "$FRB_GIT_BRANCH" == "none" ];  then
+# Uebernahme der Parameter für den Git-Gluon-Build
+# Wenn kein Git-Gluon-Branch definiert wurde -> Abbruch
+if [ "$FRB_GLUON_BRANCH" == "none" ];  then
  show_help
- to_output "Abbruch: Es wurde kein Git-Branch mittels '-B' angegeben"
+ to_output "Abbruch: Es wurde kein Git-Gluon-Branch mittels '-B' angegeben"
  exit 1
 fi
 
-# Wenn kein Gluon-Branch defniert wurde, dann den Git-Branch verwenden
-if [ "$FRB_GLUON_BRANCH" == "none" ];  then
- FRB_GLUON_BRANCH=${FRB_GIT_BRANCH}
+# Wenn kein Site-Branch definiert wurde, dann den Git-Gluon-Branch verwenden
+if [ "$FRB_SITE_BRANCH" == "none" ];  then
+ FRB_SITE_BRANCH=${FRB_GLUON_BRANCH}
 fi
 
-export GLUON_BRANCH=${FRB_GLUON_BRANCH}
+# Wenn kein Firmware-Update-Branch definiert wurde, dann den Git-Gluon-Branch verwenden
+if [ "$FRB_FW_UPDATE_BRANCH" == "none" ];  then
+ FRB_FW_UPDATE_BRANCH=${FRB_GLUON_BRANCH}
+fi
+
+export GLUON_BRANCH=${FRB_FW_UPDATE_BRANCH}
 if [ "$FRB_VERSION_SUFFIX" == "none" ];  then
  export BUILD_NUMBER=$(date '+%m%d')
 else 
@@ -220,19 +242,25 @@ fi
 # ggf. Workspace erzeugen und Gluon aus Git holen
 if [ ! -d "$WORKSPACE" ]; then
  to_output "Clone Gluon in neuen Workspace"
- git clone https://github.com/freifunk-ffm/gluon.git $WORKSPACE
+ git clone $FRB_GLUON_REPO $WORKSPACE
+ check_last_exitcode
  to_output  "Clone Site in neuen Workspace"
- git clone https://github.com/freifunk-ffm/site-ffffm.git $WORKSPACE/site
+ git clone $FRB_SITE_REPO $WORKSPACE/site
+ check_last_exitcode
 fi
 
-# Gluon und site.conf aus dem Github Branch holen
+# Gluon und site.conf aus den Git-Branches holen
 cd $WORKSPACE
 to_output  "Checkout Git-Branch vom Gluon- und Site-Repository"
-git checkout ${FRB_GIT_BRANCH}
+git checkout ${FRB_GLUON_BRANCH}
+check_last_exitcode
 git pull
+check_last_exitcode
 cd $WORKSPACE/site
-git checkout ${FRB_GIT_BRANCH}
+git checkout ${FRB_SITE_BRANCH}
+check_last_exitcode
 git pull
+check_last_exitcode
 
 cd $WORKSPACE
 to_output "Update OpenWrt"

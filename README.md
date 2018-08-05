@@ -30,19 +30,21 @@ Wird das Skript mit der Option `-h` aufgerufen, so wird folgendes ausgegeben:
 ```
 Usage: firmware-release-builder.sh ... 
 
-    Die Option -B (Branch) "muss" angegeben werden!
+    Die Option -B (Git Haupt-Branch) "muss" angegeben werden!
     Optionen in Grossbuchstaben 'sollten' angegeben werden.
     Optionen in Kleinbuchstaben 'koennen' angegeben werden.
 
-    -B <String>  Name des FFM Github-Branches (z.B. dev, test oder stable).
-    -U <String>  Name des Autoupdater-Branches (Firmware-spezifisch).
-                 (Voreinstellung: Es wird der Parameter von -B übernommen)
+    -B <String>  Name des Gluon-Branches (z.B. dev, test oder stable).
     -T <String>  Welche Targets sollen gebaut werden?
                  Liste in Anführungszeichen, getrennt durch Leerzeichen.
                  (Voreinstellung: alle als Nicht-BROKEN bekannte Targets)
+    -C <String>  Name des Site-Branches (z.B. dev, test oder stable).
+                 (Voreinstellung: Es wird der Parameter von -B übernommen)
+    -U <String>  Name des Firmware Autoupdater-Branches (Firmware-spezifisch).
+                 (Voreinstellung: Es wird der Parameter von -B übernommen)
     -V <String>  Vorgabe des Firmware Versionstrings.
                  (Voreinstellung: "Homebrew")
-    -S <String>  Eigener Suffix fuer die Versionsbezeichnung. 
+    -S <String>  Eigener Suffix fuer die Versionsbezeichnung.
                  Anstelle von Monat/Tag.
     -b [0|1]     BROKEN Router-Images bauen? (Voreinstellung: 0)
     -t [0|1]     BROKEN Targets bauen? (Voreinstellung: 0)
@@ -52,8 +54,13 @@ Usage: firmware-release-builder.sh ...
     -p <String>  Build Make-Parameter. (Voreinstellung: "-j4")
                  Liste in Anführungszeichen, getrennt durch Leerzeichen.
     -c [0|1]     Workspace vor dem Bauen löschen? (Voreinstellung: 1)
-    -a [0|1]     Ein .xz Gesamtarchiv erzeugen? (Voreinstellung: 1)
+    -a [0|1]     Ein tar.xz Gesamtarchiv erzeugen? (Voreinstellung: 1)
     -x <String>  Gesamtarchiv xz-Parameter. (Voreinstellung: "-T0 -6")
+                 Liste in Anführungszeichen, getrennt durch Leerzeichen.
+    -g <String>  Zu verwendendes Gluon-Repository.
+                 (Voreinstellung https://github.com/freifunk-ffm/gluon.git)
+    -k <String>  Zu verwendendes Site-Repository.
+                 (Voreinstellung https://github.com/freifunk-ffm/site-ffffm.git)
     -h           Dieser Text.
 ```
 
