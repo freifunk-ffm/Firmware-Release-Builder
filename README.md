@@ -17,7 +17,7 @@ Je nach Konfiguration entfernt der FRB Dateien und Unterordner. Daher sollte der
 
 ### Skript-Benutzung
 #### Voraussetzung 
-  - Die zu verwendenen Gluon-Sources und die Community-spezifischen site-Sources müssen über einen Git-Server abrufbar sein. Durch den FRB werden für beide Repos Branches mit identischem Namen abgerufen.
+  - Die zu verwendenen Gluon-Sources und die Community-spezifischen site-Sources müssen über einen Git-Server abrufbar sein. ~Durch den FRB werden für beide Repos Branches mit identischem Namen abgerufen.~
 
   - Für das Firmwarebauen müssen generell alle Pakete aus http://gluon.readthedocs.io/en/latest/user/getting_started.html#dependencies installier sein!  
 
