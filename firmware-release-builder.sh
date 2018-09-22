@@ -221,7 +221,15 @@ fi
 
 export GLUON_RELEASE=${FRB_VERSION}-${GLUON_BRANCH}-${BUILD_NUMBER}
 export GLUON_PRIORITY=${FRB_PRIORITY}
-export BROKEN=${FRB_BROKEN}
+
+# Der Build-Prozess schaut nur ob die Umgebungsvariable BROKEN existiert. 
+# Der Inhalt/Wert von BROKEN ist komplett egal.
+# Daher die Umgebungsvariable ggf. komplett entfernen.
+if [ $FRB_BROKEN -eq 0 ]; then
+  unset BROKEN
+else
+ export BROKEN=${FRB_BROKEN}
+fi
 
 CLEANUP=${FRB_CLEANUP}
 
@@ -297,7 +305,7 @@ if [ $FRB_BROKEN_TARGETS == 1 ]; then
  export BROKEN=1
 fi
 to_output "Build Targets = $FRB_TARGETS"
-to_output "BROKEN = $BROKEN"
+to_output "BROKEN = $FRB_BROKEN"
 
 ############
 # Bauen
