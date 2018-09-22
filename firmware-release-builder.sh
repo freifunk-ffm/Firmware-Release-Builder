@@ -63,9 +63,9 @@ Usage: ${0##*/} ...
     -x <String>  Gesamtarchiv xz-Parameter. (Voreinstellung: "$FRB_XZPARAMETER")
                  Liste in Anführungszeichen, getrennt durch Leerzeichen.
     -g <String>  Zu verwendendes Gluon-Repository.
-                 (Voreinstellung https://github.com/freifunk-ffm/gluon.git)
+                 (Voreinstellung $FRB_GLUON_REPO)
     -k <String>  Zu verwendendes Site-Repository.
-                 (Voreinstellung https://github.com/freifunk-ffm/site-ffffm.git)
+                 (Voreinstellung $FRB_SITE_REPO)
     -h           Dieser Text.
 
 EOF
