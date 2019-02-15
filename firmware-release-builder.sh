@@ -282,18 +282,13 @@ if [ -d "$WORKSPACE/output" ]; then
 fi
 # Einen OpenWrt-Download-Cache-Ordner anlegen
 to_output "Erstelle Symlink auf Ordner dl-cache"
-if [ -d "${WORKSPACE}/openwrt" ]; then
- RAIDER_HEISST_JETZT_TWIX="openwrt"
-else
- RAIDER_HEISST_JETZT_TWIX="lede"
-fi
 
-cd ${WORKSPACE}/${RAIDER_HEISST_JETZT_TWIX}
+cd ${WORKSPACE}/openwrt
 mkdir -p ../../dl-cache
 if [ -d "dl" ]; then
 	rm -rf dl
 fi
-ln -s ../../dl-cache ${WORKSPACE}/${RAIDER_HEISST_JETZT_TWIX}/dl
+ln -s ../../dl-cache ${WORKSPACE}/openwrt/dl
 cd ${WORKSPACE}
 
 # Schauen, ob FRB_BROKEN_TARGETS aktiv ist. Wenn ja, dann immer die volle Anzahl an Möglichkeiten (Images + Targets) bauen.
@@ -357,13 +352,12 @@ if [ $FRB_CREATE_DARCHIVE != 0 ];  then
   to_output "Vorbereitung der Deploy-Informationen"
   # Verschieben der opkg-Module an Frankfurter Zielort -> 'output/images/sysupgrade/modules'
 
-  if [ "$RAIDER_HEISST_JETZT_TWIX" == "lede" ]; then
-    # lede
-    mv ${WORKSPACE}/output/packages ${WORKSPACE}/output/images/sysupgrade/modules
-  else
-    # OpenWrt
-    mv ${WORKSPACE}/output/modules ${WORKSPACE}/output/images/sysupgrade
-  fi
+  # Gluon basierte mal auf OpenWrt, dann auf LEDE und nun wieder auf OpenWrt.
+  # Die unterschiedlichen Build-Umgebungen hatten u.a. unterschiedliche Zielpfade für Modul- bzw. Package-Binaries.
+  # Dieses Hin und Her der Pfadstrukturen wurden nicht bis zum Frankfurter DL-Server durchgereicht.
+  # Daher müssen nachträglich einige Pfade der aktuellen Gluon-Buildumgebung an die Pfad-Struktur des DL-Server angepasst werden.
+  mv ${WORKSPACE}/output/packages ${WORKSPACE}/output/images/sysupgrade/modules
+
   # Firmware-Information erzeugen
   echo ${GLUON_RELEASE} > version
   mv version ${WORKSPACE}/output/images
