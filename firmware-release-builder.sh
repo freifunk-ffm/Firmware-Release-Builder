@@ -244,6 +244,7 @@ if [ $CLEANUP != 0 ];  then
  if [ -d "$WORKSPACE" ]; then
   mv $WORKSPACE "$WORKSPACE"__removal_still_in_progress_PID-$$
   rm -rf "$WORKSPACE"__removal_still_in_progress_PID-$$ &
+  disown
  fi
 fi
 
@@ -260,14 +261,10 @@ fi
 # Gluon und site.conf aus den Git-Branches holen
 cd $WORKSPACE
 to_output  "Checkout Git-Branch vom Gluon- und Site-Repository"
-git checkout ${FRB_GLUON_BRANCH}
-check_last_exitcode
-git pull
+git fetch && git reset --hard origin/${FRB_GLUON_BRANCH}
 check_last_exitcode
 cd $WORKSPACE/site
-git checkout ${FRB_SITE_BRANCH}
-check_last_exitcode
-git pull
+git fetch && git reset --hard origin/${FRB_SITE_BRANCH}
 check_last_exitcode
 
 cd $WORKSPACE
@@ -278,7 +275,7 @@ check_last_exitcode
 # Alte Images vorher immer komplett entfernen
 to_output "Loesche alten Image Ordner"
 if [ -d "$WORKSPACE/output" ]; then
- rm -rf ${WORKSPACE}/output
+ rm -rf "${WORKSPACE}/output"
 fi
 # Einen OpenWrt-Download-Cache-Ordner anlegen
 to_output "Erstelle Symlink auf Ordner dl-cache"
