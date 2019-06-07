@@ -353,7 +353,10 @@ if [ $FRB_CREATE_DARCHIVE != 0 ];  then
   # Die unterschiedlichen Build-Umgebungen hatten u.a. unterschiedliche Zielpfade für Modul- bzw. Package-Binaries.
   # Dieses Hin und Her der Pfadstrukturen wurden nicht bis zum Frankfurter DL-Server durchgereicht.
   # Daher müssen nachträglich einige Pfade der aktuellen Gluon-Buildumgebung an die Pfad-Struktur des DL-Server angepasst werden.
-  mv ${WORKSPACE}/output/packages ${WORKSPACE}/output/images/sysupgrade/modules
+  
+  if [ -d "${WORKSPACE}/output/packages" ]; then  # wird alleinig nur ar71xx-tiny gebaut, so gibt es dann diesen Ordner nicht.
+    mv ${WORKSPACE}/output/packages ${WORKSPACE}/output/images/sysupgrade/modules
+  fi
 
   # Firmware-Information erzeugen
   echo ${GLUON_RELEASE} > version
