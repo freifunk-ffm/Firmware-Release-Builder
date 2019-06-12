@@ -10,7 +10,7 @@ echo
 
 
 # Default Werte
-FRB_TARGETS=${FRB_TARGETS:-"ar71xx-generic ar71xx-tiny ar71xx-nand ipq40xx brcm2708-bcm2708 brcm2708-bcm2709 mpc85xx-generic ramips-mt7620 ramips-mt7621 ramips-mt76x8 sunxi-cortexa7 x86-generic x86-geode x86-64"}
+FRB_TARGETS=${FRB_TARGETS:-"ar71xx-generic ar71xx-tiny ar71xx-nand ipq40xx brcm2708-bcm2708 brcm2708-bcm2709 mpc85xx-generic ramips-mt7620 ramips-mt7621 ramips-mt76x8 ramips-rt305x sunxi-cortexa7 x86-generic x86-geode x86-64"}
 FRB_GLUON_REPO=${FRB_GLUON_REPO:-"https://github.com/freifunk-ffm/gluon.git"}
 FRB_GLUON_BRANCH=${FRB_GLUON_BRANCH:-"none"}
 FRB_SITE_REPO=${FRB_SITE_REPO:-"https://github.com/freifunk-ffm/site-ffffm.git"}
