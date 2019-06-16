@@ -2,14 +2,17 @@
 
 Die folgenden Tests sollten auf möglichst vielen unterschiedlichen Routermodellen durchgeführt werden.
 
----
+Ein grober Funktionstest sollten mindestens den folgenden Anforderungen genügen.
 
-### Ein grober Funktionstest sollten mindestens den folgenden Anforderungen genügen:
+---
 
 #### Factory
 - [ ] Routerspezifische Factory-Installation
 - [ ] Konfigmodus: Erstkonfiguration (alle Eingabefelder/-möglichkeiten)
-- [ ] weiter mit Sysupgrade-Check
+
+dann weiter mit Sysupgrade-Check
+
+---
 
 #### Sysupgrade
 - [ ] Allgemeines Erscheininhsbild der LEDs
@@ -40,8 +43,14 @@ Die folgenden Tests sollten auf möglichst vielen unterschiedlichen Routermodell
 - [ ] Autoupdater (Nachtzeit, Router selbsständig)
 - [ ] ggf. Autoupdater-Test"use site conf branch"
 - [ ] Sysupgrade nach Sysupgrade (inkl. gefolgter Kurztest)
+- [ ] Sysupgrade mit lokaler Image-Datei per 'sysupgrade'
+
+---
 
 #### Firstboot
 - [ ] Durchführung mehrerer Factoryinstallationen, jeweils mit unterschiedlichen Erstkonfigurationen. Dann jeweils weiter mit Sysupgrade-Check
+
+---
+
 #### Sonstiges
 - [ ] Check Listungen Firmwarewizard
