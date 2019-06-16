@@ -10,13 +10,13 @@ Ein grober Funktionstest sollten mindestens den folgenden Anforderungen genügen
 - [ ] Routerspezifische Factory-Installation
 - [ ] Konfigmodus: Erstkonfiguration (alle Eingabefelder/-möglichkeiten)
 
-dann weiter mit Sysupgrade-Check
+Dann weiter mit Sysupgrade-Check.
 
 ---
 
 #### Sysupgrade
 - [ ] Allgemeines Erscheininhsbild der LEDs
-- [ ] Erscheininhsbild der erwarteten Netzwerk-Kontektivität
+- [ ] Erscheininhsbild der erwarteten Netzwerk-Konntektivität
 - [ ] Aufruf Konfigmodus über Reset-/WPS-Taster
 - [ ] Konfigmodus: Überprüfung der Beibehaltung der Benutzer-Konfiguration
 - [ ] Konfigmodus: Revision-Information (FW/Gluon)
@@ -39,7 +39,7 @@ dann weiter mit Sysupgrade-Check
 - [ ] Offline-SSID
 - [ ] Nodeinfo
 - [ ] opkg update
-- [ ] opkg Testinstallation
+- [ ] opkg Testinstallation (inkl. kmods)
 - [ ] Autoupdater (Nachtzeit, Router selbsständig)
 - [ ] ggf. Autoupdater-Test"use site conf branch"
 - [ ] Sysupgrade nach Sysupgrade (inkl. gefolgter Kurztest)
