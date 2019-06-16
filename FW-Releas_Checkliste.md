@@ -7,19 +7,20 @@ Die folgenden Tests sollten auf möglichst vielen unterschiedlichen Routermodell
 ### Ein grober Funktionstest sollten mindestens den folgenden Anforderungen genügen:
 
 #### Factory
-- [ ] Factoryinstallation
-- [ ] weiter mit Sysupgrade-Check
-
-#### Firstboot
-- [ ] 'firstboot'
+- [ ] Routerspezifische Factory-Installation
+- [ ] Konfigmodus: Erstkonfiguration (alle Eingabefelder/-möglichkeiten)
 - [ ] weiter mit Sysupgrade-Check
 
 #### Sysupgrade
-- [ ] Aufruf Konfigmodus zur Konfig-Überprüfung
-- [ ] Texte im Konfigmodus
-- [ ] Autoupdate Konfig-Check
-- [ ] Updatebranch 
-- [ ] Revision-Information (FW/Gluon)
+- [ ] Allgemeines Erscheininhsbild der LEDs
+- [ ] Erscheininhsbild der erwarteten Netzwerk-Kontektivität
+- [ ] Aufruf Konfigmodus über Reset-/WPS-Taster
+- [ ] Konfigmodus: Überprüfung der Beibehaltung der Benutzer-Konfiguration
+- [ ] Konfigmodus: Revision-Information (FW/Gluon)
+- [ ] Konfigmodus: Autoupdate Konfig
+- [ ] Konfigmodus: Updatebranch 
+- [ ] Konfigmodus: Texte allgemein
+- [ ] Konfigmodus: Neustart
 - [ ] Sichtung auf Map
 - [ ] SSH Login
 - [ ] Kanalübernahme
@@ -40,5 +41,7 @@ Die folgenden Tests sollten auf möglichst vielen unterschiedlichen Routermodell
 - [ ] ggf. Autoupdater-Test"use site conf branch"
 - [ ] Sysupgrade nach Sysupgrade (inkl. gefolgter Kurztest)
 
+#### Firstboot
+- [ ] Durchführung mehrerer Factoryinstallationen, jeweils mit unterschiedlichen Erstkonfigurationen. Dann jeweils weiter mit Sysupgrade-Check
 #### Sonstiges
 - [ ] Check Listungen Firmwarewizard
