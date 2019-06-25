@@ -8,7 +8,7 @@ Ein grober Funktionstest sollten mindestens den folgenden Anforderungen genügen
 
 ## Frankfurter Firmware-Release Vorabtest
 
-### Firmwaren
+### Firmware
 - [ ] Dev
 - [ ] Test
 - [ ] Stable
@@ -25,14 +25,15 @@ Ein grober Funktionstest sollten mindestens den folgenden Anforderungen genügen
   - [ ] Texte, Inhalte und Eingabenübernahme im Konfigmodus korrekt
 - [ ] Ist Autoupdate entsprechend gesetzt/vorhanden (Konfig-Tab)
 - [ ] Ist Updatebranch korrekt gesetzt (Konfig-Tab)
-- [ ] Ggf. korrekter Autoupdater Branch-Übernahme bei verwendetetm Package "use-site-conf-branch"
+- [ ] Ggf. korrekter Autoupdater Branch-Übernahme bei verwendetem Package "ffffm-use-site-conf-branch"
 - [ ] Korrekte Revision-Information Firmware/Gluon (Konfig-Tab)
 - [ ] Speicherung Konfiguration (inkl. Reboot)
 - [ ] Aufruf Statusseite
   - [ ] 2a06:xyz innerhalb vom Freifunknetz
   - [ ] fddd:xyz innerhalb vom Freifunknetz
   - [ ] 2a06:xyz ausserhalb vom Freifunknetz
-- [ ] Ist Sichtung des Knotens auf Map vorhanden 
+- [ ] Ist Sichtung des Knotens auf Map vorhanden
+- [ ] Korrekte Revision-Information Firmware/Gluon auf Map
 - [ ] SSH Login
   - [ ] innerhalb vom Freifunknetz
   - [ ] ausserhalb vom Freifunknetz
