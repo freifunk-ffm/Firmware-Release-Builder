@@ -25,7 +25,7 @@ Ein grober Funktionstest sollten mindestens den folgenden Anforderungen genügen
   - [ ] Texte, Inhalte und Eingabenübernahme im Konfigmodus korrekt
 - [ ] Ist Autoupdate entsprechend gesetzt/vorhanden (Konfig-Tab)
 - [ ] Ist Updatebranch korrekt gesetzt (Konfig-Tab)
-- [ ] Ggf. korrekter Autoupdater Branch-Übernahme bei verwendetem Package "ffffm-use-site-conf-branch"
+- [ ] Ggf. korrekte Autoupdater Branch-Übernahme bei verwendetem Package "ffffm-use-site-conf-branch"
 - [ ] Korrekte Revision-Information Firmware/Gluon (Konfig-Tab)
 - [ ] Speicherung Konfiguration (inkl. Reboot)
 - [ ] Aufruf Statusseite
