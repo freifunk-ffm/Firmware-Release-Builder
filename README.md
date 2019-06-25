@@ -66,7 +66,7 @@ Usage: firmware-release-builder.sh ...
 
 #### Kleines Build-Beispiel:
 ```
-./firmware-release-builder.sh -B test -V vX.Y.Z
+firmware-release-builder.sh -B test -V vX.Y.Z
 ```
 Durch diesen Aufruf wird aus den aktuellen Frankfurter Test-Branches (Gluon und Site) für alle verfügbaren Targets die Firmware `vX.Y.Z-test-Builddatum` erstellt. Es wird ein unsigniertes Manifest angelegt und das ganze als komprimiertes Archiv abgelegt. Das Skript zeigt den Pfad zu dem Ablageordner an. Je nach Rechner-Power braucht der Build ca. 5-8 Stunden.
 
