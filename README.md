@@ -7,7 +7,7 @@ Der FRB kann z.B. unter Jenkins oder händisch auf einem PC aufgerufen werden.
 Der FRB ist ein einzelnes Skript, welches alle notwendigen Schritte des Buildprozesses vereint.   
   - Dem Skript könne Parameter übergeben werden.  
   - Das Skript legt einen eigenen Workspace an (./wspace).
-  - Das Skript holte selbständig die Inhalte aller notwendigen Gluon-Git-Repositories.
+  - Das Skript holt selbständig die Inhalte aller notwendigen Gluon-Git-Repositories.
   - Das Skript setzt über GLUON_BRANCH den Branch für den Autoupdater.
   - Das Skript legt einen Paketesourcen-Download-Cache an (./dl-cache).
   - Der FRB ist hauptsächlich auf Frankfurter Ansprüche abgestimmt. Für den automatischen Upload auf den FFM Download-Server wird ein Tar-Archiv mit allen Images, allen opkg-Modulen und allen Versionsinformationen erzeugt (siehe https://github.com/freifunk-ffm/scripts/blob/master/firmwarefetch).  
@@ -63,6 +63,12 @@ Usage: firmware-release-builder.sh ...
                  (Voreinstellung https://github.com/freifunk-ffm/site-ffffm.git)
     -h           Dieser Text.
 ```
+
+#### Kleines Build-Beispiel:
+```
+./firmware-release-builder.sh -B test -V vX.Y.Z
+```
+Durch diesen Aufruf wird aus den aktuellen Frankfurter Test-Branches (Gluon und Site) für alle verfügbaren Targets die Firmware vX.Y.Z erstellt. Es wird ein unsigniertes Manifest angelegt und das ganze als komprimiertes Archiv abgelegt. Das Skript zeigt den Pfad zu dem Ablageordner an.
 
 ## Benötigte ECDSA-Utils
 Der FirmwareReleaseBuilder verwendet u.a. die ECDSA-Utils.
