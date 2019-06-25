@@ -1,4 +1,6 @@
-## ## Frankfurter Firmware-Release Vorabtest/Nutzbarkeits-Checkliste
+## Frankfurter Firmware-Release Vorabtest/Nutzbarkeits-Checkliste
+
+Die folgenden Tests sollten auf möglichst vielen unterschiedlichen Routermodellen durchgeführt werden.
 
 Ein grober Funktionstest sollten mindestens den folgenden Anforderungen genügen.
 
