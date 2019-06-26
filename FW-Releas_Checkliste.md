@@ -1,4 +1,4 @@
-## Frankfurter Firmware-Release Vorabtest/Nutzbarkeits-Checkliste
+## Firmware-Release Blackbox-Testing
 
 Die folgenden Tests sollten auf möglichst vielen unterschiedlichen Routermodellen durchgeführt werden.
 
