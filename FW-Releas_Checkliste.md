@@ -1,4 +1,4 @@
-## Firmware-Release Blackbox-Testing
+## Blackbox-Testing - Firmware-Release vX.Y.Z
 
 Die folgenden Tests sollten auf möglichst vielen unterschiedlichen Routermodellen durchgeführt werden.
 
@@ -17,7 +17,7 @@ Ein grober Funktionstest sollten mindestens den folgenden Anforderungen genügen
 ### Vorarbeiten
 - [ ] Bekanntgabe der geplanten site.conf/site.mk auf Admin-Liste oder IRC
 - [ ] Bauen der Firmware mit allen zur Zeit verfügbaren Targets
-- [ ] Erfolgreicher Aufruf 'date' auf neu gestartetem Test-Router (Backbone-NTP-Check)
+- [ ] Erfolgreicher Aufruf 'date' auf neu gestartetem Test-Router (Backbone-NTP-Check, Latenzzeit beachten)
 - [ ] Erfolgreicher Aufruf 'autoupdater' auf Test-Router (Backbone-DNS-Check)  
 
 ### Sysupgrade 
