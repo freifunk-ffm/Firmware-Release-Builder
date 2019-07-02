@@ -12,8 +12,8 @@ Der FRB ist ein einzelnes Skript, welches alle notwendigen Schritte des Buildpro
   - Das Skript legt einen Paketesourcen-Download-Cache an (./dl-cache).
   - Der FRB ist hauptsächlich auf Frankfurter Ansprüche abgestimmt. Für den automatischen Upload auf den FFM Download-Server wird ein Tar-Archiv mit allen Images, allen opkg-Modulen und allen Versionsinformationen erzeugt (siehe https://github.com/freifunk-ffm/scripts/blob/master/firmwarefetch).  
 
-### Achtung!   
-Je nach Konfiguration entfernt der FRB Dateien und Unterordner. Daher sollte der FRB nicht zur reinen FW-Entwickling verwendet werden!
+### Achtung - Achtung - Achtung   
+Der FRB setzt die Git-Repos hart auf den entsprechenden HEAD-Commit zurück. Lokale Anpassungen werden **immer** verworfen. Daher sollte der FRB nicht zur reinen FW-Entwickling verwendet werden!
 
 ### Skript-Benutzung
 #### Voraussetzung 
