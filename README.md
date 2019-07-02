@@ -2,13 +2,13 @@
 
 Mit dem Firmware Release Builder (FRB) können auf einfachste Art und Weise automatisiert Firmware-Releases gebaut werden.
 
-Der FRB kann z.B. unter Jenkins oder händisch auf einem PC aufgerufen werden.   
+Der FRB kann händisch auf einem PC oder automatisiert durch z.B. Jenkins aufgerufen werden.   
 
 Der FRB ist ein einzelnes Skript, welches alle notwendigen Schritte des Buildprozesses vereint.   
-  - Dem Skript könne Parameter übergeben werden.  
-  - Das Skript legt einen eigenen Workspace an (./wspace).
+  - Dem Skript werden Parameter übergeben.  
   - Das Skript holt selbständig die Inhalte aller notwendigen Gluon-Git-Repositories.
-  - Das Skript setzt über GLUON_BRANCH den Branch für den Autoupdater.
+  - Das Skript kann lokale Site-Patches (aus site/patches) anwenden.
+  - Das Skript legt einen eigenen Workspace an (./wspace).
   - Das Skript legt einen Paketesourcen-Download-Cache an (./dl-cache).
   - Der FRB ist hauptsächlich auf Frankfurter Ansprüche abgestimmt. Für den automatischen Upload auf den FFM Download-Server wird ein Tar-Archiv mit allen Images, allen opkg-Modulen und allen Versionsinformationen erzeugt (siehe https://github.com/freifunk-ffm/scripts/blob/master/firmwarefetch).  
 
@@ -45,7 +45,9 @@ Usage: firmware-release-builder.sh ...
     -V <String>  Vorgabe des Firmware Versionstrings.
                  (Voreinstellung: "Homebrew")
     -S <String>  Eigener Suffix fuer die Versionsbezeichnung.
-                 Anstelle von Monat/Tag.
+                 (Voreinstellung: MonatTag)
+    -L [0|1]     Lokale Site-Patches anwenden.
+                 (Voreinstellung: 1)
     -b [0|1]     BROKEN Router-Images bauen? (Voreinstellung: 0)
     -t [0|1]     BROKEN Targets bauen? (Voreinstellung: 0)
                  Bei 1 werden dann BROKEN-Images fuer "alle" Targets gebaut!

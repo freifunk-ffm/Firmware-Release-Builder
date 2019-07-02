@@ -5,7 +5,8 @@ echo
 
 ##############################################################################
 # Dieses Skript ist fuer den Bau von Frankfurter FW-Releases vorgesehen.
-# Das Skript ist nicht für die FW-Entwicklung geeignet! Es wird viel gelöscht!
+# Das Skript ist nicht für die Firmware-Entwicklung geeignet!
+# Lokale temporäre Änderungen werden überschrieben!
 ##############################################################################
 
 
@@ -17,6 +18,7 @@ FRB_SITE_REPO=${FRB_SITE_REPO:-"https://github.com/freifunk-ffm/site-ffffm.git"}
 FRB_SITE_BRANCH=${FRB_SITE_BRANCH:-"none"}
 FRB_FW_UPDATE_BRANCH=${FRB_FW_UPDATE_BRANCH:-none}
 FRB_VERSION=${FRB_VERSION:-Homebrew}
+FRB_SITE_PATCHES=${FRB_SITE_PATCHES:-1}
 FRB_CLEANUP=${FRB_CLEANUP:-1}
 FRB_BROKEN=${FRB_BROKEN:-0}
 FRB_BROKEN_TARGETS=${FRB_BROKEN_TARGETS:-0}
@@ -50,7 +52,9 @@ Usage: ${0##*/} ...
     -V <String>  Vorgabe des Firmware Versionstrings.
                  (Voreinstellung: "$FRB_VERSION")
     -S <String>  Eigener Suffix fuer die Versionsbezeichnung.
-                 Anstelle von Monat/Tag.
+                 (Voreinstellung: MonatTag)
+    -L [0|1]     Lokale Site-Patches anwenden.
+                 (Voreinstellung: $FRB_SITE_PATCHES)
     -b [0|1]     BROKEN Router-Images bauen? (Voreinstellung: $FRB_BROKEN)
     -t [0|1]     BROKEN Targets bauen? (Voreinstellung: $FRB_BROKEN_TARGETS)
                  Bei 1 werden dann BROKEN-Images fuer "alle" Targets gebaut!
@@ -75,7 +79,7 @@ EOF
 # Optionen parsen
 ###################################################################
 
-while getopts "T:B:C:U:V:P:S:s:p:c:b:t:a:x:g:k:h" opt; do
+while getopts "T:B:C:U:V:P:S:L:s:p:c:b:t:a:x:g:k:h" opt; do
   case $opt in
     T) FRB_TARGETS=$OPTARG
        ;;
@@ -90,6 +94,8 @@ while getopts "T:B:C:U:V:P:S:s:p:c:b:t:a:x:g:k:h" opt; do
     P) FRB_PRIORITY=$OPTARG
        ;;
     S) FRB_VERSION_SUFFIX=$OPTARG
+       ;;
+    L) FRB_SITE_PATCHES=$OPTARG
        ;;
     s) FRB_SIGNKEY_PRIVATE=$OPTARG
        ;;
@@ -168,6 +174,7 @@ Site-Branch:          $FRB_SITE_BRANCH
 FW Update-Branch:     $FRB_FW_UPDATE_BRANCH
 Versionstring:        $FRB_VERSION
 Versionsuffix:        $FRB_VERSION_SUFFIX
+Site-Patches aktiv:   $FRB_SITE_PATCHES
 Workspace löschen:    $FRB_CLEANUP
 BROKEN Images:        $FRB_BROKEN
 BROKEN Targets:       $FRB_BROKEN_TARGETS
@@ -266,6 +273,25 @@ check_last_exitcode
 cd $WORKSPACE/site
 git fetch && git reset --hard origin/${FRB_SITE_BRANCH}
 check_last_exitcode
+
+cd $WORKSPACE
+to_output "Anwenden von lokalen Site-Patches"
+if [ $FRB_SITE_PATCHES == 1 ]; then
+ if [ -d "$WORKSPACE/site/patches" ]; then
+  cd ${WORKSPACE}/site/patches
+  if [ $(echo *.patch)  != "*.patch" ]; then
+   cd $WORKSPACE
+   git -c user.name='Frankfurter FirmwareReleaseBuilder' -c user.email='ffffm-FRB@void.example.com' -c commit.gpgsign=false am --whitespace=nowarn --committer-date-is-author-date $WORKSPACE/site/patches/*.patch
+   check_last_exitcode
+  else
+   echo "Keine lokalen Site-Patches gefunden"
+  fi
+ else
+  echo "Keinen Site-Ordner für lokale Patches gefunden"
+ fi
+else
+ echo "Lokale Site-Patches werden nicht angewendet"
+fi 
 
 cd $WORKSPACE
 to_output "Update OpenWrt"
