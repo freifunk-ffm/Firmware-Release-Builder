@@ -47,7 +47,7 @@ Usage: firmware-release-builder.sh ...
     -S <String>  Eigener Suffix fuer die Versionsbezeichnung.
                  (Voreinstellung: MonatTag)
     -L [0|1]     Lokale Site-Patches anwenden.
-                 (Voreinstellung: 1)
+                 (Voreinstellung: 0)
     -b [0|1]     BROKEN Router-Images bauen? (Voreinstellung: 0)
     -t [0|1]     BROKEN Targets bauen? (Voreinstellung: 0)
                  Bei 1 werden dann BROKEN-Images fuer "alle" Targets gebaut!
