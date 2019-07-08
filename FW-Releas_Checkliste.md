@@ -22,7 +22,7 @@ Ein grober Funktionstest sollten mindestens den folgenden Anforderungen genügen
   - [ ] Erfolgreicher Test-Aufruf '```autoupdater -n```' auf Test-Router (Backbone-DNS-Check)  
   
 ### Sysupgrade
-- [ ] Sysupgrade auf Test-Router, mit aufgespielter vormaliger Firmware, über unterschiedliche Verfahren anstossen
+- [ ] FW-Upgrade auf Test-Router, mit aufgespielter vormaliger Firmware, über unterschiedliche Verfahren anstossen
   - [ ] Über den Konfigmodus
   - [ ] Über die Konsole per '```autoupdater```'
   - [ ] zusätzlich über die Konsole manuell/lokal per '```sysupgrade```'
