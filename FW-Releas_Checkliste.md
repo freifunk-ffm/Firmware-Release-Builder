@@ -33,14 +33,21 @@ Ein grober Funktionstest sollten mindestens den folgenden Anforderungen genügen
   - [ ] fddd:xyz innerhalb vom Freifunknetz
   - [ ] 2a06:xyz ausserhalb vom Freifunknetz
 - [ ] Ist Sichtung des Knotens auf Map vorhanden
-- [ ] Korrekte Revision-Information Firmware/Gluon auf Map
+- [ ] Korrekte Revision-Information Firmware/Gluon auf
+  - [ ] Map
+  - [ ] Statusseite
 - [ ] SSH Login
   - [ ] innerhalb vom Freifunknetz
   - [ ] ausserhalb vom Freifunknetz
+  - [ ] unautorisierte Anmeldung ohne Passwort nicht möglich 
 - [ ] 'nodeinfo' - korrekte Inhalts-Ausgabe
 - [ ] 'help' - korrekte Inhalts-Ausgabe
-- [ ] WLAN-Kanalübernahme nach Sysupgrade (2,4GHz und 5GHz)
+- [ ] WLAN-Kanalübernahme nach Sysupgrade
+  - [ ] 2,4GHz
+  - [ ] 5GHz
 - [ ] Meshverhalten generell
+  - [ ] WLAN
+  - [ ] LAN
 - [ ] Clientverbindung (IPv4, IPv6, DNS)
 - [ ] OFF/ON Check
   - [ ] Mesh-VPN
