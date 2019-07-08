@@ -74,18 +74,18 @@ Ein grober Funktionstest sollten mindestens den folgenden Anforderungen genügen
 - [ ] opkg
   - [ ] '```opkg update```'
   - [ ] opkg-Installation eines Testpackages (z.B. htop)
-- [ ] Sysupgrade nur nach korrekter Anzahl der geforderten Manifest-Signaturen 
+- [ ] Sysupgrade nur nach korrekter Anzahl der geforderten Manifest-Signaturen möglich
 - [ ] Sysupgrade gefolgt nach Sysupgrade
 - [ ] Autoupdater (Nachtzeit, selbsständig durch Router)
 
 
 ### Firstboot
 - [ ] '```firstboot```' absetzen
-- [ ] Weiter mit dem komplettem Sysupgrade-Check
+- [ ] Weiter mit dem komplettem Sysupgrade-Check (der dortige Testpunkt "FW-Upgrade auf Test-Router..." ist dann nicht mehr relevant).
 
 ### Factory
 - [ ] Factory-Installation
-- [ ] Weiter mit dem komplettem Sysupgrade-Check
+- [ ] Weiter mit dem komplettem Sysupgrade-Check (der dortige Testpunkt "FW-Upgrade auf Test-Router..." ist dann nicht mehr relevant).
 
 ### Nacharbeiten
 - [ ] Dokumentation der Release-Änderungshistorie
