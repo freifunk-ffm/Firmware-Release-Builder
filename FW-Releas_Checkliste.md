@@ -17,10 +17,15 @@ Ein grober Funktionstest sollten mindestens den folgenden Anforderungen genügen
 ### Vorarbeiten
 - [ ] Bekanntgabe der geplanten site.conf/site.mk auf Admin-Liste oder IRC
 - [ ] Bauen der Firmware mit allen zur Zeit verfügbaren Targets
-- [ ] Erfolgreicher Aufruf 'date' auf neu gestartetem Test-Router (Backbone-NTP-Check, Latenzzeit beachten)
-- [ ] Erfolgreicher Aufruf 'autoupdater' auf Test-Router (Backbone-DNS-Check)  
-
-### Sysupgrade 
+- [ ] Bereitstellung eines Test-Routers mit auf gespielter vormaliger Firmwareversion
+  - [ ] Erfolgreicher Aufruf 'date' auf neu gestartetem Test-Router (Backbone-NTP-Check, Latenzzeit beachten)
+  - [ ] Erfolgreicher Aufruf 'autoupdater' auf Test-Router (Backbone-DNS-Check)  
+  
+### Sysupgrade
+- [ ] Sysupgrade auf Test-Router, mit aufgespielter vormaliger Firmware, über unterschiedliche Verfahren anstossen
+  - [ ] Über den Konfigmodus
+  - [ ] Über die Konsole per 'autoupdater'
+  - [ ] zusätzlich über die Konsole manuell/lokal per 'sysupgrade'
 - [ ] Aufruf Konfigmodus mittels unterschiedlicher Web-Browser (z.B. Edge, Chromium, Firefox, Safari)
   - [ ] Texte, Inhalte und Eingabenübernahme im Konfigmodus korrekt
 - [ ] Ist Autoupdate entsprechend gesetzt/vorhanden (Konfig-Tab)
