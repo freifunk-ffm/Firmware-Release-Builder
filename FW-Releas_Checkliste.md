@@ -18,14 +18,14 @@ Ein grober Funktionstest sollten mindestens den folgenden Anforderungen genügen
 - [ ] Bekanntgabe der geplanten site.conf/site.mk auf Admin-Liste oder IRC
 - [ ] Bauen der Firmware mit allen zur Zeit verfügbaren Targets
 - [ ] Bereitstellung eines Test-Routers mit auf gespielter vormaliger Firmwareversion
-  - [ ] Erfolgreicher Aufruf 'date' auf neu gestartetem Test-Router (Backbone-NTP-Check, Latenzzeit beachten)
-  - [ ] Erfolgreicher Test-Aufruf 'autoupdater -n' auf Test-Router (Backbone-DNS-Check)  
+  - [ ] Erfolgreicher Aufruf '```date```' auf neu gestartetem Test-Router (Backbone-NTP-Check, Latenzzeit beachten)
+  - [ ] Erfolgreicher Test-Aufruf '```autoupdater -n```' auf Test-Router (Backbone-DNS-Check)  
   
 ### Sysupgrade
 - [ ] Sysupgrade auf Test-Router, mit aufgespielter vormaliger Firmware, über unterschiedliche Verfahren anstossen
   - [ ] Über den Konfigmodus
-  - [ ] Über die Konsole per 'autoupdater'
-  - [ ] zusätzlich über die Konsole manuell/lokal per 'sysupgrade'
+  - [ ] Über die Konsole per '```autoupdater```'
+  - [ ] zusätzlich über die Konsole manuell/lokal per '```sysupgrade```'
 - [ ] Aufruf Konfigmodus mittels unterschiedlicher Web-Browser (z.B. Edge, Chromium, Firefox, Safari)
   - [ ] Texte, Inhalte und Eingabenübernahme im Konfigmodus korrekt
 - [ ] Ist Autoupdate entsprechend gesetzt/vorhanden (Konfig-Tab)
@@ -45,8 +45,8 @@ Ein grober Funktionstest sollten mindestens den folgenden Anforderungen genügen
   - [ ] innerhalb vom Freifunknetz
   - [ ] ausserhalb vom Freifunknetz
   - [ ] unautorisierte Anmeldung ohne Passwort nicht möglich 
-- [ ] 'nodeinfo' - korrekte Inhalts-Ausgabe
-- [ ] 'help' - korrekte Inhalts-Ausgabe
+- [ ] '```nodeinfo```' - korrekte Inhalts-Ausgabe
+- [ ] '```help```' - korrekte Inhalts-Ausgabe
 - [ ] WLAN-Kanalübernahme nach Sysupgrade
   - [ ] 2,4GHz
   - [ ] 5GHz
@@ -71,7 +71,7 @@ Ein grober Funktionstest sollten mindestens den folgenden Anforderungen genügen
     - [ ] Mit Mesh / Mesh-VPN
     - [ ] Herstellung von Normalbedingungen (normale SSID kommt wieder)
 - [ ] opkg
-  - [ ] 'opkg update'
+  - [ ] '```opkg update```'
   - [ ] opkg-Installation eines Testpackages (z.B. htop)
 - [ ] Sysupgrade nur nach korrekter Anzahl der geforderten Manifest-Signaturen 
 - [ ] Sysupgrade gefolgt nach Sysupgrade
@@ -79,7 +79,7 @@ Ein grober Funktionstest sollten mindestens den folgenden Anforderungen genügen
 
 
 ### Firstboot
-- [ ] 'firstboot' absetzen
+- [ ] '```firstboot```' absetzen
 - [ ] Weiter mit dem komplettem Sysupgrade-Check
 
 ### Factory
