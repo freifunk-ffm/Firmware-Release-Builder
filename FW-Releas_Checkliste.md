@@ -19,7 +19,7 @@ Ein grober Funktionstest sollten mindestens den folgenden Anforderungen genügen
 - [ ] Inhalt von site/modules ist auf gewünschtem Stand
 - [ ] Bauen der Firmware mit allen zur Zeit verfügbaren Targets
 - [ ] Bereitstellung eines Test-Routers mit aufgespielter vormaliger Firmwareversion
-  - [ ] Erfolgreicher Aufruf '```date```' auf neu gestartetem Test-Router (Backbone-NTP-Check, Latenzzeit beachten)
+  - [ ] Erfolgreicher Aufruf '```date```' auf neu gestartetem Test-Router (Backbone-NTP-Check, Latenzzeit nach Neustart beachten)
   - [ ] Erfolgreicher Test-Aufruf '```autoupdater -n```' auf Test-Router (Backbone-DNS-Check)  
   
 ### Sysupgrade
@@ -106,4 +106,5 @@ Ein grober Funktionstest sollten mindestens den folgenden Anforderungen genügen
 ---
 
 Das aktuelle Template dieser Checkliste ist hier zu finden:  
-https://raw.githubusercontent.com/freifunk-ffm/Firmware-Release-Builder/master/FW-Releas_Checkliste.md
+https://raw.githubusercontent.com/freifunk-ffm/Firmware-Release-Builder/master/FW-Releas_Checkliste.md  
+
