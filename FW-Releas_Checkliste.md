@@ -105,5 +105,5 @@ Ein grober Funktionstest sollten mindestens den folgenden Anforderungen genügen
 
 ---
 
-Das aktuelle Template dieser Test-Liste ist hier zu finden:  
+Das aktuelle Template dieser Checkliste ist hier zu finden:  
 https://raw.githubusercontent.com/freifunk-ffm/Firmware-Release-Builder/master/FW-Releas_Checkliste.md
