@@ -17,7 +17,7 @@ Ein grober Funktionstest sollten mindestens den folgenden Anforderungen genügen
 ### Vorarbeiten
 - [ ] Bekanntgabe der geplanten site.conf/site.mk auf Admin-Liste oder IRC
 - [ ] Inhalt von site/modules ist auf gewünschtem Stand
-- [ ] Bauen der Firmware mit allen zur Zeit verfügbaren Targets
+- [ ] Bauen der Firmware mit allen zur Zeit möglichen und allen "Not-BROKEN" Targets
 - [ ] Bereitstellung eines Test-Routers mit aufgespielter vormaliger Firmwareversion
   - [ ] Erfolgreicher Aufruf '```date```' auf neu gestartetem Test-Router (Backbone-NTP-Check, Latenzzeit nach Neustart beachten)
   - [ ] Erfolgreicher Test-Aufruf '```autoupdater -n```' auf Test-Router (Backbone-DNS-Check)  
