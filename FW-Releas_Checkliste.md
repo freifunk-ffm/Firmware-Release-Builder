@@ -81,11 +81,11 @@ Ein grober Funktionstest sollten mindestens den folgenden Anforderungen genügen
 
 ### Firstboot
 - [ ] '```firstboot```' absetzen
-- [ ] Weiter mit dem kompletten Sysupgrade-Check (der dortige Testpunkt "FW-Upgrade auf Test-Router..." ist dann nicht mehr relevant).
+- [ ] Weiter mit dem Sysupgrade-Check (der dortige Testpunkt "FW-Upgrade auf Test-Router..." ist dann nicht mehr relevant).
 
 ### Factory
 - [ ] Factory-Installation
-- [ ] Weiter mit dem kompletten Sysupgrade-Check (der dortige Testpunkt "FW-Upgrade auf Test-Router..." ist dann nicht mehr relevant).
+- [ ] Weiter mit dem Sysupgrade-Check (der dortige Testpunkt "FW-Upgrade auf Test-Router..." ist dann nicht mehr relevant).
 
 ### Nacharbeiten
 - [ ] Dokumentation der Release-Änderungshistorie
