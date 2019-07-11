@@ -19,8 +19,8 @@ Ein grober Funktionstest sollten mindestens den folgenden Anforderungen genügen
 - [ ] Inhalt von site/modules ist auf gewünschtem Stand
 - [ ] Bauen der Firmware mit allen zur Zeit möglichen und allen "Not-BROKEN" Targets
 - [ ] Bereitstellung eines Test-Routers mit aufgespielter vormaliger Firmwareversion
-  - [ ] Erfolgreicher Aufruf '```date```' auf neu gestartetem Test-Router (Backbone-NTP-Check, Latenzzeit nach Neustart beachten)
-  - [ ] Erfolgreicher Test-Aufruf '```autoupdater -n```' auf Test-Router (Backbone-DNS-Check)  
+  - [ ] Erfolgreicher Aufruf von '```date```' auf neu gestartetem Test-Router (Backbone-NTP-Check, Latenzzeit nach Neustart beachten)
+  - [ ] Erfolgreicher Testaufruf von '```autoupdater -n```' auf Test-Router (Backbone-DNS-Check)  
   
 ### Sysupgrade
 - [ ] FW-Upgrade auf Test-Router, mit aufgespielter vormaliger Firmware, über unterschiedliche Verfahren anstossen
@@ -63,7 +63,7 @@ Ein grober Funktionstest sollten mindestens den folgenden Anforderungen genügen
   - [ ] Client WLAN
   - [ ] Client LAN
   - [ ] WLAN
-- [ ] WLAN-Taster - Funktions-Chek
+- [ ] WLAN-Taster - Funktions-Check
 - [ ] Offline-SSID
   - [ ] Direkt nach Reboot
     - [ ] Mit Mesh / Mesh-VPN
