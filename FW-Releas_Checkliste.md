@@ -77,6 +77,7 @@ Ein grober Funktionstest sollten mindestens den folgenden Anforderungen genügen
 - [ ] Sysupgrade nur nach korrekter Anzahl der geforderten Manifest-Signaturen möglich
 - [ ] Sysupgrade gefolgt nach Sysupgrade
 - [ ] Autoupdater (Nachtzeit, selbsständig durch Router)
+- [ ] Kurz-Sichtung von '```dmesg```' nach Reboot
 
 
 ### Firstboot
