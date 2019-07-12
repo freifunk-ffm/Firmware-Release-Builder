@@ -74,9 +74,9 @@ Ein grober Funktionstest sollten mindestens den folgenden Anforderungen genügen
 - [ ] opkg
   - [ ] '```opkg update```'
   - [ ] opkg-Installation eines Testpackages (z.B. htop)
-- [ ] Sysupgrade nur nach korrekter Anzahl der geforderten Manifest-Signaturen möglich
-- [ ] Sysupgrade gefolgt nach Sysupgrade
-- [ ] Autoupdater (Nachtzeit, selbsständig durch Router)
+- [ ] Autoupdate nur nach korrekter Anzahl der geforderten Manifest-Signaturen möglich
+- [ ] Autoupdate gefolgt nach Autoupdate
+- [ ] Autoupdate (Nachtzeit, selbsständig durch Router)
 - [ ] Kurz-Sichtung von '```dmesg```' nach Reboot
 
 
