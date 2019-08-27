@@ -149,6 +149,7 @@ FRB_CLEANUP=$(normalize_bool $FRB_CLEANUP)
 FRB_BROKEN=$(normalize_bool $FRB_BROKEN)
 FRB_BROKEN_TARGETS=$(normalize_bool $FRB_BROKEN_TARGETS)
 FRB_CREATE_DARCHIVE=$(normalize_bool $FRB_CREATE_DARCHIVE)
+FRB_SITE_PATCHES=$(normalize_bool $FRB_SITE_PATCHES)
 
 #####################################################################
 # Echo formated information
