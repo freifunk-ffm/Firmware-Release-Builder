@@ -11,12 +11,12 @@ echo
 
 
 # Default Werte
-FRB_TARGETS=${FRB_TARGETS:-"ar71xx-generic ar71xx-tiny ar71xx-nand ipq40xx brcm2708-bcm2708 brcm2708-bcm2709 mpc85xx-generic ramips-mt7620 ramips-mt7621 ramips-mt76x8 ramips-rt305x sunxi-cortexa7 x86-generic x86-geode x86-64"}
+FRB_TARGETS=${FRB_TARGETS:-"alle"}
 FRB_GLUON_REPO=${FRB_GLUON_REPO:-"https://github.com/freifunk-ffm/gluon.git"}
 FRB_GLUON_BRANCH=${FRB_GLUON_BRANCH:-"none"}
 FRB_SITE_REPO=${FRB_SITE_REPO:-"https://github.com/freifunk-ffm/site-ffffm.git"}
 FRB_SITE_BRANCH=${FRB_SITE_BRANCH:-"none"}
-FRB_FW_UPDATE_BRANCH=${FRB_FW_UPDATE_BRANCH:-none}
+FRB_FW_UPDATE_BRANCH=${FRB_FW_UPDATE_BRANCH:-"none"}
 FRB_VERSION=${FRB_VERSION:-Homebrew}
 FRB_SITE_PATCHES=${FRB_SITE_PATCHES:-0}
 FRB_CLEANUP=${FRB_CLEANUP:-1}
@@ -315,15 +315,32 @@ fi
 ln -s ../../dl-cache ${WORKSPACE}/openwrt/dl
 cd ${WORKSPACE}
 
+
+# Welche Targets sollen gebaut werden?
 # Schauen, ob FRB_BROKEN_TARGETS aktiv ist. Wenn ja, dann immer die volle Anzahl an Möglichkeiten (Images + Targets) bauen.
 # FRB_TARGETS verwenden oder komplett ueberschreiben.
 if [ $FRB_BROKEN_TARGETS == 1 ]; then
- # All möglichen Targets bauene. Auch die als BROKEN markierten.
+# All möglichen Targets bauene. Auch die als BROKEN markierten.
  FRB_TARGETS=$(grep GluonTarget targets/targets.mk | awk -F, '{print $2 "-" $3}'|sed 's/).*//')
-  # Zur Sicherheit nochmal BROKEN setzen
+ # Zur Sicherheit nochmal BROKEN setzen
  export BROKEN=1
+else
+# Oder gefolgt der Standardfall:
+# Gibt es bereits eine Vorgabe der zu bauenden Targets,
+# oder sollen einfach alle Nicht-BROKEN gebaut werden?
+ if [ "$FRB_TARGETS" == "alle" ]; then
+  FRB_TARGETS=""
+  for GLUON_TARGET in $(make list-targets); do
+   FRB_TARGETS="$FRB_TARGETS $GLUON_TARGET"
+  done
+ fi
 fi
-to_output "Build Targets = $FRB_TARGETS"
+
+to_output "Für folgende Targets werden Images gebaut"
+for GLUON_TARGET in $FRB_TARGETS; do
+ echo $GLUON_TARGET
+done
+
 to_output "BROKEN = $FRB_BROKEN"
 
 ############
@@ -400,9 +417,12 @@ if [ $FRB_CREATE_DARCHIVE != 0 ];  then
   to_output  "Das Deploy-Archive liegt hier: ${WORKSPACE}/output/images/gluon-ffffm-${GLUON_RELEASE}.tar.xz"
 fi
 
-#Fertig!
-to_output  "Fertig!"
-
 show_build_information
 
+to_output "Für folgende Targets wurden Images gebaut"
+for GLUON_TARGET in $FRB_TARGETS; do
+ echo $GLUON_TARGET
+done
 
+#Fertig!
+to_output  "Fertig!"
