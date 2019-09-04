@@ -21,8 +21,13 @@ Der FRB setzt die Git-Repos hart auf den entsprechenden HEAD-Commit zurück. Lok
 
   - Für das Firmwarebauen müssen generell alle Pakete aus http://gluon.readthedocs.io/en/latest/user/getting_started.html#dependencies installier sein!  
 
+#### Kleines Build-Beispiel:
+```
+firmware-release-builder.sh -B test -V vX.Y.Z
+```
+Durch diesen Aufruf wird aus den aktuellen Frankfurter Test-Branches (Gluon und Site) für alle verfügbaren Targets die Firmware `vX.Y.Z-test-Builddatum` erstellt. Es wird ein unsigniertes Manifest angelegt und das ganze als komprimiertes Archiv abgelegt. Das Skript zeigt den Pfad zu dem Ablageordner an. Je nach Rechner-Power braucht der Build ca. 5-8 Stunden.
 
-#### Das Skript anwenden
+#### Optionen des Skriptes
 Skriptname:`firmware-release-builder.sh`  
 
 Wird das Skript mit der Option `-h` aufgerufen, so wird folgendes ausgegeben:
@@ -63,14 +68,12 @@ Usage: firmware-release-builder.sh ...
                  (Voreinstellung https://github.com/freifunk-ffm/gluon.git)
     -k <String>  Zu verwendendes Site-Repository.
                  (Voreinstellung https://github.com/freifunk-ffm/site-ffffm.git)
+    -v <String>  Zu verwendender Tag des Gluon-Repositories.
+                 (Keine Voreinstellung)
+    -w <String>  Zu verwendender Tag des Site-Repositories.
+                 (Keine Voreinstellung) 
     -h           Dieser Text.
 ```
-
-#### Kleines Build-Beispiel:
-```
-firmware-release-builder.sh -B test -V vX.Y.Z
-```
-Durch diesen Aufruf wird aus den aktuellen Frankfurter Test-Branches (Gluon und Site) für alle verfügbaren Targets die Firmware `vX.Y.Z-test-Builddatum` erstellt. Es wird ein unsigniertes Manifest angelegt und das ganze als komprimiertes Archiv abgelegt. Das Skript zeigt den Pfad zu dem Ablageordner an. Je nach Rechner-Power braucht der Build ca. 5-8 Stunden.
 
 ## Benötigte ECDSA-Utils
 Der FirmwareReleaseBuilder verwendet u.a. die ECDSA-Utils.

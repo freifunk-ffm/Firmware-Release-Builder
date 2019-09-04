@@ -14,8 +14,10 @@ echo
 FRB_TARGETS=${FRB_TARGETS:-"alle"}
 FRB_GLUON_REPO=${FRB_GLUON_REPO:-"https://github.com/freifunk-ffm/gluon.git"}
 FRB_GLUON_BRANCH=${FRB_GLUON_BRANCH:-"none"}
+FRB_GLUON_TAG=${FRB_GLUON_TAG:-"-"}
 FRB_SITE_REPO=${FRB_SITE_REPO:-"https://github.com/freifunk-ffm/site-ffffm.git"}
 FRB_SITE_BRANCH=${FRB_SITE_BRANCH:-"none"}
+FRB_SITE_TAG=${FRB_SITE_TAG:-"-"}
 FRB_FW_UPDATE_BRANCH=${FRB_FW_UPDATE_BRANCH:-"none"}
 FRB_VERSION=${FRB_VERSION:-Homebrew}
 FRB_SITE_PATCHES=${FRB_SITE_PATCHES:-0}
@@ -70,6 +72,10 @@ Usage: ${0##*/} ...
                  (Voreinstellung $FRB_GLUON_REPO)
     -k <String>  Zu verwendendes Site-Repository.
                  (Voreinstellung $FRB_SITE_REPO)
+    -v <String>  Zu verwendender Tag des Gluon-Repositories.
+                 (Keine Voreinstellung)
+    -w <String>  Zu verwendender Tag des Site-Repositories.
+                 (Keine Voreinstellung)
     -h           Dieser Text.
 
 EOF
@@ -79,7 +85,7 @@ EOF
 # Optionen parsen
 ###################################################################
 
-while getopts "T:B:C:U:V:P:S:L:s:p:c:b:t:a:x:g:k:h" opt; do
+while getopts "T:B:C:U:V:P:S:L:s:p:c:b:t:a:x:g:k:v:w:h" opt; do
   case $opt in
     T) FRB_TARGETS=$OPTARG
        ;;
@@ -114,6 +120,10 @@ while getopts "T:B:C:U:V:P:S:L:s:p:c:b:t:a:x:g:k:h" opt; do
     g) FRB_GLUON_REPO=$OPTARG
        ;;
     k) FRB_SITE_REPO=$OPTARG
+       ;;
+    v) FRB_GLUON_TAG=$OPTARG
+       ;;
+    w) FRB_SITE_TAG=$OPTARG
        ;;
     h) show_help
        exit 0
@@ -169,9 +179,11 @@ Die FW wird/wurde mit folgenden Optionen gebaut:
 
 Targets:              $FRB_TARGETS
 Gluon-Repo:           $FRB_GLUON_REPO
-Site-Repo:            $FRB_SITE_REPO
 Gluon-Branch:         $FRB_GLUON_BRANCH
+Gluon-Tag:            $FRB_GLUON_TAG
+Site-Repo:            $FRB_SITE_REPO
 Site-Branch:          $FRB_SITE_BRANCH
+Site-Tag:             $FRB_SITE_TAG
 FW Update-Branch:     $FRB_FW_UPDATE_BRANCH
 Versionstring:        $FRB_VERSION
 Versionsuffix:        $FRB_VERSION_SUFFIX
@@ -258,22 +270,44 @@ fi
 
 # ggf. Workspace erzeugen und Gluon aus Git holen
 if [ ! -d "$WORKSPACE" ]; then
- to_output "Clone Gluon in neuen Workspace"
+ to_output "Clone Gluon in leeren Workspace"
  git clone $FRB_GLUON_REPO $WORKSPACE
  check_last_exitcode
- to_output  "Clone Site in neuen Workspace"
+ to_output  "Clone Site in leeren Workspace"
  git clone $FRB_SITE_REPO $WORKSPACE/site
  check_last_exitcode
 fi
 
-# Gluon und site.conf aus den Git-Branches holen
+# Gluon und Site aus den Git-Branches bzw. Git-Tags holen
 cd $WORKSPACE
-to_output  "Checkout Git-Branch vom Gluon- und Site-Repository"
-git fetch && git reset --hard origin/${FRB_GLUON_BRANCH}
+to_output  "Hard-Reset des Gluon-Repositories"
+# Gluon-Repo
+git fetch && git reset --hard
 check_last_exitcode
+# Was soll verwendet werden: Branch oder Tag ?
+if [ "$FRB_GLUON_TAG" == "-" ];  then
+ to_output  "Gluon-Repository checkout Branch"
+ git checkout ${FRB_SITE_BRANCH}
+else
+ to_output  "Gluon-Repository checkout Tag"
+ git checkout tags/${FRB_GLUON_TAG}
+fi
+check_last_exitcode
+# Site-Repo
 cd $WORKSPACE/site
-git fetch && git reset --hard origin/${FRB_SITE_BRANCH}
+to_output  "Hard-Reset des Site-Repository"
+git fetch && git reset --hard
 check_last_exitcode
+# Was soll verwendet werden: Branch oder Tag ?
+if [ "$FRB_SITE_TAG" == "-" ];  then
+ to_output  "Site-Repository checkout Branch"
+ git checkout ${FRB_SITE_BRANCH}
+else
+ to_output  "Site-Repository checkout Tag"
+ git checkout tags/${FRB_SITE_TAG}
+fi
+check_last_exitcode
+
 
 cd $WORKSPACE
 to_output "Anwenden von lokalen Site-Patches"
