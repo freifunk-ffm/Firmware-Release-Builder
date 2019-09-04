@@ -287,7 +287,7 @@ check_last_exitcode
 # Was soll verwendet werden: Branch oder Tag ?
 if [ "$FRB_GLUON_TAG" == "-" ];  then
  to_output  "Gluon-Repository checkout Branch"
- git checkout ${FRB_SITE_BRANCH}
+ git checkout ${FRB_GLUON_BRANCH}
 else
  to_output  "Gluon-Repository checkout Tag"
  git checkout tags/${FRB_GLUON_TAG}
