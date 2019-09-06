@@ -57,17 +57,25 @@ Usage: ${0##*/} ...
                  (Voreinstellung: MonatTag)
     -L [0|1]     Lokale Site-Patches anwenden.
                  (Voreinstellung: $FRB_SITE_PATCHES)
-    -b [0|1]     BROKEN Router-Images bauen? (Voreinstellung: $FRB_BROKEN)
-    -t [0|1]     BROKEN Targets bauen? (Voreinstellung: $FRB_BROKEN_TARGETS)
+    -b [0|1]     BROKEN Router-Images bauen?
+                 (Voreinstellung: $FRB_BROKEN)
+    -t [0|1]     BROKEN Targets bauen?
+                 (Voreinstellung: $FRB_BROKEN_TARGETS)
                  Bei 1 werden dann BROKEN-Images fuer "alle" Targets gebaut!
-    -P [int]     GLUON_PRIORITY (Voreinstellung: $FRB_PRIORITY)
-    -s <String>  Absoluter Pfad zum privaten ECDSA-Signkey.
-    -p <String>  Build Make-Parameter. (Voreinstellung: "$FRB_BPARAMETER")
+    -P [int]     GLUON_PRIORITY
+                 (Voreinstellung: $FRB_PRIORITY)
+    -s <String>  Absoluter Pfad und Name des privaten ECDSA-Signkeys. 
+                 Falls angegeben, so wird das Manifest damit signiert.
+    -p <String>  Build Make-Parameter.
                  Liste in Anführungszeichen, getrennt durch Leerzeichen.
-    -c [0|1]     Workspace vor dem Bauen löschen? (Voreinstellung: $FRB_CLEANUP)
-    -a [0|1]     Ein tar.xz Gesamtarchiv erzeugen? (Voreinstellung: $FRB_CREATE_DARCHIVE)
-    -x <String>  Gesamtarchiv xz-Parameter. (Voreinstellung: "$FRB_XZPARAMETER")
+                 (Voreinstellung: "$FRB_BPARAMETER")
+    -c [0|1]     Workspace vor dem Bauen löschen?
+                 (Voreinstellung: $FRB_CLEANUP)
+    -a [0|1]     Ein tar.xz Gesamtarchiv erzeugen?
+                 (Voreinstellung: $FRB_CREATE_DARCHIVE)
+    -x <String>  Gesamtarchiv xz-Parameter.
                  Liste in Anführungszeichen, getrennt durch Leerzeichen.
+                 (Voreinstellung: "$FRB_XZPARAMETER")
     -g <String>  Zu verwendendes Gluon-Repository.
                  (Voreinstellung $FRB_GLUON_REPO)
     -k <String>  Zu verwendendes Site-Repository.
@@ -141,7 +149,7 @@ done
 #####################################################################
 # Jenkins kann komfortabel nur boolesche Variablen als false/true 
 # uebergeben.
-# Die folgendenden Zeilen transformieren durch Jenkins uebergebene 
+# Die folgenden Zeilen transformieren durch Jenkins uebergebene 
 # Aufrufparameter in 0/1 zurueck.
 #####################################################################
 normalize_bool() {
@@ -405,8 +413,7 @@ fi
 # MD5 wird letztlich doch noch benötigt. Der MD5-HASH wird im Konfig-Modus beim Umflashen angezeigt.
 cd ${WORKSPACE}/output/images
 
-to_output  "Erzeuge Hashes der Images"
-# Hier sollte irgendwann mal eine Schleife abgearbeitet werden :o)
+to_output  "Erzeuge Image-Hashes"
 hashfile_MD5=../MD5SUMS-${GLUON_RELEASE}
 hashfile_SHA256=../SHA256SUMS-${GLUON_RELEASE}
 find -L * -exec md5sum {} \; > ${hashfile_MD5}
@@ -417,7 +424,7 @@ echo --- >> ${hashfile_SHA256}
 
 # Die Hashes ggf. noch mit einem ECDSA-Key signieren (zur absoluten Sicherheit).
 if [ "$FRB_SIGNKEY_PRIVATE" != "none" ];  then
- to_output "Signiere die Hashedatei"
+ to_output "Signiere die Hash-Dateien"
  # ECDSA signieren der Hash-Dateien
  ecdsasign ${hashfile_MD5} < ${FRB_SIGNKEY_PRIVATE} >> ${hashfile_MD5}
  ecdsasign ${hashfile_SHA256} < ${FRB_SIGNKEY_PRIVATE} >> ${hashfile_SHA256}
