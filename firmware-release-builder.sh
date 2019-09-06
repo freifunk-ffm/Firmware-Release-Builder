@@ -270,19 +270,19 @@ fi
 
 # ggf. Workspace erzeugen und Gluon aus Git holen
 if [ ! -d "$WORKSPACE" ]; then
- to_output "Clone Gluon in leeren Workspace"
+ to_output "Klone Gluon in leeren Workspace"
  git clone $FRB_GLUON_REPO $WORKSPACE
  check_last_exitcode
- to_output  "Clone Site in leeren Workspace"
+ to_output  "Klone Site in leeren Workspace"
  git clone $FRB_SITE_REPO $WORKSPACE/site
  check_last_exitcode
 fi
 
 # Gluon und Site aus den Git-Branches bzw. Git-Tags holen
+# Gluon-Repo
 cd $WORKSPACE
 to_output  "Hard-Reset des Gluon-Repositories"
-# Gluon-Repo
-git fetch && git reset --hard
+git fetch && git reset --hard origin/${FRB_GLUON_BRANCH}
 check_last_exitcode
 # Was soll verwendet werden: Branch oder Tag ?
 if [ "$FRB_GLUON_TAG" == "-" ];  then
@@ -295,8 +295,8 @@ fi
 check_last_exitcode
 # Site-Repo
 cd $WORKSPACE/site
-to_output  "Hard-Reset des Site-Repository"
-git fetch && git reset --hard
+to_output  "Hard-Reset des Site-Repositories"
+git fetch && git reset --hard origin/$FRB_SITE_BRANCH
 check_last_exitcode
 # Was soll verwendet werden: Branch oder Tag ?
 if [ "$FRB_SITE_TAG" == "-" ];  then
