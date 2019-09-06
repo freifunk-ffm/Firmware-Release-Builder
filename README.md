@@ -48,30 +48,38 @@ Usage: firmware-release-builder.sh ...
     -U <String>  Name des Firmware Autoupdater-Branches (Firmware-spezifisch).
                  (Voreinstellung: Es wird der Parameter von -B übernommen)
     -V <String>  Vorgabe des Firmware Versionstrings.
-                 (Voreinstellung: "Homebrew")
+                 (Voreinstellung: "$FRB_VERSION")
     -S <String>  Eigener Suffix fuer die Versionsbezeichnung.
                  (Voreinstellung: MonatTag)
     -L [0|1]     Lokale Site-Patches anwenden.
-                 (Voreinstellung: 0)
-    -b [0|1]     BROKEN Router-Images bauen? (Voreinstellung: 0)
-    -t [0|1]     BROKEN Targets bauen? (Voreinstellung: 0)
+                 (Voreinstellung: $FRB_SITE_PATCHES)
+    -b [0|1]     BROKEN Router-Images bauen?
+                 (Voreinstellung: $FRB_BROKEN)
+    -t [0|1]     BROKEN Targets bauen?
+                 (Voreinstellung: $FRB_BROKEN_TARGETS)
                  Bei 1 werden dann BROKEN-Images fuer "alle" Targets gebaut!
-    -P [int]     GLUON_PRIORITY (Voreinstellung: 0)
-    -s <String>  Absoluter Pfad zum privaten ECDSA-Signkey.
-    -p <String>  Build Make-Parameter. (Voreinstellung: "-j4")
+    -P [int]     GLUON_PRIORITY
+                 (Voreinstellung: $FRB_PRIORITY)
+    -s <String>  Absoluter Pfad und Name des privaten ECDSA-Signkeys. 
+                 Falls angegeben, so wird das Manifest damit signiert.
+    -p <String>  Build Make-Parameter.
                  Liste in Anführungszeichen, getrennt durch Leerzeichen.
-    -c [0|1]     Workspace vor dem Bauen löschen? (Voreinstellung: 1)
-    -a [0|1]     Ein tar.xz Gesamtarchiv erzeugen? (Voreinstellung: 1)
-    -x <String>  Gesamtarchiv xz-Parameter. (Voreinstellung: "-T0 -6")
+                 (Voreinstellung: "$FRB_BPARAMETER")
+    -c [0|1]     Workspace vor dem Bauen löschen?
+                 (Voreinstellung: $FRB_CLEANUP)
+    -a [0|1]     Ein tar.xz Gesamtarchiv erzeugen?
+                 (Voreinstellung: $FRB_CREATE_DARCHIVE)
+    -x <String>  Gesamtarchiv xz-Parameter.
                  Liste in Anführungszeichen, getrennt durch Leerzeichen.
+                 (Voreinstellung: "$FRB_XZPARAMETER")
     -g <String>  Zu verwendendes Gluon-Repository.
-                 (Voreinstellung https://github.com/freifunk-ffm/gluon.git)
+                 (Voreinstellung $FRB_GLUON_REPO)
     -k <String>  Zu verwendendes Site-Repository.
-                 (Voreinstellung https://github.com/freifunk-ffm/site-ffffm.git)
+                 (Voreinstellung $FRB_SITE_REPO)
     -v <String>  Zu verwendender Tag des Gluon-Repositories.
                  (Keine Voreinstellung)
     -w <String>  Zu verwendender Tag des Site-Repositories.
-                 (Keine Voreinstellung) 
+                 (Keine Voreinstellung)
     -h           Dieser Text.
 ```
 
