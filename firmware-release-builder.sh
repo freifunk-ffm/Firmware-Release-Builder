@@ -175,7 +175,7 @@ FRB_SITE_PATCHES=$(normalize_bool $FRB_SITE_PATCHES)
 to_output() {
 echo
 echo ----------------------------------------------------------------
-echo "FirmwareBuilder: $1"
+echo "FRB: $1"
 echo ----------------------------------------------------------------
 }
 
