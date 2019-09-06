@@ -314,10 +314,15 @@ to_output "Anwenden von lokalen Site-Patches"
 if [ $FRB_SITE_PATCHES == 1 ]; then
  if [ -d "$WORKSPACE/site/patches" ]; then
   cd ${WORKSPACE}/site/patches
-  if [ $(echo *.patch)  != "*.patch" ]; then
+  if [[ $(echo *.patch)  != "*.patch" ]]; then
    cd $WORKSPACE
-   git -c user.name='Frankfurter FirmwareReleaseBuilder' -c user.email='ffffm-FRB@void.example.com' -c commit.gpgsign=false am --whitespace=nowarn --committer-date-is-author-date $WORKSPACE/site/patches/*.patch
-   check_last_exitcode
+   PATCHFILES=*.patch
+   for i in site/patches/$PATCHFILES
+   do
+    echo "Angewendeter Patch: $i"
+    patch -N -p1 -r - -s -i $i
+    echo
+   done
   else
    echo "Keine lokalen Site-Patches gefunden"
   fi
