@@ -21,7 +21,7 @@ Der FRB setzt die Git-Repos hart auf den entsprechenden HEAD-Commit zurück. Lok
 
   - Für das Firmwarebauen müssen generell alle Pakete aus http://gluon.readthedocs.io/en/latest/user/getting_started.html#dependencies installier sein!
   
-  - Für den Make-Aufruf bestimmt und setzt der FirmwareReleaseBuilder die Umgebungsvariablen `GLUON_BRANCH`, `GLUON_RELEASE` und `GLUON_PRIORITY`. Dieses ist für die Gestaltung der zu verwendenden `site.mk` zu berücksichtigen.
+  - Für den Make-Aufruf bestimmt und überschreibt der FirmwareReleaseBuilder die Umgebungsvariablen `GLUON_BRANCH`, `GLUON_RELEASE` und `GLUON_PRIORITY`. Dieses ist für die Gestaltung der zu verwendenden `site.mk` zu berücksichtigen.
 
 #### Kleines Build-Beispiel:
 ```
