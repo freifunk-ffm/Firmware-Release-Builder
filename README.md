@@ -19,7 +19,9 @@ Der FRB setzt die Git-Repos hart auf den entsprechenden HEAD-Commit zurück. Lok
 #### Voraussetzung 
   - Die zu verwendenen Gluon-Sources und die Community-spezifischen site-Sources müssen über einen Git-Server abrufbar sein. ~Durch den FRB werden für beide Repos Branches mit identischem Namen abgerufen.~
 
-  - Für das Firmwarebauen müssen generell alle Pakete aus http://gluon.readthedocs.io/en/latest/user/getting_started.html#dependencies installier sein!  
+  - Für das Firmwarebauen müssen generell alle Pakete aus http://gluon.readthedocs.io/en/latest/user/getting_started.html#dependencies installier sein!
+  
+  - Für den Make-Aufruf bestimmt und setzt der FirmwareReleaseBuilder die Umgebungsvariablen `GLUON_BRANCH`, `GLUON_RELEASE` und `GLUON_PRIORITY`. Dieses ist für die Gestaltung der zu verwendenden `site.mk` zu berücksichtigen.
 
 #### Kleines Build-Beispiel:
 ```
