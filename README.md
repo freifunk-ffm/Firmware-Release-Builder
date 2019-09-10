@@ -50,34 +50,34 @@ Usage: firmware-release-builder.sh ...
     -U <String>  Name des Firmware Autoupdater-Branches (Firmware-spezifisch).
                  (Voreinstellung: Es wird der Parameter von -B übernommen)
     -V <String>  Vorgabe des Firmware Versionstrings.
-                 (Voreinstellung: "$FRB_VERSION")
+                 (Voreinstellung: "Homebrew")
     -S <String>  Eigener Suffix fuer die Versionsbezeichnung.
                  (Voreinstellung: MonatTag)
     -L [0|1]     Lokale Site-Patches anwenden.
-                 (Voreinstellung: $FRB_SITE_PATCHES)
+                 (Voreinstellung: 0)
     -b [0|1]     BROKEN Router-Images bauen?
-                 (Voreinstellung: $FRB_BROKEN)
+                 (Voreinstellung: 0)
     -t [0|1]     BROKEN Targets bauen?
-                 (Voreinstellung: $FRB_BROKEN_TARGETS)
+                 (Voreinstellung: 0)
                  Bei 1 werden dann BROKEN-Images fuer "alle" Targets gebaut!
     -P [int]     GLUON_PRIORITY
-                 (Voreinstellung: $FRB_PRIORITY)
+                 (Voreinstellung: 0)
     -s <String>  Absoluter Pfad und Name des privaten ECDSA-Signkeys. 
                  Falls angegeben, so wird das Manifest damit signiert.
     -p <String>  Build Make-Parameter.
                  Liste in Anführungszeichen, getrennt durch Leerzeichen.
-                 (Voreinstellung: "$FRB_BPARAMETER")
+                 (Voreinstellung: "-j4")
     -c [0|1]     Workspace vor dem Bauen löschen?
-                 (Voreinstellung: $FRB_CLEANUP)
+                 (Voreinstellung: 1)
     -a [0|1]     Ein tar.xz Gesamtarchiv erzeugen?
-                 (Voreinstellung: $FRB_CREATE_DARCHIVE)
+                 (Voreinstellung: 1)
     -x <String>  Gesamtarchiv xz-Parameter.
                  Liste in Anführungszeichen, getrennt durch Leerzeichen.
-                 (Voreinstellung: "$FRB_XZPARAMETER")
+                 (Voreinstellung: "-T0 -6")
     -g <String>  Zu verwendendes Gluon-Repository.
-                 (Voreinstellung $FRB_GLUON_REPO)
+                 (Voreinstellung https://github.com/freifunk-ffm/gluon.git)
     -k <String>  Zu verwendendes Site-Repository.
-                 (Voreinstellung $FRB_SITE_REPO)
+                 (Voreinstellung https://github.com/freifunk-ffm/site-ffffm.git)
     -v <String>  Zu verwendender Tag des Gluon-Repositories.
                  (Keine Voreinstellung)
     -w <String>  Zu verwendender Tag des Site-Repositories.
