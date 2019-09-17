@@ -13,11 +13,11 @@ Der FRB ist ein einzelnes Skript, welches alle notwendigen Schritte des Buildpro
   - Der FRB ist hauptsächlich auf Frankfurter Ansprüche abgestimmt. Für den automatischen Upload auf den FFM Download-Server wird ein Tar-Archiv mit allen Images, allen opkg-Modulen und allen Versionsinformationen erzeugt (siehe https://github.com/freifunk-ffm/scripts/blob/master/firmwarefetch).  
 
 ### Achtung - Achtung - Achtung   
-Der FRB setzt die Git-Repos hart auf den entsprechenden HEAD-Commit zurück. Lokale Anpassungen werden **immer** verworfen. Daher sollte der FRB nicht zur reinen FW-Entwickling verwendet werden!
+Der FRB setzt die verwendeten Git-Repos hart auf die Origin-HEAD-Commits zurück. Lokale Anpassungen werden **immer** verworfen! Daher sollte der FRB nicht zur reinen FW-Entwickling verwendet werden!
 
 ### Skript-Benutzung
 #### Voraussetzung 
-  - Die zu verwendenen Gluon-Sources und die Community-spezifischen site-Sources müssen über einen Git-Server abrufbar sein. ~Durch den FRB werden für beide Repos Branches mit identischem Namen abgerufen.~
+  - Die zu verwendenen Community-spezifischen site-Sources und die Gluon-Sources müssen über einen Git-Server abrufbar sein.
 
   - Für das Firmwarebauen müssen generell alle Pakete aus http://gluon.readthedocs.io/en/latest/user/getting_started.html#dependencies installier sein!
   
