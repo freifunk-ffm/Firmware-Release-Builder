@@ -25,9 +25,9 @@ Der FRB setzt die verwendeten Git-Repos hart auf die Origin-HEAD-Commits zurück
 
 #### Kleines Build-Beispiel:
 ```
-firmware-release-builder.sh -B test -V vX.Y.Z
+firmware-release-builder.sh -C test -V vX.Y.Z
 ```
-Durch diesen Aufruf wird aus den aktuellen Frankfurter Test-Branches (Gluon und Site) für alle verfügbaren Targets die Firmware `vX.Y.Z-test-Builddatum` erstellt. Es wird ein unsigniertes Manifest angelegt und das ganze als komprimiertes Archiv abgelegt. Das Skript zeigt den Pfad zu dem Ablageordner an. Je nach Rechner-Power braucht der Build ca. 5-8 Stunden.
+Durch diesen Aufruf wird aus den aktuellen Frankfurter Test-Branches (Site und Gluon) für alle verfügbaren Targets die Firmware `vX.Y.Z-test-Builddatum` erstellt. Es wird ein unsigniertes Manifest angelegt und das ganze als komprimiertes Archiv abgelegt. Das Skript zeigt den Pfad zu dem Ablageordner an. Je nach Rechner-Power braucht der Build ca. 5-8 Stunden.
 
 #### Optionen des Skriptes
 Skriptname:`firmware-release-builder.sh`  
@@ -37,18 +37,18 @@ Wird das Skript mit der Option `-h` aufgerufen, so wird folgendes ausgegeben:
 ```
 Usage: firmware-release-builder.sh ... 
 
-    Die Option -B (Git Haupt-Branch) "muss" angegeben werden!
+    Die Option -C (Git Site-Branch) "muss" angegeben werden!
     Optionen in Grossbuchstaben 'sollten' angegeben werden.
     Optionen in Kleinbuchstaben 'koennen' angegeben werden.
 
-    -B <String>  Name des Gluon-Branches (z.B. dev, test oder stable).
+    -C <String>  Name des Git Site-Branches (z.B. dev, test oder stable).
+    -B <String>  Name des Git Gluon-Branches (z.B. dev, test oder stable).
+                 (Voreinstellung: Es wird der Parameter von -C übernommen)
+    -U <String>  Name des Firmware Autoupdater-Branches (Firmware-spezifisch).
+                 (Voreinstellung: Es wird der Parameter von -C übernommen)
     -T <String>  Welche Targets sollen gebaut werden?
                  Liste in Anführungszeichen, getrennt durch Leerzeichen.
                  (Voreinstellung: alle als Nicht-BROKEN bekannte Targets)
-    -C <String>  Name des Site-Branches (z.B. dev, test oder stable).
-                 (Voreinstellung: Es wird der Parameter von -B übernommen)
-    -U <String>  Name des Firmware Autoupdater-Branches (Firmware-spezifisch).
-                 (Voreinstellung: Es wird der Parameter von -B übernommen)
     -V <String>  Vorgabe des Firmware Versionstrings.
                  (Voreinstellung: "Homebrew")
     -S <String>  Eigener Suffix fuer die Versionsbezeichnung.

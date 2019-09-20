@@ -51,9 +51,22 @@ Ein grober Funktionstest sollten mindestens den folgenden Anforderungen genügen
 - [ ] WLAN-Kanalübernahme nach Sysupgrade
   - [ ] 2,4GHz
   - [ ] 5GHz
-- [ ] Meshverhalten generell
-  - [ ] WLAN
-  - [ ] LAN
+- [ ] Mesh-Verhalten generell
+  - [ ] folgende Punkte getestet mit
+    - [ ] einem Mesh-VPN-Knoten
+    - [ ] einem Mesh-Only-Knoten
+  - [ ] gegen Knoten mit gleicher Firmware
+    - [ ] WLAN
+      - [ ] Radio0
+      - [ ] Radio1
+    - [ ] LAN
+    - [ ] WAN
+  - [ ]  gegen Knoten mit vormaliger Firmware
+    - [ ] WLAN
+      - [ ] Radio0
+      - [ ] Radio1
+    - [ ] LAN
+    - [ ] WAN
 - [ ] Clientverbindung (IPv4, IPv6, DNS)
 - [ ] OFF/ON Check
   - [ ] Mesh-VPN
@@ -108,4 +121,3 @@ Ein grober Funktionstest sollten mindestens den folgenden Anforderungen genügen
 
 Das aktuelle Template dieser Checkliste ist hier zu finden:  
 Direkt-Link: https://raw.githubusercontent.com/freifunk-ffm/Firmware-Release-Builder/master/FW-Releas_Checkliste.md  
-

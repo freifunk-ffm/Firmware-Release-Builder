@@ -19,7 +19,7 @@ FRB_SITE_REPO=${FRB_SITE_REPO:-"https://github.com/freifunk-ffm/site-ffffm.git"}
 FRB_SITE_BRANCH=${FRB_SITE_BRANCH:-"none"}
 FRB_SITE_TAG=${FRB_SITE_TAG:-"-"}
 FRB_FW_UPDATE_BRANCH=${FRB_FW_UPDATE_BRANCH:-"none"}
-FRB_VERSION=${FRB_VERSION:-Homebrew}
+FRB_VERSION=${FRB_VERSION:-vHomebrew}
 FRB_SITE_PATCHES=${FRB_SITE_PATCHES:-0}
 FRB_CLEANUP=${FRB_CLEANUP:-1}
 FRB_BROKEN=${FRB_BROKEN:-0}
@@ -39,18 +39,18 @@ cat << EOF
 
 Usage: ${0##*/} ...
 
-    Die Option -B (Git Haupt-Branch) "muss" angegeben werden!
+    Die Option -C (Git Site-Branch) "muss" angegeben werden!
     Optionen in Grossbuchstaben 'sollten' angegeben werden.
     Optionen in Kleinbuchstaben 'koennen' angegeben werden.
 
-    -B <String>  Name des Gluon-Branches (z.B. dev, test oder stable).
+    -C <String>  Name des Git Site-Branches (z.B. dev, test oder stable).
+    -B <String>  Name des Git Gluon-Branches (z.B. dev, test oder stable).
+                 (Voreinstellung: Es wird der Parameter von -C übernommen)
+    -U <String>  Name des Firmware Autoupdater-Branches (Firmware-spezifisch).
+                 (Voreinstellung: Es wird der Parameter von -C übernommen)
     -T <String>  Welche Targets sollen gebaut werden?
                  Liste in Anführungszeichen, getrennt durch Leerzeichen.
                  (Voreinstellung: alle als Nicht-BROKEN bekannte Targets)
-    -C <String>  Name des Site-Branches (z.B. dev, test oder stable).
-                 (Voreinstellung: Es wird der Parameter von -B übernommen)
-    -U <String>  Name des Firmware Autoupdater-Branches (Firmware-spezifisch).
-                 (Voreinstellung: Es wird der Parameter von -B übernommen)
     -V <String>  Vorgabe des Firmware Versionstrings.
                  (Voreinstellung: "$FRB_VERSION")
     -S <String>  Eigener Suffix fuer die Versionsbezeichnung.
@@ -76,13 +76,13 @@ Usage: ${0##*/} ...
     -x <String>  Gesamtarchiv xz-Parameter.
                  Liste in Anführungszeichen, getrennt durch Leerzeichen.
                  (Voreinstellung: "$FRB_XZPARAMETER")
-    -g <String>  Zu verwendendes Gluon-Repository.
-                 (Voreinstellung $FRB_GLUON_REPO)
     -k <String>  Zu verwendendes Site-Repository.
                  (Voreinstellung $FRB_SITE_REPO)
-    -v <String>  Zu verwendender Tag des Gluon-Repositories.
-                 (Keine Voreinstellung)
+    -g <String>  Zu verwendendes Gluon-Repository.
+                 (Voreinstellung $FRB_GLUON_REPO)
     -w <String>  Zu verwendender Tag des Site-Repositories.
+                 (Keine Voreinstellung)
+    -v <String>  Zu verwendender Tag des Gluon-Repositories.
                  (Keine Voreinstellung)
     -h           Dieser Text.
 
@@ -186,12 +186,12 @@ cat << EOF
 Die FW wird/wurde mit folgenden Optionen gebaut:
 
 Targets:              $FRB_TARGETS
-Gluon-Repo:           $FRB_GLUON_REPO
-Gluon-Branch:         $FRB_GLUON_BRANCH
-Gluon-Tag:            $FRB_GLUON_TAG
 Site-Repo:            $FRB_SITE_REPO
 Site-Branch:          $FRB_SITE_BRANCH
 Site-Tag:             $FRB_SITE_TAG
+Gluon-Repo:           $FRB_GLUON_REPO
+Gluon-Branch:         $FRB_GLUON_BRANCH
+Gluon-Tag:            $FRB_GLUON_TAG
 FW Update-Branch:     $FRB_FW_UPDATE_BRANCH
 Versionstring:        $FRB_VERSION
 Versionsuffix:        $FRB_VERSION_SUFFIX
@@ -222,25 +222,25 @@ check_last_exitcode()
 ###################################################################
 ###################################################################
 
-# Uebernahme der Parameter für den Git-Gluon-Build
-# Wenn kein Git-Gluon-Branch definiert wurde -> Abbruch
-if [ "$FRB_GLUON_BRANCH" == "none" ];  then
+# Uebernahme der Parameter für den Firmware-Build
+
+# Wenn kein Site-Branch definiert wurde -> Abbruch
+if [ "$FRB_SITE_BRANCH" == "none" ];  then
  show_help
- to_output "Abbruch: Es wurde kein Git-Gluon-Branch mittels '-B' angegeben"
+ to_output "Abbruch: Es wurde kein Git-Site-Branch mittels '-C' angegeben"
  exit 1
 fi
 
-# Wenn kein Site-Branch definiert wurde, dann den Git-Gluon-Branch verwenden
-if [ "$FRB_SITE_BRANCH" == "none" ];  then
- FRB_SITE_BRANCH=${FRB_GLUON_BRANCH}
+# Wenn kein Gluon-Branch definiert wurde, dann den Site-Branch verwenden
+if [ "$FRB_GLUON_BRANCH" == "none" ];  then
+ FRB_GLUON_BRANCH=${FRB_SITE_BRANCH}
 fi
 
-# Wenn kein Firmware-Update-Branch definiert wurde, dann den Git-Gluon-Branch verwenden
+# Wenn kein Firmware-Update-Branch definiert wurde, dann den Site-Branch verwenden
 if [ "$FRB_FW_UPDATE_BRANCH" == "none" ];  then
- FRB_FW_UPDATE_BRANCH=${FRB_GLUON_BRANCH}
+ FRB_FW_UPDATE_BRANCH=${FRB_SITE_BRANCH}
 fi
 
-export GLUON_BRANCH=${FRB_FW_UPDATE_BRANCH}
 if [ "$FRB_VERSION_SUFFIX" == "none" ];  then
  BUILD_NUMBER=$(date '+%m%d')
  FRB_VERSION_SUFFIX=${BUILD_NUMBER}
@@ -248,6 +248,7 @@ else
  BUILD_NUMBER=${FRB_VERSION_SUFFIX}
 fi
 
+export GLUON_BRANCH=${FRB_FW_UPDATE_BRANCH}
 export GLUON_RELEASE=${FRB_VERSION}-${GLUON_BRANCH}-${BUILD_NUMBER}
 export GLUON_PRIORITY=${FRB_PRIORITY}
 
