@@ -5,12 +5,13 @@ Mit dem Firmware Release Builder (FRB) können auf einfachste Art und Weise auto
 Der FRB kann händisch auf einem PC oder automatisiert durch z.B. Jenkins aufgerufen werden.   
 
 Der FRB ist ein einzelnes Skript, welches alle notwendigen Schritte des Buildprozesses vereint.   
-  - Dem Skript werden Parameter übergeben.  
+  - Dem Skript werden Parameter übergeben.
   - Das Skript holt selbständig die Inhalte aller notwendigen Gluon-Git-Repositories.
   - Das Skript kann lokale Site-Patches (aus site/patches) anwenden.
   - Das Skript legt einen eigenen Workspace an (./wspace).
-  - Das Skript legt einen Paketesourcen-Download-Cache an (./dl-cache).
-  - Der FRB ist hauptsächlich auf Frankfurter Ansprüche abgestimmt. Für den automatischen Upload auf den FFM Download-Server wird ein Tar-Archiv mit allen Images, allen opkg-Modulen und allen Versionsinformationen erzeugt (siehe https://github.com/freifunk-ffm/scripts/blob/master/firmwarefetch).  
+  - Das Skript legt einen Paketesourcen-Download-Cache an (./dl-cache).  
+  - Das Skript erzeugt eine Manifest-Datei und signiert sie ggf. mit einem vorliegendem Public-Key.
+  - Der FRB ist hauptsächlich auf Frankfurter Ansprüche abgestimmt. Für den automatischen Upload auf den FFM Download-Server wird ein Tar-Archiv mit allen Images, allen opkg-Modulen und allen Versionsinformationen erzeugt (siehe https://github.com/freifunk-ffm/scripts/blob/master/firmwarefetch).
 
 ### Achtung - Achtung - Achtung   
 Der FRB setzt die lokal verwendeten Git-Repos hart auf die Origin-HEAD-Commits zurück. Lokale Anpassungen werden **immer** verworfen! Daher sollte der FRB nicht zur reinen FW-Entwickling verwendet werden!

@@ -411,33 +411,33 @@ if [ "$FRB_SIGNKEY_PRIVATE" != "none" ];  then
  contrib/sign.sh ${FRB_SIGNKEY_PRIVATE} ${WORKSPACE}/output/images/sysupgrade/${GLUON_BRANCH}.manifest
 fi
 
-# MD5 und SHA256 Hashes von allen Images erzeugen
-# MD5 wird letztlich doch noch benötigt. Der MD5-HASH wird im Konfig-Modus beim Umflashen angezeigt.
+# SHA512 und SHA256 Hashes von allen Images erzeugen, auch von den Factory-Images, und dann alles abspeichern.
+# SHA256 wird letztlich noch benötigt. Der SHA256-HASH wird u.a. im Konfig-Modus beim Umflashen angezeigt.
 cd ${WORKSPACE}/output/images
 
 to_output  "Erzeuge Image-Hashes"
-hashfile_MD5=../MD5SUMS-${GLUON_RELEASE}
+hashfile_SHA512=../SHA512SUMS-${GLUON_RELEASE}
 hashfile_SHA256=../SHA256SUMS-${GLUON_RELEASE}
-find -L * -exec md5sum {} \; > ${hashfile_MD5}
+find -L * -exec sha512sum {} \; > ${hashfile_SHA512}
 find -L * -exec sha256sum {} \; > ${hashfile_SHA256}
 # Footer an die Hash-Dateien anhängen
-echo --- >> ${hashfile_MD5}
+echo --- >> ${hashfile_SHA512}
 echo --- >> ${hashfile_SHA256}
 
 # Die Hashes ggf. noch mit einem ECDSA-Key signieren (zur absoluten Sicherheit).
 if [ "$FRB_SIGNKEY_PRIVATE" != "none" ];  then
  to_output "Signiere die Hash-Dateien"
  # ECDSA signieren der Hash-Dateien
- ecdsasign ${hashfile_MD5} < ${FRB_SIGNKEY_PRIVATE} >> ${hashfile_MD5}
+ ecdsasign ${hashfile_SHA512} < ${FRB_SIGNKEY_PRIVATE} >> ${hashfile_SHA512}
  ecdsasign ${hashfile_SHA256} < ${FRB_SIGNKEY_PRIVATE} >> ${hashfile_SHA256}
- mv ${hashfile_MD5} .
+ mv ${hashfile_SHA512} .
  mv ${hashfile_SHA256} .
  # Damit es auch kontrolliert werden kann -> Bereitstellen des öffentlichen ECDSA-Schluessels
  to_output "Public ECDSA-Schluessel bereitstellen"
  ecdsakeygen -p < ${FRB_SIGNKEY_PRIVATE} > ecdsa-key-${GLUON_RELEASE}.pub
 fi
 # Die Hash-Dateien an Zielposition verschieben
-mv ${hashfile_MD5} .
+mv ${hashfile_SHA512} .
 mv ${hashfile_SHA256} .
 cd ${WORKSPACE}
 
