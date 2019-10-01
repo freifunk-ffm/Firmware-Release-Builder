@@ -11,6 +11,7 @@ Der FRB ist ein einzelnes Skript, welches alle notwendigen Schritte des Buildpro
   - Das Skript legt einen eigenen Workspace an (./wspace).
   - Das Skript legt einen Paketesourcen-Download-Cache an (./dl-cache).  
   - Das Skript erzeugt eine Manifest-Datei und signiert sie ggf. mit einem vorliegendem Public-Key.
+  - Das Skript erstellt zwei Dateien mit SHA256- und SHA512-Image-Hashes (auch Factory) und signiert diese ggf.
   - Der FRB ist hauptsächlich auf Frankfurter Ansprüche abgestimmt. Für den automatischen Upload auf den FFM Download-Server wird ein Tar-Archiv mit allen Images, allen opkg-Modulen und allen Versionsinformationen erzeugt (siehe https://github.com/freifunk-ffm/scripts/blob/master/firmwarefetch).
 
 ### Achtung - Achtung - Achtung   
