@@ -81,8 +81,11 @@ Usage: ${0##*/} ...
     -g <String>  Zu verwendendes Gluon-Repository.
                  (Voreinstellung $FRB_GLUON_REPO)
     -w <String>  Zu verwendender Tag des Site-Repositories.
+                 Hat Priorität vor dem Parameter -C.
+                 Für die Namensbildung der Images wird weiterhin -C benötigt.
                  (Keine Voreinstellung)
     -v <String>  Zu verwendender Tag des Gluon-Repositories.
+                 Hat Priorität vor dem Paramater -B.
                  (Keine Voreinstellung)
     -h           Dieser Text.
 
@@ -289,32 +292,34 @@ if [ ! -d "$WORKSPACE" ]; then
 fi
 
 # Gluon und Site aus den Git-Branches bzw. Git-Tags holen
+
 # Gluon-Repo
 cd $WORKSPACE
-to_output  "Hard-Reset des Gluon-Repositories"
-git fetch && git reset --hard origin/${FRB_GLUON_BRANCH}
+to_output  "Gluon-Repository aktualisieren"
+git fetch
 check_last_exitcode
 # Was soll verwendet werden: Branch oder Tag ?
 if [ "$FRB_GLUON_TAG" == "-" ];  then
  to_output  "Gluon-Repository checkout Branch"
- git checkout ${FRB_GLUON_BRANCH}
+ git reset --hard origin/${FRB_GLUON_BRANCH}
 else
  to_output  "Gluon-Repository checkout Tag"
- git checkout tags/${FRB_GLUON_TAG}
+ git reset --hard ${FRB_GLUON_TAG}
 fi
 check_last_exitcode
+
 # Site-Repo
 cd $WORKSPACE/site
-to_output  "Hard-Reset des Site-Repositories"
-git fetch && git reset --hard origin/$FRB_SITE_BRANCH
+to_output  "Site-Repositoriy aktualisieren"
+git fetch
 check_last_exitcode
 # Was soll verwendet werden: Branch oder Tag ?
 if [ "$FRB_SITE_TAG" == "-" ];  then
  to_output  "Site-Repository checkout Branch"
- git checkout ${FRB_SITE_BRANCH}
+ git reset --hard origin/${FRB_SITE_BRANCH}
 else
  to_output  "Site-Repository checkout Tag"
- git checkout tags/${FRB_SITE_TAG}
+ git reset --hard ${FRB_SITE_TAG}
 fi
 check_last_exitcode
 
