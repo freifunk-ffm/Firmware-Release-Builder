@@ -38,7 +38,8 @@ Ein grober Funktionstest sollten mindestens den folgenden Anforderungen genügen
   - [ ] 2a06:xyz innerhalb vom Freifunknetz
   - [ ] fddd:xyz innerhalb vom Freifunknetz
   - [ ] 2a06:xyz ausserhalb vom Freifunknetz
-- [ ] Ist Sichtung des Knotens auf Map vorhanden
+- [ ] Ist Sichtung des Knotens auf der Map gegeben
+- [ ] Ist Sichtung von aktuellen Knoten-Daten in Grafana gegeben
 - [ ] Korrekte Revision-Information Firmware/Gluon auf
   - [ ] Map
   - [ ] Statusseite
