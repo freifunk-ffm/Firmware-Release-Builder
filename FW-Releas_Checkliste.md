@@ -92,6 +92,7 @@ Ein grober Funktionstest sollten mindestens den folgenden Anforderungen genügen
 - [ ] Autoupdate gefolgt nach Autoupdate
 - [ ] Autoupdate (Nachtzeit, selbsständig durch Router)
 - [ ] Kurz-Sichtung von '```dmesg```' nach Reboot
+- [ ] Nach längerer Laufzeit eines Routers (mind. 1h) die Ausgabe von '```logread```' sichten
 
 
 ### Firstboot
