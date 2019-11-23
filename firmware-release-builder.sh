@@ -435,15 +435,18 @@ if [ "$FRB_SIGNKEY_PRIVATE" != "none" ];  then
  # ECDSA signieren der Hash-Dateien
  ecdsasign ${hashfile_SHA512} < ${FRB_SIGNKEY_PRIVATE} >> ${hashfile_SHA512}
  ecdsasign ${hashfile_SHA256} < ${FRB_SIGNKEY_PRIVATE} >> ${hashfile_SHA256}
+ # Die Hash-Dateien an die Zielposition verschieben
  mv ${hashfile_SHA512} .
  mv ${hashfile_SHA256} .
  # Damit es auch kontrolliert werden kann -> Bereitstellen des öffentlichen ECDSA-Schluessels
  to_output "Public ECDSA-Schluessel bereitstellen"
  ecdsakeygen -p < ${FRB_SIGNKEY_PRIVATE} > ecdsa-key-${GLUON_RELEASE}.pub
-fi
-# Die Hash-Dateien an Zielposition verschieben
+else
+ # Ansonsten einfach nur die Hash-Dateien an die Zielposition verschieben
 mv ${hashfile_SHA512} .
 mv ${hashfile_SHA256} .
+fi
+
 cd ${WORKSPACE}
 
 if [ $FRB_CREATE_DARCHIVE != 0 ];  then
