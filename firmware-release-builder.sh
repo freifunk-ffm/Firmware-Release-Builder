@@ -324,7 +324,7 @@ check_last_exitcode
 
 
 cd $WORKSPACE
-to_output "Anwenden von lokalen Site-Patches"
+to_output "Anwenden von lokalen Site-Patches vor 'make update'"
 if [ $FRB_SITE_PATCHES == 1 ]; then
  if [ -d "$WORKSPACE/site/patches" ]; then
   cd ${WORKSPACE}/site/patches
@@ -351,6 +351,30 @@ cd $WORKSPACE
 to_output "Update OpenWrt"
 make update
 check_last_exitcode
+
+cd $WORKSPACE
+to_output "Anwenden von lokalen Site-Patches nach 'make update'"
+if [ $FRB_SITE_PATCHES == 1 ]; then
+ if [ -d "$WORKSPACE/site/patches" ]; then
+  cd ${WORKSPACE}/site/patches
+  if [[ $(echo *.patch.after_make_update)  != "*.patch.after_make_update" ]]; then
+   cd $WORKSPACE
+   PATCHFILES=*.patch.after_make_update
+   for i in site/patches/$PATCHFILES
+   do
+    echo "Angewendeter Patch: $i"
+    patch -N -p1 -r - -s -i $i
+    echo
+   done
+  else
+   echo "Keine lokalen Site-Patches gefunden"
+  fi
+ else
+  echo "Keinen Site-Ordner für lokale Patches gefunden"
+ fi
+else
+ echo "Lokale Site-Patches werden nicht angewendet"
+fi 
 
 # Alte Images vorher immer komplett entfernen
 to_output "Loesche alten Image Ordner"
