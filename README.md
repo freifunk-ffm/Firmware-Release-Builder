@@ -10,9 +10,9 @@ Der FRB ist ein einzelnes Skript, welches alle notwendigen Schritte des Buildpro
   - Das Skript kann lokale Site-Patches (aus site/patches) anwenden.
   - Das Skript legt einen eigenen Workspace an (./wspace).
   - Das Skript legt einen Paketesourcen-Download-Cache an (./dl-cache).  
-  - Das Skript erzeugt eine Manifest-Datei und signiert sie ggf. mit einem vorliegendem Public-Key.
-  - Das Skript erstellt zwei Dateien mit SHA256- und SHA512-Image-Hashes (auch Factory) und signiert diese ggf.
-  - Für einen automatisierten Upload auf einen Download-Server wird ein Tar-Archiv mit allen Images, allen opkg-Modulen und allen Versionsinformationen erzeugt (siehe dazu das Frankfurter Fetch-Skript-Gegenstück: https://github.com/freifunk-ffm/scripts/blob/master/firmwarefetch).
+  - Das Skript erzeugt eine Sysupgrade-Manifest-Datei und signiert diese ggf. mit einem vorliegenden Public-ECDSA-Key.
+  - Das Skript erstellt zwei Dateien mit SHA256- und SHA512-Image-Hashes (auch Factory) und signiert diese ggf. mit einem vorliegenden Public-ECDSA-Key.
+  - Für einen automatisierten Upload auf einen Download-Server wird ein komprimiertes Tar-Archiv mit allen Images, allen opkg-Modulen und allen Versionsinformationen erstellt (siehe dazu das Frankfurter Fetch-Skript-Gegenstück: https://github.com/freifunk-ffm/scripts/blob/master/firmwarefetch).
   - Der FRB ist defaultmäßig auf Frankfurter Ansprüche abgestimmt. 
   - Durch anpassung der Aufrufparameter ist der FirmwareReleaseBuilder jedoch Community-übergreifend einsetzbar.
 
@@ -29,9 +29,9 @@ Der FRB setzt die lokal verwendeten Git-Repos hart auf die Origin-HEAD-Commits z
 
 #### Kleines Build-Beispiel:
 ```
-firmware-release-builder.sh -C test -V vX.Y.Z
+firmware-release-builder.sh -C test -V v1.2.3 -c 1
 ```
-Durch diesen Aufruf wird aus den aktuellen Frankfurter Test-Branches (Site und Gluon) für alle verfügbaren Targets die Firmware `vX.Y.Z-test-Builddatum` erstellt. Es wird ein unsigniertes Manifest angelegt und das ganze als komprimiertes Archiv abgelegt. Das Skript zeigt den Pfad zu dem Ablageordner an. Je nach Rechner-Power braucht der Build ca. 5-8 Stunden.
+Durch diesen Aufruf wird aus den aktuellen Frankfurter Test-Branches (Site und Gluon) für alle verfügbaren Targets die Firmware `v1.2.3-test-Builddatum` erstellt. Vorab wird ein bereits vorhandener Build-Workspace gelöscht. Es wird ein unsigniertes Sysupgrade-Manifest angelegt und alle erstellten Images und opkg-Module als komprimiertes Archiv abgelegt. Das Skript zeigt den Pfad zu dem Ablageordner an. Je nach Rechner-Power braucht der Build ca. 5-8 Stunden.
 
 #### Optionen des Skriptes
 Skriptname:`firmware-release-builder.sh`  
