@@ -46,6 +46,7 @@ Usage: firmware-release-builder.sh ...
     Optionen in Kleinbuchstaben 'koennen' angegeben werden.
 
     -C <String>  Name des Firmware Autoupdater-Branches (Firmware-spezifisch).
+                 (Geht als Mittelstring in die FW-Release-Bezeichnung ein)
     -U <String>  Name des Git Site-Branches (z.B. dev, test oder stable).
                  (Voreinstellung: Es wird der Parameter von -C übernommen)
     -B <String>  Name des Git Gluon-Branches (z.B. dev, test oder stable).
@@ -83,8 +84,7 @@ Usage: firmware-release-builder.sh ...
     -g <String>  Zu verwendendes Gluon-Repository.
                  (Voreinstellung https://github.com/freifunk-ffm/gluon.git)
     -w <String>  Zu verwendender Tag des Site-Repositories.
-                 Hat Priorität vor dem Parameter -C.
-                 Für die Namensbildung der Images wird weiterhin -C benötigt.
+                 Hat Priorität vor dem Parameter -U.
                  (Keine Voreinstellung)
     -v <String>  Zu verwendender Tag des Gluon-Repositories.
                  Hat Priorität vor dem Paramater -B.

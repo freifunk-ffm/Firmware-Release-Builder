@@ -44,9 +44,10 @@ Usage: ${0##*/} ...
     Optionen in Kleinbuchstaben 'koennen' angegeben werden.
 
     -C <String>  Name des Firmware Autoupdater-Branches (Firmware-spezifisch).
-    -B <String>  Name des Git Gluon-Branches (z.B. dev, test oder stable).
-                 (Voreinstellung: Es wird der Parameter von -C übernommen)
+                 (Geht als Mittelstring in die FW-Release-Bezeichnung ein)
     -U <String>  Name des Git Site-Branches (z.B. dev, test oder stable).
+                 (Voreinstellung: Es wird der Parameter von -C übernommen)
+    -B <String>  Name des Git Gluon-Branches (z.B. dev, test oder stable).
                  (Voreinstellung: Es wird der Parameter von -C übernommen)
     -T <String>  Welche Targets sollen gebaut werden?
                  Liste in Anführungszeichen, getrennt durch Leerzeichen.
@@ -81,8 +82,7 @@ Usage: ${0##*/} ...
     -g <String>  Zu verwendendes Gluon-Repository.
                  (Voreinstellung $FRB_GLUON_REPO)
     -w <String>  Zu verwendender Tag des Site-Repositories.
-                 Hat Priorität vor dem Parameter -C.
-                 Für die Namensbildung der Images wird weiterhin -C benötigt.
+                 Hat Priorität vor dem Parameter -U.
                  (Keine Voreinstellung)
     -v <String>  Zu verwendender Tag des Gluon-Repositories.
                  Hat Priorität vor dem Paramater -B.
@@ -207,7 +207,7 @@ xz-Parameter:         $FRB_XZPARAMETER
 Pfad Signkey privat:  $FRB_SIGNKEY_PRIVATE
 Buildparameter:       $FRB_BPARAMETER
 Workspace:            $WORKSPACE
-
+Name FW-Release:      $GLUON_RELEASE
 EOF
 }
 
