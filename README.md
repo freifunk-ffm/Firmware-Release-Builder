@@ -29,7 +29,7 @@ Der FRB setzt die lokal verwendeten Git-Repos hart auf die Origin-HEAD-Commits z
 
 #### Kleines Build-Beispiel:
 ```
-firmware-release-builder.sh -C test -V v1.2.3 -c 1
+firmware-release-builder.sh -C test -V v1.2.3
 ```
 Durch diesen Aufruf wird aus den aktuellen Frankfurter Test-Branches (Site und Gluon) für alle verfügbaren Targets die Firmware `v1.2.3-test-Builddatum` erstellt. Vorab wird ein bereits vorhandener Build-Workspace gelöscht. Es wird ein unsigniertes Sysupgrade-Manifest angelegt und alle erstellten Images und opkg-Module als komprimiertes Archiv abgelegt. Das Skript zeigt den Pfad zu dem Ablageordner an. Je nach Rechner-Power braucht der Build ca. 5-8 Stunden.
 
