@@ -39,22 +39,22 @@ Skriptname:`firmware-release-builder.sh`
 Wird das Skript mit der Option `-h` aufgerufen, so wird folgendes ausgegeben:
 
 ```
-Usage: firmware-release-builder.sh ... 
+Usage: firmware-release-builder.sh ...
 
     Die Option -C (Git Site-Branch) "muss" angegeben werden!
     Optionen in Grossbuchstaben 'sollten' angegeben werden.
     Optionen in Kleinbuchstaben 'koennen' angegeben werden.
 
-    -C <String>  Name des Git Site-Branches (z.B. dev, test oder stable).
-    -B <String>  Name des Git Gluon-Branches (z.B. dev, test oder stable).
+    -C <String>  Name des Firmware Autoupdater-Branches (Firmware-spezifisch).
+    -U <String>  Name des Git Site-Branches (z.B. dev, test oder stable).
                  (Voreinstellung: Es wird der Parameter von -C übernommen)
-    -U <String>  Name des Firmware Autoupdater-Branches (Firmware-spezifisch).
+    -B <String>  Name des Git Gluon-Branches (z.B. dev, test oder stable).
                  (Voreinstellung: Es wird der Parameter von -C übernommen)
     -T <String>  Welche Targets sollen gebaut werden?
                  Liste in Anführungszeichen, getrennt durch Leerzeichen.
                  (Voreinstellung: alle als Nicht-BROKEN bekannte Targets)
     -V <String>  Vorgabe des Firmware Versionstrings.
-                 (Voreinstellung: "Homebrew")
+                 (Voreinstellung: "vHomebrew")
     -S <String>  Eigener Suffix fuer die Versionsbezeichnung.
                  (Voreinstellung: MonatTag)
     -L [0|1]     Lokale Site-Patches anwenden.
@@ -78,13 +78,16 @@ Usage: firmware-release-builder.sh ...
     -x <String>  Gesamtarchiv xz-Parameter.
                  Liste in Anführungszeichen, getrennt durch Leerzeichen.
                  (Voreinstellung: "-T0 -6")
-    -g <String>  Zu verwendendes Gluon-Repository.
-                 (Voreinstellung https://github.com/freifunk-ffm/gluon.git)
     -k <String>  Zu verwendendes Site-Repository.
                  (Voreinstellung https://github.com/freifunk-ffm/site-ffffm.git)
-    -v <String>  Zu verwendender Tag des Gluon-Repositories.
-                 (Keine Voreinstellung)
+    -g <String>  Zu verwendendes Gluon-Repository.
+                 (Voreinstellung https://github.com/freifunk-ffm/gluon.git)
     -w <String>  Zu verwendender Tag des Site-Repositories.
+                 Hat Priorität vor dem Parameter -C.
+                 Für die Namensbildung der Images wird weiterhin -C benötigt.
+                 (Keine Voreinstellung)
+    -v <String>  Zu verwendender Tag des Gluon-Repositories.
+                 Hat Priorität vor dem Paramater -B.
                  (Keine Voreinstellung)
     -h           Dieser Text.
 ```

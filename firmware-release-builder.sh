@@ -43,10 +43,10 @@ Usage: ${0##*/} ...
     Optionen in Grossbuchstaben 'sollten' angegeben werden.
     Optionen in Kleinbuchstaben 'koennen' angegeben werden.
 
-    -C <String>  Name des Git Site-Branches (z.B. dev, test oder stable).
+    -C <String>  Name des Firmware Autoupdater-Branches (Firmware-spezifisch).
     -B <String>  Name des Git Gluon-Branches (z.B. dev, test oder stable).
                  (Voreinstellung: Es wird der Parameter von -C übernommen)
-    -U <String>  Name des Firmware Autoupdater-Branches (Firmware-spezifisch).
+    -U <String>  Name des Git Site-Branches (z.B. dev, test oder stable).
                  (Voreinstellung: Es wird der Parameter von -C übernommen)
     -T <String>  Welche Targets sollen gebaut werden?
                  Liste in Anführungszeichen, getrennt durch Leerzeichen.
@@ -100,11 +100,11 @@ while getopts "T:B:C:U:V:P:S:L:s:p:c:b:t:a:x:g:k:v:w:h" opt; do
   case $opt in
     T) FRB_TARGETS=$OPTARG
        ;;
+    C) FRB_FW_UPDATE_BRANCH=$OPTARG
+       ;;
+    U) FRB_SITE_BRANCH=$OPTARG
+       ;;
     B) FRB_GLUON_BRANCH=$OPTARG
-       ;;
-    C) FRB_SITE_BRANCH=$OPTARG
-       ;;
-    U) FRB_FW_UPDATE_BRANCH=$OPTARG
        ;;
     V) FRB_VERSION=$OPTARG
        ;;
@@ -188,13 +188,13 @@ cat << EOF
 Die FW wird/wurde mit folgenden Optionen gebaut:
 
 Targets:              $FRB_TARGETS
+FW Update-Branch:     $FRB_FW_UPDATE_BRANCH
 Site-Repo:            $FRB_SITE_REPO
 Site-Branch:          $FRB_SITE_BRANCH
 Site-Tag:             $FRB_SITE_TAG
 Gluon-Repo:           $FRB_GLUON_REPO
 Gluon-Branch:         $FRB_GLUON_BRANCH
 Gluon-Tag:            $FRB_GLUON_TAG
-FW Update-Branch:     $FRB_FW_UPDATE_BRANCH
 Versionstring:        $FRB_VERSION
 Versionsuffix:        $FRB_VERSION_SUFFIX
 Site-Patches aktiv:   $FRB_SITE_PATCHES
@@ -226,31 +226,29 @@ check_last_exitcode()
 
 # Uebernahme der Parameter für den Firmware-Build
 
-# Wenn kein Site-Branch definiert wurde -> Abbruch
-if [ "$FRB_SITE_BRANCH" == "none" ];  then
+# Wenn kein Firmware-Update-Branch definiert wurde -> Abbruch
+if [ "$FRB_FW_UPDATE_BRANCH" == "none" ];  then
  show_help
- to_output "Abbruch: Es wurde kein Git-Site-Branch mittels '-C' angegeben"
+ to_output "Abbruch: Es wurde kein Firmware-Update-Branch mittels '-C' angegeben"
  exit 1
 fi
 
-# Wenn ein Site-Tag definiert wurde, dann keinen Site-Branch verwenden.
+# Wenn kein Site-Tag oder Site-Branch definiert wurde,
+# dann den Firmware-Update-Branch verwenden.
 # Der Site-Tag hat Priorität.
 if [ "$FRB_SITE_TAG" != "-" ]; then
   FRB_SITE_BRANCH="-"
+elif [ "$FRB_SITE_BRANCH" == "none" ];  then
+ FRB_SITE_BRANCH=${FRB_FW_UPDATE_BRANCH}
 fi
 
 # Wenn kein Gluon-Tag oder Gluon-Branch definiert wurde,
-# dann den Site-Branch verwenden.
+# dann den Firmware-Update-Branch verwenden.
 # Der Gluon-Tag hat Priorität.
 if [ "$FRB_GLUON_TAG" != "-" ]; then
   FRB_GLUON_BRANCH="-"
 elif [ "$FRB_GLUON_BRANCH" == "none" ];  then
- FRB_GLUON_BRANCH=${FRB_SITE_BRANCH}
-fi
-
-# Wenn kein Firmware-Update-Branch definiert wurde, dann den Site-Branch verwenden
-if [ "$FRB_FW_UPDATE_BRANCH" == "none" ];  then
- FRB_FW_UPDATE_BRANCH=${FRB_SITE_BRANCH}
+ FRB_GLUON_BRANCH=${FRB_FW_UPDATE_BRANCH}
 fi
 
 if [ "$FRB_VERSION_SUFFIX" == "none" ];  then
@@ -310,9 +308,15 @@ check_last_exitcode
 # Was soll verwendet werden: Branch oder Tag ?
 if [ "$FRB_GLUON_TAG" == "-" ];  then
  to_output  "Gluon-Repository checkout Branch"
+ echo "Gluon-Repo:  "$FRB_GLUON_REPO
+ echo "Repo-Branch: "$FRB_GLUON_BRANCH
+ echo
  git reset --hard origin/${FRB_GLUON_BRANCH}
 else
  to_output  "Gluon-Repository checkout Tag"
+ echo "Gluon-Repo: "$FRB_GLUON_REPO
+ echo "Repo-Tag:   "$FRB_GLUON_TAG
+ echo
  git reset --hard ${FRB_GLUON_TAG}
 fi
 check_last_exitcode
@@ -325,9 +329,15 @@ check_last_exitcode
 # Was soll verwendet werden: Branch oder Tag ?
 if [ "$FRB_SITE_TAG" == "-" ];  then
  to_output  "Site-Repository checkout Branch"
+ echo "Site-Repo:   "$FRB_SITE_REPO
+ echo "Repo-Branch: "$FRB_SITE_BRANCH
+ echo
  git reset --hard origin/${FRB_SITE_BRANCH}
 else
  to_output  "Site-Repository checkout Tag"
+ echo "Site-Repo: "$FRB_SITE_REPO
+ echo "Repo-Tag:  "$FRB_SITE_TAG
+ echo
  git reset --hard ${FRB_SITE_TAG}
 fi
 check_last_exitcode
