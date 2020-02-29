@@ -233,8 +233,18 @@ if [ "$FRB_SITE_BRANCH" == "none" ];  then
  exit 1
 fi
 
-# Wenn kein Gluon-Branch definiert wurde, dann den Site-Branch verwenden
-if [ "$FRB_GLUON_BRANCH" == "none" ];  then
+# Wenn ein Site-Tag definiert wurde, dann keinen Site-Branch verwenden.
+# Der Site-Tag hat Priorität.
+if [ "$FRB_SITE_TAG" != "-" ]; then
+  FRB_SITE_BRANCH="-"
+fi
+
+# Wenn kein Gluon-Tag oder Gluon-Branch definiert wurde,
+# dann den Site-Branch verwenden.
+# Der Gluon-Tag hat Priorität.
+if [ "$FRB_GLUON_TAG" != "-" ]; then
+  FRB_GLUON_BRANCH="-"
+elif [ "$FRB_GLUON_BRANCH" == "none" ];  then
  FRB_GLUON_BRANCH=${FRB_SITE_BRANCH}
 fi
 
