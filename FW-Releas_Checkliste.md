@@ -29,11 +29,11 @@ Ein grober Funktionstest sollten mindestens den folgenden Anforderungen genügen
   - [ ] zusätzlich über die Konsole manuell/lokal per '```sysupgrade```'
 - [ ] Aufruf Konfigmodus mittels unterschiedlicher Web-Browser (z.B. Edge, Chromium, Firefox, Safari)
   - [ ] Texte, Inhalte und Eingabenübernahme im Konfigmodus korrekt
-- [ ] Ist Autoupdate entsprechend gesetzt/vorhanden (Konfig-Tab)
-- [ ] Ist Updatebranch korrekt gesetzt (Konfig-Tab)
-- [ ] Ggf. korrekte Autoupdater Branch-Übernahme bei verwendetem Package "ffffm-use-site-conf-branch"
-- [ ] Korrekte Revision-Information Firmware/Gluon (Konfig-Tab)
-- [ ] Speicherung Konfiguration (inkl. Reboot)
+  - [ ] Ist Autoupdate entsprechend gesetzt/vorhanden (Konfig-Tab)
+  - [ ] Ist Updatebranch korrekt gesetzt (Konfig-Tab)
+  - [ ] Ggf. korrekte Autoupdater Branch-Übernahme bei verwendetem Package "ffffm-use-site-conf-branch"
+  - [ ] Korrekte Revision-Information Firmware/Gluon (Konfig-Tab)
+  - [ ] Speicherung Konfiguration (inkl. Reboot)
 - [ ] Aufruf Statusseite
   - [ ] 2a06:xyz innerhalb vom Freifunknetz
   - [ ] fddd:xyz innerhalb vom Freifunknetz
