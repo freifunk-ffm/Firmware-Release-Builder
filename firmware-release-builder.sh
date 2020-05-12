@@ -21,6 +21,7 @@ FRB_SITE_TAG=${FRB_SITE_TAG:-"-"}
 FRB_FW_UPDATE_BRANCH=${FRB_FW_UPDATE_BRANCH:-"none"}
 FRB_VERSION=${FRB_VERSION:-vHomebrew}
 FRB_SITE_PATCHES=${FRB_SITE_PATCHES:-0}
+FRB_NAME_PATCH_FOLDER=${FRB_NAME_PATCH_FOLDER:-"patches"}
 FRB_CLEANUP=${FRB_CLEANUP:-1}
 FRB_BROKEN=${FRB_BROKEN:-0}
 FRB_BROKEN_TARGETS=${FRB_BROKEN_TARGETS:-0}
@@ -58,6 +59,8 @@ Usage: ${0##*/} ...
                  (Voreinstellung: MonatTag)
     -L [0|1]     Lokale Site-Patches anwenden.
                  (Voreinstellung: $FRB_SITE_PATCHES)
+    -l <String>  Name des Patch-Ordners innerhalb des Site-Ordners
+                 (Voreinstellung: "$FRB_NAME_PATCH_FOLDER)
     -b [0|1]     BROKEN Router-Images bauen?
                  (Voreinstellung: $FRB_BROKEN)
     -t [0|1]     BROKEN Targets bauen?
@@ -113,6 +116,8 @@ while getopts "T:B:C:U:V:P:S:L:s:p:c:b:t:a:x:g:k:v:w:h" opt; do
     S) FRB_VERSION_SUFFIX=$OPTARG
        ;;
     L) FRB_SITE_PATCHES=$OPTARG
+       ;;
+    l) FRB_NAME_PATCH_FOLDER=$OPTARG
        ;;
     s) FRB_SIGNKEY_PRIVATE=$OPTARG
        ;;
@@ -198,6 +203,7 @@ Gluon-Tag:            $FRB_GLUON_TAG
 Versionstring:        $FRB_VERSION
 Versionsuffix:        $FRB_VERSION_SUFFIX
 Site-Patches aktiv:   $FRB_SITE_PATCHES
+Site-Patch Ordner:    $FRB_NAME_PATCH_FOLDER
 Workspace löschen:    $FRB_CLEANUP
 BROKEN Images:        $FRB_BROKEN
 BROKEN Targets:       $FRB_BROKEN_TARGETS
@@ -347,11 +353,11 @@ cd $WORKSPACE
 to_output "Anwenden von lokalen Site-Patches vor 'make update'"
 if [ $FRB_SITE_PATCHES == 1 ]; then
  if [ -d "$WORKSPACE/site/patches" ]; then
-  cd ${WORKSPACE}/site/patches
+  cd ${WORKSPACE}/site/$FRB_NAME_PATCH_FOLDER
   if [[ $(echo *.patch)  != "*.patch" ]]; then
    cd $WORKSPACE
    PATCHFILES=*.patch
-   for i in site/patches/$PATCHFILES
+   for i in site/$FRB_NAME_PATCH_FOLDER/$PATCHFILES
    do
     echo "Angewendeter Patch: $i"
     patch -N -p1 -r - -s -i $i
@@ -376,11 +382,11 @@ cd $WORKSPACE
 to_output "Anwenden von lokalen Site-Patches nach 'make update'"
 if [ $FRB_SITE_PATCHES == 1 ]; then
  if [ -d "$WORKSPACE/site/patches" ]; then
-  cd ${WORKSPACE}/site/patches
+  cd ${WORKSPACE}/site/$FRB_NAME_PATCH_FOLDER
   if [[ $(echo *.patch.after_make_update)  != "*.patch.after_make_update" ]]; then
    cd $WORKSPACE
    PATCHFILES=*.patch.after_make_update
-   for i in site/patches/$PATCHFILES
+   for i in site/$FRB_NAME_PATCH_FOLDER/$PATCHFILES
    do
     echo "Angewendeter Patch: $i"
     patch -N -p1 -r - -s -i $i
