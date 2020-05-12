@@ -512,7 +512,7 @@ if [ $FRB_CREATE_DARCHIVE != 0 ];  then
   # Deploy-Archiv erzeugen
   to_output "Erzeuge Deploy-Archiv"
   cd ${WORKSPACE}/output/images
-  tar cvf gluon-ffffm-${GLUON_RELEASE}.tar.xz  -I "xz ${FRB_XZPARAMETER}" *
+  tar cvf gluon-${GLUON_RELEASE}.tar.xz  -I "xz ${FRB_XZPARAMETER}" *
 fi
 
 #Fertig!
@@ -526,5 +526,5 @@ for GLUON_TARGET in $FRB_TARGETS; do
 done
 
 to_output  "Das Deploy-Archive liegt hier:"
-echo ${WORKSPACE}/output/images/gluon-ffffm-${GLUON_RELEASE}.tar.xz
+echo ${WORKSPACE}/output/images/gluon-${GLUON_RELEASE}.tar.xz
 echo
