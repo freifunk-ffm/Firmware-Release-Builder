@@ -352,7 +352,7 @@ check_last_exitcode
 cd $WORKSPACE
 to_output "Anwenden von lokalen Site-Patches vor 'make update'"
 if [ $FRB_SITE_PATCHES == 1 ]; then
- if [ -d "$WORKSPACE/site/patches" ]; then
+ if [ -d "$WORKSPACE/site/$FRB_NAME_PATCH_FOLDER" ]; then
   cd ${WORKSPACE}/site/$FRB_NAME_PATCH_FOLDER
   if [[ $(echo *.patch)  != "*.patch" ]]; then
    cd $WORKSPACE
@@ -381,7 +381,7 @@ check_last_exitcode
 cd $WORKSPACE
 to_output "Anwenden von lokalen Site-Patches nach 'make update'"
 if [ $FRB_SITE_PATCHES == 1 ]; then
- if [ -d "$WORKSPACE/site/patches" ]; then
+ if [ -d "$WORKSPACE/site/$FRB_NAME_PATCH_FOLDER" ]; then
   cd ${WORKSPACE}/site/$FRB_NAME_PATCH_FOLDER
   if [[ $(echo *.patch.after_make_update)  != "*.patch.after_make_update" ]]; then
    cd $WORKSPACE
