@@ -56,9 +56,9 @@ Usage: ${0##*/} ...
                  (Voreinstellung: alle als Nicht-BROKEN bekannte Targets)
     -V <String>  Vorgabe des Firmware Versionstrings.
                  (Voreinstellung: "$FRB_VERSION")
-    -E <Streing> Eigener erster Suffix fuer die Versionsbezeichnung.
+    -E <Streing> Eigener erster Suffix für die Versionsbezeichnung.
                  (Voreinstellung: Es wird der Parameter von -C übernommen)
-    -S <String>  Eigener zweiter Suffix fuer die Versionsbezeichnung.
+    -S <String>  Eigener zweiter Suffix für die Versionsbezeichnung.
                  (Voreinstellung: MonatTag)
     -L [0|1]     Lokale Site-Patches anwenden.
                  (Voreinstellung: $FRB_SITE_PATCHES)
@@ -68,7 +68,7 @@ Usage: ${0##*/} ...
                  (Voreinstellung: $FRB_BROKEN)
     -t [0|1]     BROKEN Targets bauen?
                  (Voreinstellung: $FRB_BROKEN_TARGETS)
-                 Bei 1 werden dann BROKEN-Images fuer "alle" Targets gebaut!
+                 Bei 1 werden dann BROKEN-Images für "alle" Targets gebaut!
     -P [int]     GLUON_PRIORITY
                  (Voreinstellung: $FRB_PRIORITY)
     -s <String>  Absoluter Pfad und Name des privaten ECDSA-Signkeys. 
