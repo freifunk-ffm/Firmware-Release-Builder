@@ -30,7 +30,8 @@ FRB_CREATE_DARCHIVE=${FRB_CREATE_DARCHIVE:-1}
 FRB_XZPARAMETER=${FRB_XZPARAMETER:-"-T0 -6"}
 FRB_SIGNKEY_PRIVATE=${FRB_SIGNKEY_PRIVATE:-"none"}
 FRB_BPARAMETER=${FRB_BPARAMETER:-"-j4"}
-FRB_VERSION_SUFFIX=${FRB_VERSION_SUFFIX:-"none"}
+FRB_VERSION_SUFFIX_1=${FRB_VERSION_SUFFIX_1:-"none"}
+FRB_VERSION_SUFFIX_2=${FRB_VERSION_SUFFIX_2:-"none"}
 
 ###################################################################
 # Usage Info
@@ -55,7 +56,9 @@ Usage: ${0##*/} ...
                  (Voreinstellung: alle als Nicht-BROKEN bekannte Targets)
     -V <String>  Vorgabe des Firmware Versionstrings.
                  (Voreinstellung: "$FRB_VERSION")
-    -S <String>  Eigener Suffix fuer die Versionsbezeichnung.
+    -E <Streing> Eigener erster Suffix fuer die Versionsbezeichnung.
+                 (Voreinstellung: Es wird der Parameter von -C übernommen)
+    -S <String>  Eigener zweiter Suffix fuer die Versionsbezeichnung.
                  (Voreinstellung: MonatTag)
     -L [0|1]     Lokale Site-Patches anwenden.
                  (Voreinstellung: $FRB_SITE_PATCHES)
@@ -99,7 +102,7 @@ EOF
 # Optionen parsen
 ###################################################################
 
-while getopts "T:B:C:U:V:P:S:L:l:s:p:c:b:t:a:x:g:k:v:w:h" opt; do
+while getopts "T:B:C:U:V:P:E:S:L:l:s:p:c:b:t:a:x:g:k:v:w:h" opt; do
   case $opt in
     T) FRB_TARGETS=$OPTARG
        ;;
@@ -113,7 +116,9 @@ while getopts "T:B:C:U:V:P:S:L:l:s:p:c:b:t:a:x:g:k:v:w:h" opt; do
        ;;
     P) FRB_PRIORITY=$OPTARG
        ;;
-    S) FRB_VERSION_SUFFIX=$OPTARG
+    E) FRB_VERSION_SUFFIX_1=$OPTARG
+       ;;
+    S) FRB_VERSION_SUFFIX_2=$OPTARG
        ;;
     L) FRB_SITE_PATCHES=$OPTARG
        ;;
@@ -201,7 +206,8 @@ Gluon-Repo:           $FRB_GLUON_REPO
 Gluon-Branch:         $FRB_GLUON_BRANCH
 Gluon-Tag:            $FRB_GLUON_TAG
 Versionstring:        $FRB_VERSION
-Versionsuffix:        $FRB_VERSION_SUFFIX
+Versionsuffix eins:   $FRB_VERSION_SUFFIX_1
+Versionsuffix zwei:   $FRB_VERSION_SUFFIX_2
 Site-Patches aktiv:   $FRB_SITE_PATCHES
 Site-Patch Ordner:    $FRB_NAME_PATCH_FOLDER
 Workspace löschen:    $FRB_CLEANUP
@@ -213,7 +219,8 @@ xz-Parameter:         $FRB_XZPARAMETER
 Pfad Signkey privat:  $FRB_SIGNKEY_PRIVATE
 Buildparameter:       $FRB_BPARAMETER
 Workspace:            $WORKSPACE
-Name FW-Release:      $GLUON_RELEASE
+
+Name des FW-Releases: $GLUON_RELEASE
 EOF
 }
 
@@ -257,15 +264,25 @@ elif [ "$FRB_GLUON_BRANCH" == "none" ];  then
  FRB_GLUON_BRANCH=${FRB_FW_UPDATE_BRANCH}
 fi
 
-if [ "$FRB_VERSION_SUFFIX" == "none" ];  then
- BUILD_NUMBER=$(date '+%m%d')
- FRB_VERSION_SUFFIX=${BUILD_NUMBER}
+
+# Suffix 1 (Branchname fuer GLUON_RELEASE)
+if [ "$FRB_VERSION_SUFFIX_1" == "none" ];  then
+ BRANCH_SHORTENER=$(date '+%m%d')
+ FRB_VERSION_SUFFIX_1=${BRANCH_SHORTENER}
 else
- BUILD_NUMBER=${FRB_VERSION_SUFFIX}
+ BRANCH_SHORTENER=${FRB_VERSION_SUFFIX_1}
+fi
+
+# Suffix 2 (Build-Nummer fuer GLUON_RELEASE)
+if [ "$FRB_VERSION_SUFFIX_2" == "none" ];  then
+ BUILD_NUMBER=$(date '+%m%d')
+ FRB_VERSION_SUFFIX_2=${BUILD_NUMBER}
+else
+ BUILD_NUMBER=${FRB_VERSION_SUFFIX_2}
 fi
 
 export GLUON_BRANCH=${FRB_FW_UPDATE_BRANCH}
-export GLUON_RELEASE=${FRB_VERSION}-${GLUON_BRANCH}-${BUILD_NUMBER}
+export GLUON_RELEASE=${FRB_VERSION}-${BRANCH_SHORTENER}-${BUILD_NUMBER}
 export GLUON_PRIORITY=${FRB_PRIORITY}
 
 # Der Build-Prozess schaut nur ob die Umgebungsvariable BROKEN existiert. 

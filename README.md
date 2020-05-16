@@ -56,7 +56,9 @@ Usage: firmware-release-builder.sh ...
                  (Voreinstellung: alle als Nicht-BROKEN bekannte Targets)
     -V <String>  Vorgabe des Firmware Versionstrings.
                  (Voreinstellung: "vHomebrew")
-    -S <String>  Eigener Suffix fuer die Versionsbezeichnung.
+    -E <Streing> Eigener erster Suffix fuer die Versionsbezeichnung.
+                 (Voreinstellung: Es wird der Parameter von -C übernommen)
+    -S <String>  Eigener zweiter Suffix fuer die Versionsbezeichnung.
                  (Voreinstellung: MonatTag)
     -L [0|1]     Lokale Site-Patches anwenden.
                  (Voreinstellung: 0)
