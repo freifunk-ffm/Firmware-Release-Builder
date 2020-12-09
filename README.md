@@ -7,12 +7,12 @@ Der FRB kann händisch auf einem PC oder automatisiert durch z.B. Jenkins aufger
 Der FRB ist ein einzelnes Skript, welches alle notwendigen Schritte des Buildprozesses vereint.   
   - Dem Skript werden Parameter übergeben.
   - Das Skript holt selbständig die Inhalte aller notwendigen Gluon-Git-Repositories.
-  - **Das Skript kann lokale Site-Patches (aus site/patches) anwenden.**
+  - Das Skript kann lokale Site-Patches (aus site/patches) anwenden.
   - **Das Skript legt einen eigenen Workspace an (./wspace).**
-  - Das Skript legt einen Paketesourcen-Download-Cache an (./dl-cache).  
+  - **Das Skript legt einen Paketesourcen-Download-Cache an (./dl-cache).**
   - Das Skript erzeugt eine Sysupgrade-Manifest-Datei und signiert diese ggf. mit einem vorliegenden Public-ECDSA-Key.
   - Das Skript erstellt zwei Dateien mit SHA256- und SHA512-Image-Hashes (auch Factory) und signiert diese ggf. mit einem vorliegenden Public-ECDSA-Key.
-  - Für einen automatisierten Upload auf einen Download-Server wird ein komprimiertes Tar-Archiv mit allen Images, allen opkg-Modulen und allen Versionsinformationen erstellt (**siehe dazu das Frankfurter Fetch-Skript-Gegenstück: https://github.com/freifunk-ffm/scripts/blob/master/firmwarefetch**).
+  - Für einen automatisierten Upload auf einen Download-Server wird ein komprimiertes Tar-Archiv mit allen Images, allen opkg-Modulen und allen Versionsinformationen erstellt (**siehe dazu das Frankfurter Fetch-Skript:** https://github.com/freifunk-ffm/scripts/blob/master/firmwarefetch ).
   - Der FRB ist defaultmäßig auf Frankfurter Ansprüche abgestimmt. 
   - Durch anpassung der Aufrufparameter ist der FirmwareReleaseBuilder jedoch Community-übergreifend einsetzbar.
 
@@ -33,7 +33,7 @@ firmware-release-builder.sh -C test -V v1.2.3
 ```
 Durch diesen Aufruf wird aus den aktuellen Frankfurter Test-Branches (Site und Gluon) für alle verfügbaren Targets die Firmware `v1.2.3-test-Builddatum` erstellt. Vorab wird ein bereits vorhandener Build-Workspace gelöscht. Es wird ein unsigniertes Sysupgrade-Manifest angelegt und alle erstellten Images und opkg-Module als komprimiertes Archiv abgelegt. Das Skript zeigt den Pfad zu dem Ablageordner an. Je nach Rechner-Power braucht der Build ca. 5-8 Stunden.
 
-Ein weiteres Build-Beispile für nur ein Target sieht so aus:
+Der Aufruf des Build-Beispiele für nur ein Target sähe so aus:
 ```
 firmware-release-builder.sh -C test -V v1.2.3 -T ar71xx-generic
 ```
